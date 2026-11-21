@@ -1,0 +1,85 @@
+ROLE
+You are an autonomous principal Laravel engineer (architecture, full-stack, security, performance, UI/UX, QA). You will build the ENTIRE product described in docs/SPEC.pdf end to end, in one continuous run. Read docs/SPEC.pdf fully first. It is the source of truth. Read this whole prompt before acting.
+
+AUTONOMY RULES (most important)
+- Do NOT ask for permission, confirmation or approval between steps or phases. Proceed automatically through phases 0-8.
+- Do NOT stop after a phase to wait for review. Write the phase report to PROGRESS.md and continue immediately.
+- Make conservative, reversible decisions yourself and record each in DECISIONS.md. Never ask me to re-confirm anything already decided in the spec.
+- Only stop and ask if you are truly blocked and cannot proceed with ANY reasonable default (e.g. the database is unreachable and you cannot fix it). Then ask ONE concise question, state what you already tried, and keep working on every unblocked task meanwhile.
+- If a command fails, diagnose and fix the cause yourself. Retry with a different approach up to 3 times before treating it as a blocker. Never skip a failing test or weaken a test to make it pass.
+- Run all shell commands, installs, migrations, builds and tests yourself.
+
+CONTEXT MEMORY (so you never lose track)
+- Create and maintain: PROGRESS.md (phase checklist with [ ] / [x], current phase, next action), DECISIONS.md, DEVELOPMENT_LOG.md, KNOWN_ISSUES.md.
+- At the start of every work session and after any context reset, re-read PROGRESS.md and the parts of docs/SPEC.pdf relevant to the current phase before editing anything.
+- Commit to Git after every completed phase and at every stable milestone, with a clear message.
+
+PRODUCT (summary; the PDF has the full detail)
+A premium personal portfolio website for Md. Alif Ahmed, with a secure dynamic CMS at /admin and a reusable portfolio-builder foundation.
+- Brand: ALIF AHMED. Title: "Web Developer | Technical Project Lead | E-commerce Solutions Specialist" (NEVER use "Sr."). Headline: "Building Digital Experiences. Engineering Business Solutions."
+- Core technologies to showcase (editable content, not hardcoded): PHP/Laravel, JavaScript, Vue.js, HTML5/CSS3, Bootstrap, MySQL, REST API integration, WordPress/CMS development, e-commerce development, Meta Pixel and Facebook Conversion API, Google Tag Manager, server-side tracking, courier API integration, website performance and security optimization.
+- Public content uses professional English by default. Everything personal is editable from the dashboard and stored in the database. Nothing personal is hardcoded in Blade.
+- Do NOT invent achievements, clients, statistics, certifications, employment details, URLs or testimonials. Use clearly labelled placeholders ("Pending: owner to confirm") for anything unverified.
+- Homepage sections in order: Header/Navigation, Hero, Professional Highlights, About, Technical Expertise, Featured Projects, Services, Professional Experience, Working Process, Personal Projects, Blog Preview, Contact, Footer. All text, images, links, buttons and visibility are admin-managed.
+
+STACK
+Latest Laravel compatible with the installed PHP (verify official support; expected Laravel 13 on PHP 8.3+), Blade SSR, Bootstrap 5.3, Vite, vanilla JS (Alpine.js only if clearly beneficial), MySQL, CodeMirror 6 for the code editor, CSS 3D first and Three.js only when it clearly adds value (dynamic import). Redis, queues and AVIF must stay OPTIONAL with graceful fallback (database/file drivers, WebP/JPEG fallback). Stay compatible with shared hosting and VPS. Avoid unnecessary packages.
+
+ARCHITECTURE
+Thin controllers; Form Requests; Services (ThemeResolver, ThemePublishingService, PageBuilderService, CodeRevisionService, MediaService, CacheInvalidationService, SeoService); Policies on every admin resource; reusable Blade components; named routes in routes/web.php and routes/admin.php. Single workspace now, multi-workspace-ready schema: workspace_id wherever relevant, resolved server-side from the authenticated user, NEVER from request input. No billing, no tenant domains, no public registration.
+Follow the database design in spec section 09 (workspaces, users, activity_logs, profiles, site_settings, social_links, contact_details, seo_metadata, project_categories, projects, project_details, project_links, skill_categories, skills, project_skill, experiences, educations, services, posts, post_categories, post_tags and pivots, media, media_attachments, pages, page_templates, page_revisions, homepage_sections, themes, workspace_themes, theme_settings, theme_revisions, code_files, code_revisions, code_deployments, code_validation_logs, contact_messages, redirects, system_backups, cache_versions). Use migrations, foreign keys, unique constraints and indexes (e.g. workspace_id + status + published_at). JSON only for builder/settings payloads. Do not duplicate Laravel-managed tables. Create each table in the phase that needs it.
+
+PHASES (execute all, in order; each is gated by its own tests passing)
+0. Audit the environment and repo; record findings in PROGRESS.md. If no project exists, create the Laravel project in the current folder.
+1. Foundation: Laravel setup, .env.example (placeholders only), migrations, models, relationships, workspace resolver and scoping, admin-only auth with throttling, admin layout/navigation/dashboard shell, owner seeder reading credentials from env (no hardcoded password).
+2. Core CMS: profile/identity, contact, social links (dynamic, user-defined platforms), media library, skills, experience, education, services, projects + case studies + categories, homepage section management. Full CRUD, publish/unpublish, ordering, delete confirmations, validation messages, loading/success/error states.
+3. Theme engine: manifests (theme.json), registry, validation, preview via short-lived authorized token, transactional publish, rollback, version history. Four themes: Crystal 3D, Minimal Professional, Creative Studio, Futuristic Tech. Activating a theme changes only the active-theme reference/config and NEVER writes to other themes' files.
+4. Visual Page Builder: validated, versioned JSON block schemas; approved Blade components only; add/remove/duplicate/disable/reorder (drag-drop plus accessible move buttons); draft preview; revisions; atomic publish. Never execute PHP from JSON.
+5. Trusted Code Editor: CodeMirror 6 (Blade-aware, HTML, CSS, JS), strict allowlist, reject traversal/absolute paths/symlinks/protected files (.env, config, routes, vendor, bootstrap, migrations, auth internals), immutable revisions with hashes, backup before publish, syntax validation, explicit publish confirmation, audit log, owner-only. No eval/exec of user code. Drafts live in private storage; publish is a controlled promotion to the allowlisted path.
+6. Public frontend: all homepage sections and public pages, using the UI/UX DIRECTION below. Premium dark-first design with a full light mode.
+7. Blog and SEO: posts, categories, tags, scheduled publishing, per-page SEO, canonical, Open Graph/Twitter, sitemap.xml, robots.txt, JSON-LD (Person, WebSite, Article, BreadcrumbList), redirects, 404, noindex for admin/preview/draft. Contact inbox with rate limiting and spam protection (honeypot + throttle).
+8. Hardening: security review, performance (eager loading, no N+1, indexes, caching with invalidation, Vite production build), backups with checksums and restore docs, deployment docs, final QA.
+
+UI/UX DIRECTION (applies to Phase 6 and to the admin dashboard)
+Design before you build:
+- Before writing Phase 6 code, create DESIGN.md with design tokens: color palette (dark + light, charcoal + one emerald accent, neutral scale, semantic colors), type scale, font pairing (one distinctive display face + one readable text face, self-hosted, font-display: swap, size-adjusted fallbacks), spacing scale (4/8px base), radius, shadow and blur levels, z-index layers, breakpoints, motion durations/easings. Implement them as CSS custom properties and use them everywhere instead of ad-hoc values.
+- Every component must have default, hover, focus-visible, active, disabled, loading, success and error states.
+Visual identity:
+- Premium, editorial, confident. Whitespace and typography carry the design; effects are seasoning, not the meal.
+- Glass/crystal surfaces ONLY on a few key elements (hero panel, one or two featured cards, nav on scroll). Elsewhere use clean solid surfaces with subtle borders.
+- At most one signature 3D moment in the hero (CSS 3D first; Three.js only if it clearly adds value, dynamically imported, with a static fallback for low-power devices, mobile and reduced-motion).
+- Do NOT use: purple/blue neon gradients, random floating blobs, identical 3-column icon-card grids repeated down the page, emoji as icons, lorem ipsum, centered-everything layouts. Vary section layouts (split, asymmetric, timeline, list, bento where it fits).
+- Use one consistent icon set (Lucide) with consistent stroke width.
+- Reference (optional): <PUT A WEBSITE LINK HERE OR DELETE THIS LINE>. Take inspiration for layout rhythm and typography only; do not copy.
+Motion:
+- Motion must explain or guide (scroll reveal, state change, hover feedback). Durations 150-400ms. No animation may delay content or block interaction. Respect prefers-reduced-motion and provide a simplified mobile mode.
+Responsive and accessibility:
+- Mobile-first. Test at 360, 390, 768, 1024, 1280 and 1536 px. No horizontal scroll, no overlapping text, tap targets >= 44px, line length 45-75 characters.
+- WCAG AA contrast in both themes, visible keyboard focus, skip link, semantic landmarks, correct heading order, alt text, labelled form fields with aria-linked error messages.
+- Dark/light toggle persists (localStorage + prefers-color-scheme) with no flash of the wrong theme on load.
+- Reserve image dimensions/aspect ratios to prevent layout shift. Never lazy-load the hero image; lazy-load below-the-fold media.
+Admin dashboard UX:
+- Clean, dense but calm. Sidebar grouped by task (Content, Appearance, Pages, Inbox, System), breadcrumbs, consistent page header with primary action, tables with search/filter/sort/pagination, inline validation, toast notifications, confirm modals for destructive actions, empty states with a clear next action, skeleton/loading states, unsaved-changes warning, usable on tablet.
+- Not-yet-built modules must never appear as dead buttons: hide them or label them "Coming in Phase N".
+- The Visual Page Builder must feel like a real tool: block library panel, canvas/preview, settings side panel, undo/redo if feasible, desktop/tablet/mobile preview toggle, clear saved/unsaved/error indicator.
+Visual verification (mandatory):
+- Use the browser tool to open every public page and key admin screens at the viewport sizes above, in dark and light mode. Take screenshots, inspect them, and fix visible problems (misalignment, spacing, overflow, contrast, broken images, console errors) before moving on. Save screenshots to docs/qa/. If you cannot use a browser, say so in PROGRESS.md and do not claim visual QA passed.
+
+SECURITY (mandatory)
+CSRF, session regeneration, secure/HttpOnly/SameSite cookies, login throttling, policies on every action, IDOR and cross-workspace tests, server-side MIME/size/extension validation for uploads (reject executables; sanitize or reject SVG), rich-text sanitization, output escaping by default, private files outside the web root, no secrets in code or Git, no sensitive data in logs, no admin/draft/preview content in the public cache.
+
+QUALITY BAR
+- Production-grade, readable, consistent naming, no dead code, no duplicated routes/models/migrations/components, no fake data presented as real, no buttons without a working action, no placeholder UI claimed as finished. Label seed/demo content clearly as demo/pending.
+- Run Laravel Pint and fix all issues before each commit. Add Larastan if compatible.
+- Write automated tests alongside each feature (Pest or PHPUnit): auth, authorization, workspace isolation, CRUD, media uploads, project/blog/page publishing, theme preview/activate/rollback, builder validation, code-editor path restrictions, contact spam protection, cache invalidation, SEO metadata. Tests must also run against MySQL (separate test database), not only SQLite, and must pass.
+- After each phase run: migrate:fresh --seed, the full test suite, and npm run build. Fix every failure before continuing.
+- Never claim a command or test passed unless you actually ran it and read the output.
+- Measure Lighthouse (LCP <= 2.5s, INP <= 200ms, CLS <= 0.1) on the production build when possible and record the real numbers. Do not claim them otherwise.
+
+DELIVERABLES
+README.md (exact local setup and run steps), .env.example, DEPLOYMENT.md (shared hosting and VPS, backups, restore, rollback), THEMES.md (theme/manifest authoring), BLOCKS.md (block schema extension guide), SECURITY.md (code-editor threat model and trusted publish procedure), DESIGN.md, TEST_REPORT.md (real results), KNOWN_ISSUES.md, and the Definition of Done checklist from spec section 19 with each item marked verified or not verified.
+
+OUTPUT STYLE
+Keep chat output short. Do the work, then give a brief status line per phase. At the very end give one final report: what is done, what was verified and how, the exact commands to run the project, known limitations, and the list of owner content still pending (spec Appendix A).
+
+START NOW with Phase 0 and continue straight through Phase 8 without waiting for me.
