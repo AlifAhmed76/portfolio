@@ -6,12 +6,12 @@
 - [x] Phase 2: Core CMS (Profile, Contact, Social Links, Media Library, Skills, Experience, Education, Services, Projects, Homepage Sections)
 - [x] Phase 3: Theme Engine (Manifests, Validation, Token Preview, Transactional Publish, Rollback, 4 Themes)
 - [x] Phase 4: Visual Page Builder (Schema Validation, Approved Blocks, Drag/Reorder, Draft Revisions, Preview, Publish)
-- [ ] Phase 5: Trusted Code Editor (CodeMirror 6, Strict Allowlist, Traversal Defense, Immutable Revisions, Syntax Checks, Publish Audit)
+- [x] Phase 5: Trusted Code Editor (CodeMirror 6, Strict Allowlist, Traversal Defense, Immutable Revisions, Syntax Checks, Publish Audit)
 - [ ] Phase 6: Premium Frontend (Crystal 3D Default, Minimal Professional, Creative Studio, Futuristic Tech, Responsive, Motion, A11y)
 - [ ] Phase 7: Dynamic Blog & Comprehensive SEO (Posts, Categories, Tags, Structured Data, Sitemap, Robots, Contact Rate Limiting)
 - [ ] Phase 8: Hardening, Optimization, QA & Final Handover (Security Audit, Pint, Pest/PHPUnit, Core Web Vitals, Backup/Restore Docs)
 
 ## Current Status
-- **Current Phase**: Phase 4 Complete -> Transitioning to Phase 5 (Trusted Code Editor)
-- **Active Task**: Designing and building the Trusted Code Editor (CodeMirror 6 integration, strictly allowlisted theme/template paths, path traversal defense, immutable revision history, syntax validation, owner authorization).
-- **Next Action**: Create Phase 5 migrations (`code_files`, `code_revisions`), `CodeEditorService`, admin editor UI with CodeMirror 6, and automated security tests.
+- **Current Phase**: Phase 5 Complete -> Transitioning to Phase 6 (Premium Frontend)
+- **Active Task**: Implementing high-polish frontend design tokens, Crystal 3D default theme with signature CSS 3D depth, light/dark mode persistence, responsive breakpoints (360px-1280px), and browser QA visual validation.
+- **Next Action**: Create `DESIGN.md`, polish all 11 sections in `crystal-3d` and companion themes, test theme switcher and responsive states, take QA screenshots.

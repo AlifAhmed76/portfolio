@@ -58,3 +58,17 @@
   - Full SQLite test suite: 33 tests passing.
   - Full MySQL test suite (`alif_portfolio_test`): 33 tests passing.
   - Asset build (`npm run build`): passed with 0 errors.
+
+### Entry 6: Phase 5 Trusted Code Editor Execution
+- **Date**: 2026-11-21
+- **Scope**: Implemented Trusted Code Editor architecture & threat model per Spec Section 09.G.
+- **Components Created**:
+  - Migration `2026_01_01_000005_create_code_editor_tables.php` (`code_files`, `code_revisions`).
+  - Models: `CodeFile` and `CodeRevision` with workspace scoping.
+  - Service: `CodeEditorService` with strict allowlist verification (`resources/views/themes`), path traversal blocking (`..`, `\`, leading slashes, null bytes, hidden files, `.env`, `config`, `routes`, etc.), syntax checks (`json_decode` and `php -l`), pre-save backup revision snapshots with SHA-256 calculation, and revision rollback.
+  - Controller & UI: `CodeEditorController` (strictly restricted to `owner` role) and `resources/views/admin/code-editor/index.blade.php` with file tree navigator, active file dirty indicator, keyboard shortcuts (Ctrl+S), and revisions restore modal.
+- **Verification**:
+  - 5 security tests in `CodeEditorSecurityTest.php` passing.
+  - Full SQLite test suite: 38 tests passing.
+  - Full MySQL test suite (`alif_portfolio_test`): 38 tests passing.
+  - Asset build (`npm run build`): passed with 0 errors.

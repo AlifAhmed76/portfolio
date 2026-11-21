@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CodeEditorController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EducationController;
 use App\Http\Controllers\Admin\ExperienceController;
@@ -101,6 +102,14 @@ Route::middleware('admin')->group(function () {
         Route::get('{theme}/preview', [ThemeController::class, 'preview'])->name('preview');
         Route::post('{theme}/publish', [ThemeController::class, 'publish'])->name('publish');
         Route::post('rollback/{revision}', [ThemeController::class, 'rollback'])->name('rollback');
+    });
+
+    // Trusted Code Editor
+    Route::prefix('code-editor')->name('code-editor.')->group(function () {
+        Route::get('/', [CodeEditorController::class, 'index'])->name('index');
+        Route::get('open', [CodeEditorController::class, 'open'])->name('open');
+        Route::post('save', [CodeEditorController::class, 'save'])->name('save');
+        Route::post('restore', [CodeEditorController::class, 'restore'])->name('restore');
     });
 
     // Pages & Visual Page Builder
