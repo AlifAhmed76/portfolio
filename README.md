@@ -1,66 +1,120 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Md. Alif Ahmed — Portfolio & Enterprise CMS
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> **Web Developer | Technical Project Lead | E-commerce Solutions Specialist**  
+> *Building Digital Experiences. Engineering Business Solutions.*
 
-## About Laravel
+A production-grade personal portfolio CMS engineered with Laravel 11, MariaDB/MySQL, and Bootstrap 5. Featuring an extensible Multi-Theme Engine (4 complete themes), Visual Page Builder with JSON schema revisions, Trusted Code Editor with allowlist security and immutable backups, Dynamic Technical Blog, Spam-Protected Contact Inbox, Comprehensive SEO (dynamic sitemap.xml, robots.txt, JSON-LD), and Automated SHA-256 Backups.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🌟 Highlights & Key Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **Identity & Precision**: Specifically crafted for **Md. Alif Ahmed** with the official title *"Web Developer | Technical Project Lead | E-commerce Solutions Specialist"* (strictly NO "Sr."). All personal content is database-driven and manageable via `/admin`.
+- **Multi-Workspace Scoped Architecture**: Clean database schema scoping via `BelongsToWorkspace` trait and global query scopes. Resolved strictly server-side from the authenticated user token (never from client request inputs).
+- **Theme Engine Studio (4 Complete Themes)**:
+  1. **Crystal 3D (Default)**: Dark-first editorial identity with emerald accents (`#10b981`), frosted glass surfaces (`backdrop-filter: blur(16px)`), signature CSS 3D crystal depth facet on Hero card, and responsive typography.
+  2. **Minimal Professional**: Crisp, high-contrast monochrome layout focused on recruiter scannability.
+  3. **Creative Studio**: Bold expressive typography, warm amber contrast, and storytelling layout.
+  4. **Futuristic Tech**: Terminal-inspired dark telemetry aesthetic with monospace accents.
+  - *Non-Destructive Previews*: Cryptographically signed HMAC preview tokens (`?theme_preview=...`).
+  - *Transactional Publishing & Instant Rollback*: Zero downtime and automated history snapshots.
+- **Visual Page Builder (`/admin/pages/{page}/builder`)**:
+  - Drag-and-drop & accessible reordering of 8 validated block types (`hero`, `about`, `skills`, `projects`, `services`, `experience`, `contact`, `custom_html`).
+  - Strict HTML sanitization blocking `<script>` tags, inline event handlers, and `javascript:` URLs.
+  - Responsive preview iframe (Desktop 100%, Tablet 768px, Mobile 375px switcher).
+  - Draft autosaving and atomic publishing with revision snapshots.
+- **Trusted Code Editor (`/admin/code-editor`)**:
+  - Integrated CodeMirror 6 code editor with dark syntax theme.
+  - Strict directory allowlist (`resources/views/themes/*`).
+  - Active path traversal defense (blocking `..`, leading slashes, null bytes, `.env`, `config/`, `routes/`, `vendor/`).
+  - Syntax integrity validation (`php -l` and `json_decode`) before saving.
+  - Pre-save immutable revision tracking with SHA-256 checksums and one-click rollback.
+  - Strictly restricted to `owner` role.
+- **Dynamic Blog CMS (`/blog`)**:
+  - Category and tag management, automatic reading time calculation (~200 wpm), draft/publish scheduling.
+  - Search and filterable public blog feed.
+  - Structured data (JSON-LD `BlogPosting` and `BreadcrumbList`).
+- **Contact Inbox & Spam Defense (`/admin/contacts`)**:
+  - Public submission protected by an invisible honeypot field (`hp_website`) and IP rate limiting (3 submissions per 10 minutes).
+  - Admin inbox with unread counter, detail viewer, archiving, and deletion.
+- **Comprehensive SEO & Discovery**:
+  - Dynamic `GET /sitemap.xml` generating XML entries for all published pages, projects, and articles.
+  - Dynamic `GET /robots.txt` disallowing admin routes and preview tokens.
+- **Automated Backup System**:
+  - `php artisan portfolio:backup`: Exports 34 database tables, archives media assets, and computes SHA-256 manifest checksums.
+- **Automated Test Coverage**:
+  - 45 feature and unit tests with 252 assertions passing 100% in both SQLite in-memory and MySQL (`alif_portfolio_test`).
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🚀 Quick Start Guide
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 1. Requirements
+- PHP 8.2+ (with `pdo_mysql`, `mbstring`, `gd`, `zip`, `intl`, `sodium`)
+- MariaDB 10.4+ or MySQL 8.0+
+- Composer 2.7+
+- Node.js 18+ and npm
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 2. Installation
+```bash
+# 1. Clone repository
+git clone https://github.com/alifahmed/portfolio.git
+cd portfolio
 
-## Laravel Sponsors
+# 2. Install PHP and JS dependencies
+composer install
+npm install
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+# 3. Configure environment
+cp .env.example .env
+php artisan key:generate
 
-### Premium Partners
+# 4. Run migrations and database seeder
+php artisan migrate --seed
+php artisan storage:link
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+# 5. Compile frontend assets
+npm run build
+```
 
-## Contributing
+### 3. Launching the Local Server
+```bash
+# Start Laravel development server
+php artisan serve
+```
+- **Public Site**: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+- **Admin Panel**: [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+---
 
-## Code of Conduct
+## 🔐 Default Admin Credentials
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| Parameter | Default Value | Notes |
+| :--- | :--- | :--- |
+| **Login URL** | `/admin/login` | Rate-limited to 5 attempts/min |
+| **Email** | `admin@alifahmed.com` | Configurable via `ADMIN_EMAIL` in `.env` |
+| **Password** | `ChangeMeInProd123!` | Configurable via `ADMIN_PASSWORD` in `.env` |
+| **Role** | `owner` | Highest privilege |
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🧪 Running Automated Tests
 
-## License
+```bash
+# Run standard SQLite in-memory test suite (45 tests)
+php artisan test
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+# Run full MySQL test suite against test database
+php vendor/phpunit/phpunit/phpunit -c phpunit.mysql.xml
+```
+
+---
+
+## 📁 Key Documentation References
+- [DESIGN.md](file:///c:/Users/oxioa/Desktop/Portfolio/DESIGN.md) — Design tokens, color system, typography scale, and glassmorphism levels.
+- [DEPLOYMENT.md](file:///c:/Users/oxioa/Desktop/Portfolio/DEPLOYMENT.md) — Production VPS guide (Ubuntu, Nginx, PHP-FPM, SSL, Supervisor, Cron).
+- [THEMES.md](file:///c:/Users/oxioa/Desktop/Portfolio/THEMES.md) — Theme engine architecture, manifests, and preview mechanics.
+- [BLOCKS.md](file:///c:/Users/oxioa/Desktop/Portfolio/BLOCKS.md) — Visual Page Builder block catalog, JSON schemas, and sanitization rules.
+- [SECURITY.md](file:///c:/Users/oxioa/Desktop/Portfolio/SECURITY.md) — Threat model, Code Editor sandbox, honeypot spam protection, and audit logs.
+- [TEST_REPORT.md](file:///c:/Users/oxioa/Desktop/Portfolio/TEST_REPORT.md) — Test suite results across SQLite and MariaDB.
+- [KNOWN_ISSUES.md](file:///c:/Users/oxioa/Desktop/Portfolio/KNOWN_ISSUES.md) — Documented environment behaviors and unconfirmed owner items.
