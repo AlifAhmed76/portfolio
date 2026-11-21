@@ -6,13 +6,18 @@ WORKDIR /var/www/html
 # Copy application files
 COPY . /var/www/html
 
+# Environment for Composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+# Install composer production dependencies during build
+RUN composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction
+
 # Image and PHP-FPM Configuration
 ENV WEBROOT=/var/www/html/public
-ENV SKIP_COMPOSER=0
+ENV SKIP_COMPOSER=1
 ENV PHP_ERRORS_STDERR=1
 ENV RUN_SCRIPTS=1
 ENV REAL_IP_HEADER=1
-ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Laravel Production Defaults
 ENV APP_ENV=production
