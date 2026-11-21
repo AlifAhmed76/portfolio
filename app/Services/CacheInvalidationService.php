@@ -47,24 +47,10 @@ class CacheInvalidationService
         Cache::forget("workspace_{$id}_homepage");
     }
 
-    public static function invalidatePages(?string $slug = null): void
-    {
-        $id = WorkspaceResolver::currentId() ?? 1;
-        Cache::forget("workspace_{$id}_pages");
-        if ($slug) {
-            Cache::forget("workspace_{$id}_page_{$slug}");
-        }
-        Cache::forget("workspace_{$id}_homepage");
-    }
-
-    public function flushFrontend(): void
-    {
-        static::invalidateAll();
-    }
-
     public static function invalidateAll(): void
     {
         $id = WorkspaceResolver::currentId() ?? 1;
         Cache::flush();
     }
 }
+

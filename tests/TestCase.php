@@ -2,7 +2,6 @@
 
 namespace Tests;
 
-use App\Services\ThemeResolver;
 use App\Services\WorkspaceResolver;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
@@ -12,6 +11,5 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
         WorkspaceResolver::clear();
-        ThemeResolver::clear();
     }
 }
