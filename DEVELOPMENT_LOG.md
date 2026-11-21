@@ -11,11 +11,20 @@
 - Generated core project tracking documents: PROGRESS.md, DECISIONS.md, DEVELOPMENT_LOG.md, KNOWN_ISSUES.md.
 
 ## 2026-11-21 - Phase 1: Foundation Completed
-- Built foundation migrations: `workspaces`, `users` (extended with `workspace_id`, `role`, `status`), `activity_logs`, `site_settings`, `profiles`, `contact_details`, `social_links`, `seo_metadata`.
+- Built foundation migrations: `workspaces`, `users`, `activity_logs`, `site_settings`, `profiles`, `contact_details`, `social_links`, `seo_metadata`.
 - Implemented multi-workspace scoping architecture: `WorkspaceResolver`, `WorkspaceScope`, and `BelongsToWorkspace` trait with server-side resolution.
-- Configured admin-only authentication: `AuthController`, `LoginRequest` with rate-limiting (5 attempts per minute), session regeneration, and logout.
-- Implemented `AdminMiddleware` and `ResolveWorkspace` middleware.
+- Configured admin-only authentication: `AuthController`, `LoginRequest` with rate-limiting, session regeneration, and logout.
 - Built responsive administrative dashboard shell in Blade with Bootstrap 5.3, Lucide icons, task-grouped sidebar, breadcrumbs, toasts, dark/light theme switch, and "Coming in Phase N" badges.
-- Seeded initial workspace, owner account (reading credentials securely from environment), initial profile (strictly adhering to no "Sr." rule), contact placeholders, and site settings.
-- Wrote and verified 13 automated tests across SQLite in-memory and MariaDB/MySQL (`alif_portfolio_test`). All tests passing.
-- Verified Vite asset production build.
+- Seeded initial workspace, owner account, initial profile (strictly adhering to no "Sr." rule), contact placeholders, and site settings.
+- Verified 13 automated tests across SQLite in-memory and MariaDB/MySQL.
+
+## 2026-11-21 - Phase 2: Core CMS Completed
+- Built Core CMS migrations: `media`, `media_attachments`, `project_categories`, `projects`, `project_details`, `project_links`, `skill_categories`, `skills`, `project_skill`, `experiences`, `educations`, `services`, `homepage_sections`.
+- Created Eloquent models with workspace scoping, relations, and helpers.
+- Built `MediaService` with MIME validation, dimension detection, SVG script sanitization, and safe deletion checks preventing deletion of referenced files.
+- Built `CacheInvalidationService` handling targeted tag and key invalidation across profile, projects, skills, services, and sections.
+- Created dedicated Form Requests with server-side validation and regex forbidding "Sr." in titles.
+- Created Admin controllers and responsive views for Identity & Profile, Media Library, Projects & Case Studies, Skills (descriptive evidence, no percentage progress bars), Experiences & Education, Services, and Homepage Sections.
+- Seeded full catalog of Alif Ahmed's core technologies, initial case study project, services, and homepage sections.
+- Wrote and passed 20 automated tests in SQLite and MariaDB/MySQL (`alif_portfolio_test`).
+- Built production Vite assets.

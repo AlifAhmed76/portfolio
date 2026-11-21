@@ -2,6 +2,14 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EducationController;
+use App\Http\Controllers\Admin\ExperienceController;
+use App\Http\Controllers\Admin\IdentityController;
+use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\SectionController;
+use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SkillController;
 use Illuminate\Support\Facades\Route;
 
 // Authentication routes
@@ -17,9 +25,70 @@ Route::middleware('admin')->group(function () {
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Content management routes will be registered in Phase 2
-    // Appearance management routes will be registered in Phase 3 & 5
-    // Pages & Builder routes will be registered in Phase 4
-    // Inbox & SEO routes will be registered in Phase 7
-    // Operations & Backups routes will be registered in Phase 8
+    // Identity & Contacts
+    Route::prefix('identity')->name('identity.')->group(function () {
+        Route::get('/', [IdentityController::class, 'index'])->name('index');
+        Route::put('profile', [IdentityController::class, 'updateProfile'])->name('profile.update');
+        Route::put('contact', [IdentityController::class, 'updateContact'])->name('contact.update');
+        Route::post('social', [IdentityController::class, 'storeSocialLink'])->name('social.store');
+        Route::put('social/{socialLink}', [IdentityController::class, 'updateSocialLink'])->name('social.update');
+        Route::delete('social/{socialLink}', [IdentityController::class, 'destroySocialLink'])->name('social.destroy');
+    });
+
+    // Media Library
+    Route::prefix('media')->name('media.')->group(function () {
+        Route::get('/', [MediaController::class, 'index'])->name('index');
+        Route::post('upload', [MediaController::class, 'upload'])->name('upload');
+        Route::delete('{media}', [MediaController::class, 'destroy'])->name('destroy');
+    });
+
+    // Projects & Case Studies
+    Route::prefix('projects')->name('projects.')->group(function () {
+        Route::get('/', [ProjectController::class, 'index'])->name('index');
+        Route::get('create', [ProjectController::class, 'create'])->name('create');
+        Route::post('/', [ProjectController::class, 'store'])->name('store');
+        Route::get('{project}/edit', [ProjectController::class, 'edit'])->name('edit');
+        Route::put('{project}', [ProjectController::class, 'update'])->name('update');
+        Route::delete('{project}', [ProjectController::class, 'destroy'])->name('destroy');
+        Route::post('{project}/featured', [ProjectController::class, 'toggleFeatured'])->name('featured');
+    });
+
+    // Skills & Categories
+    Route::prefix('skills')->name('skills.')->group(function () {
+        Route::get('/', [SkillController::class, 'index'])->name('index');
+        Route::post('categories', [SkillController::class, 'storeCategory'])->name('category.store');
+        Route::delete('categories/{category}', [SkillController::class, 'destroyCategory'])->name('category.destroy');
+        Route::post('/', [SkillController::class, 'store'])->name('store');
+        Route::put('{skill}', [SkillController::class, 'update'])->name('update');
+        Route::delete('{skill}', [SkillController::class, 'destroy'])->name('destroy');
+    });
+
+    // Experience & Education
+    Route::prefix('experience')->name('experience.')->group(function () {
+        Route::get('/', [ExperienceController::class, 'index'])->name('index');
+        Route::post('/', [ExperienceController::class, 'store'])->name('store');
+        Route::put('{experience}', [ExperienceController::class, 'update'])->name('update');
+        Route::delete('{experience}', [ExperienceController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('education')->name('education.')->group(function () {
+        Route::post('/', [EducationController::class, 'store'])->name('store');
+        Route::put('{education}', [EducationController::class, 'update'])->name('update');
+        Route::delete('{education}', [EducationController::class, 'destroy'])->name('destroy');
+    });
+
+    // Services
+    Route::prefix('services')->name('services.')->group(function () {
+        Route::get('/', [ServiceController::class, 'index'])->name('index');
+        Route::post('/', [ServiceController::class, 'store'])->name('store');
+        Route::put('{service}', [ServiceController::class, 'update'])->name('update');
+        Route::delete('{service}', [ServiceController::class, 'destroy'])->name('destroy');
+    });
+
+    // Homepage Sections
+    Route::prefix('sections')->name('sections.')->group(function () {
+        Route::get('/', [SectionController::class, 'index'])->name('index');
+        Route::put('{section}', [SectionController::class, 'update'])->name('update');
+        Route::post('{section}/toggle', [SectionController::class, 'toggle'])->name('toggle');
+    });
 });
