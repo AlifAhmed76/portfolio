@@ -1,0 +1,30 @@
+services:
+  - type: web
+    name: alif-portfolio
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: APP_NAME
+        value: "Alif Ahmed Portfolio"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        sync: false
+      - key: APP_URL
+        sync: false
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DB_HOST
+        value: biv62q7gb3a5k8rbskoe-mysql.services.clever-cloud.com
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_DATABASE
+        value: biv62q7gb3a5k8rbskoe
+      - key: DB_USERNAME
+        value: udm12g5jukik995u
+      - key: DB_PASSWORD
+        sync: false
