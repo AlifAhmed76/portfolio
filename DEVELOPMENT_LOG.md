@@ -87,3 +87,17 @@
   - Full SQLite test suite: 41 tests passing.
   - Full MySQL test suite (`alif_portfolio_test`): 41 tests passing.
   - Asset build (`npm run build`): passed with 0 errors.
+
+### Entry 8: Phase 7 Dynamic Blog, SEO & Contact Inbox Execution
+- **Date**: 2026-11-21
+- **Scope**: Implemented Blog CMS, Contact inbox spam defense, XML sitemap, robots.txt, and structured data per Spec Section 09.H & Section 11 & Section 12.
+- **Components Created**:
+  - Migration `2026_01_01_000006_create_blog_and_inbox_tables.php` (`post_categories`, `post_tags`, `posts`, `post_post_tag`, `contact_messages`).
+  - Models: `PostCategory`, `PostTag`, `Post` (with automatic reading time calculation at 200 wpm), and `ContactMessage`.
+  - Admin Controllers & Views: `PostController` (CRUD, reading time, SEO tags) and `ContactMessageController` (inbox list, show, archive, delete).
+  - Public Routing & Controllers: `BlogController` (listing, search, category/tag filtering, reading time, JSON-LD structured data), `ContactController` (honeypot field check and IP rate limiting of max 3 submissions per 10 minutes), and `SeoController` (`GET /sitemap.xml` dynamic XML generator, `GET /robots.txt`).
+- **Verification**:
+  - 4 automated feature tests in `BlogAndSeoTest.php` passing.
+  - Full SQLite test suite: 45 tests passing.
+  - Full MySQL test suite (`alif_portfolio_test`): 45 tests passing.
+  - Asset build (`npm run build`): passed with 0 errors.

@@ -329,5 +329,38 @@ class DatabaseSeeder extends Seeder
                 ],
             ]
         );
+
+        // 12. Initial Blog Articles & Categories
+        $blogCategory = \App\Models\PostCategory::firstOrCreate(
+            ['workspace_id' => $workspace->id, 'slug' => 'systems-architecture'],
+            ['name' => 'Systems Architecture', 'description' => 'Architectural patterns, scalable data pipelines, and performance engineering.']
+        );
+
+        $tagLaravel = \App\Models\PostTag::firstOrCreate(
+            ['workspace_id' => $workspace->id, 'slug' => 'laravel'],
+            ['name' => 'Laravel']
+        );
+        $tagTracking = \App\Models\PostTag::firstOrCreate(
+            ['workspace_id' => $workspace->id, 'slug' => 'server-side-tracking'],
+            ['name' => 'Server-Side Tracking']
+        );
+
+        $samplePost = \App\Models\Post::firstOrCreate(
+            ['workspace_id' => $workspace->id, 'slug' => 'architecting-meta-conversion-api-laravel'],
+            [
+                'category_id' => $blogCategory->id,
+                'title' => 'Architecting Server-Side Meta Conversion API in High-Volume Laravel Applications',
+                'summary' => 'How to overcome client-side tracking loss, iOS privacy restrictions, and ad blockers using dual-stream deduplicated server events.',
+                'content' => "In contemporary e-commerce architectures, client-side pixel tracking has degraded substantially due to iOS Intelligent Tracking Prevention (ITP), browser ad-blocking extensions, and restrictive cookie expiration policies. When businesses rely solely on browser JavaScript pixels, attribution accuracy can decline by up to 30%.\n\n### The Dual-Stream Architecture\nTo restore complete attribution integrity, we implement a hybrid pipeline: dispatching standard browser events alongside high-fidelity server-side payloads via Meta's Graph API.\n\n```php\nclass MetaConversionService\n{\n    public function dispatchPurchaseEvent(Order \$order, Request \$request): void\n    {\n        \$payload = [\n            'event_name' => 'Purchase',\n            'event_time' => now()->timestamp,\n            'event_id' => 'order_' . \$order->id,\n            'user_data' => [\n                'em' => hash('sha256', strtolower(trim(\$order->email))),\n                'client_ip_address' => \$request->ip(),\n                'client_user_agent' => \$request->userAgent(),\n            ],\n            'custom_data' => [\n                'currency' => 'BDT',\n                'value' => (float) \$order->total,\n            ],\n        ];\n\n        ProcessMetaEventJob::dispatch(\$payload)->onQueue('tracking');\n    }\n}\n```\n\n### Deduplication Key Governance\nThe cornerstone of resilient attribution is the deterministic `event_id`. By sharing this identical unique identifier across both the browser `fbq('track', 'Purchase', {}, {eventID: ...})` and the server-side payload, Meta automatically deduplicates the interaction within a 48-hour window, ensuring accurate purchase counts and eliminating false signal inflation.\n\n### Resilient Background Queues\nDirectly calling third-party analytics endpoints synchronously in HTTP request lifecycles adds latency and creates checkout failure points. Utilizing Redis-backed Laravel jobs ensures zero impact on transaction latency while guaranteeing automatic exponential backoff retries during external endpoint outages.",
+                'reading_time' => 4,
+                'status' => 'published',
+                'published_at' => now(),
+                'meta_title' => 'Server-Side Meta CAPI Architecture in Laravel',
+                'meta_description' => 'A comprehensive technical blueprint for implementing robust Meta Conversion API tracking with event deduplication in Laravel.',
+                'author_id' => $owner->id,
+            ]
+        );
+
+        $samplePost->tags()->syncWithoutDetaching([$tagLaravel->id, $tagTracking->id]);
     }
 }

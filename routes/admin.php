@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\CodeEditorController;
+use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EducationController;
 use App\Http\Controllers\Admin\ExperienceController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Admin\IdentityController;
 use App\Http\Controllers\Admin\MediaController;
 use App\Http\Controllers\Admin\PageBuilderController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -127,5 +129,23 @@ Route::middleware('admin')->group(function () {
         Route::post('{page}/builder/publish', [PageBuilderController::class, 'publish'])->name('builder.publish');
         Route::get('{page}/builder/revisions', [PageBuilderController::class, 'revisions'])->name('builder.revisions');
         Route::post('{page}/builder/restore/{revision}', [PageBuilderController::class, 'restoreRevision'])->name('builder.restore');
+    });
+
+    // Blog Articles
+    Route::prefix('posts')->name('posts.')->group(function () {
+        Route::get('/', [PostController::class, 'index'])->name('index');
+        Route::get('create', [PostController::class, 'create'])->name('create');
+        Route::post('/', [PostController::class, 'store'])->name('store');
+        Route::get('{post}/edit', [PostController::class, 'edit'])->name('edit');
+        Route::put('{post}', [PostController::class, 'update'])->name('update');
+        Route::delete('{post}', [PostController::class, 'destroy'])->name('destroy');
+    });
+
+    // Contact Inbox
+    Route::prefix('contacts')->name('contacts.')->group(function () {
+        Route::get('/', [ContactMessageController::class, 'index'])->name('index');
+        Route::get('{contact}', [ContactMessageController::class, 'show'])->name('show');
+        Route::patch('{contact}/archive', [ContactMessageController::class, 'archive'])->name('archive');
+        Route::delete('{contact}', [ContactMessageController::class, 'destroy'])->name('destroy');
     });
 });
