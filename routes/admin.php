@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\Admin\ThemeController;
 use Illuminate\Support\Facades\Route;
 
 // Authentication routes
@@ -90,5 +91,13 @@ Route::middleware('admin')->group(function () {
         Route::get('/', [SectionController::class, 'index'])->name('index');
         Route::put('{section}', [SectionController::class, 'update'])->name('update');
         Route::post('{section}/toggle', [SectionController::class, 'toggle'])->name('toggle');
+    });
+
+    // Theme Engine
+    Route::prefix('themes')->name('themes.')->group(function () {
+        Route::get('/', [ThemeController::class, 'index'])->name('index');
+        Route::get('{theme}/preview', [ThemeController::class, 'preview'])->name('preview');
+        Route::post('{theme}/publish', [ThemeController::class, 'publish'])->name('publish');
+        Route::post('rollback/{revision}', [ThemeController::class, 'rollback'])->name('rollback');
     });
 });

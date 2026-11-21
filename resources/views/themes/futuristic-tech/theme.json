@@ -1,0 +1,18 @@
+{
+  "slug": "futuristic-tech",
+  "name": "Futuristic Tech",
+  "version": "1.0.0",
+  "description": "High-tech terminal aesthetic. Dark technical visual language, monospace accents, cyber status badges, and precision layout.",
+  "mode": "dark-first",
+  "tokens": {
+    "accent_color": "#06b6d4",
+    "bg_color": "#050811",
+    "surface_color": "#0b1120",
+    "border_color": "#1e293b",
+    "font_heading": "JetBrains Mono",
+    "font_body": "Inter"
+  },
+  "supported_blocks": [
+    "hero", "highlights", "about", "expertise", "projects", "services", "experience", "education", "process", "blog", "contact"
+  ]
+}

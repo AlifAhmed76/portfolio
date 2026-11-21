@@ -1,0 +1,19 @@
+{
+  "slug": "crystal-3d",
+  "name": "Crystal 3D",
+  "version": "1.0.0",
+  "description": "Recommended default theme. Dark-first editorial identity with emerald accents, selective crystal/glass surfaces, and subtle 3D depth.",
+  "mode": "dark-first",
+  "tokens": {
+    "accent_color": "#10b981",
+    "bg_color": "#090d16",
+    "surface_color": "#0f172a",
+    "border_color": "rgba(255, 255, 255, 0.08)",
+    "font_heading": "Plus Jakarta Sans",
+    "font_body": "Inter",
+    "glass_blur": "16px"
+  },
+  "supported_blocks": [
+    "hero", "highlights", "about", "expertise", "projects", "services", "experience", "education", "process", "blog", "contact"
+  ]
+}

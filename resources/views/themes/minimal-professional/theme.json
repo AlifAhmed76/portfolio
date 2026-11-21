@@ -1,0 +1,18 @@
+{
+  "slug": "minimal-professional",
+  "name": "Minimal Professional",
+  "version": "1.0.0",
+  "description": "Editorial, recruiter-friendly light-first theme. Clean layout, typography-focused, rapid load time, and high accessibility contrast.",
+  "mode": "light-first",
+  "tokens": {
+    "accent_color": "#0f766e",
+    "bg_color": "#ffffff",
+    "surface_color": "#f8fafc",
+    "border_color": "#e2e8f0",
+    "font_heading": "Cabinet Grotesk",
+    "font_body": "Inter"
+  },
+  "supported_blocks": [
+    "hero", "highlights", "about", "expertise", "projects", "services", "experience", "education", "process", "blog", "contact"
+  ]
+}
