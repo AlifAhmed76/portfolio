@@ -259,5 +259,75 @@ class DatabaseSeeder extends Seeder
                 ['title' => $sec['title'], 'sort_order' => $sec['order'], 'is_enabled' => true]
             );
         }
+
+        // 11. Initial Page Templates
+        \App\Models\PageTemplate::firstOrCreate(
+            ['slug' => 'blank-canvas'],
+            [
+                'name' => 'Blank Canvas',
+                'is_system' => true,
+                'version' => '1.0',
+                'schema_json' => [],
+            ]
+        );
+
+        \App\Models\PageTemplate::firstOrCreate(
+            ['slug' => 'landing-page'],
+            [
+                'name' => 'Standard Landing Page',
+                'is_system' => true,
+                'version' => '1.0',
+                'schema_json' => [
+                    [
+                        'id' => 'block-hero-1',
+                        'type' => 'hero',
+                        'enabled' => true,
+                        'settings' => [
+                            'badge' => 'Available for Strategic Web Projects',
+                            'headline' => 'Web Developer | Technical Project Lead',
+                            'subheadline' => 'Building enterprise-grade web applications, e-commerce architectures, and high-performance APIs.',
+                            'cta_primary_label' => 'Explore Work',
+                            'cta_primary_url' => '#projects',
+                            'cta_secondary_label' => 'Initiate Contact',
+                            'cta_secondary_url' => '#contact',
+                        ],
+                    ],
+                    [
+                        'id' => 'block-about-1',
+                        'type' => 'about',
+                        'enabled' => true,
+                        'settings' => [
+                            'title' => 'Engineering Excellence',
+                            'subtitle' => 'About Alif Ahmed',
+                            'bio' => 'Dedicated technical project lead with deep expertise in custom Laravel engineering, high-scale database optimization, and conversion-focused architecture.',
+                            'highlights' => 'Technical Project Management, High-Throughput E-Commerce, Meta Conversion API',
+                        ],
+                    ],
+                    [
+                        'id' => 'block-projects-1',
+                        'type' => 'projects',
+                        'enabled' => true,
+                        'settings' => [
+                            'title' => 'Featured Engineering Cases',
+                            'subtitle' => 'Production Implementations',
+                            'limit' => 6,
+                            'featured_only' => true,
+                            'layout' => 'grid',
+                        ],
+                    ],
+                    [
+                        'id' => 'block-contact-1',
+                        'type' => 'contact',
+                        'enabled' => true,
+                        'settings' => [
+                            'title' => 'Start a Project Conversation',
+                            'subtitle' => 'Direct Consultation & Engagement',
+                            'form_enabled' => true,
+                            'show_socials' => true,
+                        ],
+                    ],
+                ],
+            ]
+        );
     }
 }
