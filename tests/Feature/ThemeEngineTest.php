@@ -46,7 +46,7 @@ class ThemeEngineTest extends TestCase
 
     public function test_all_four_themes_have_valid_manifests_and_templates(): void
     {
-        $expectedThemes = ['crystal-3d', 'minimal-professional', 'creative-studio', 'futuristic-tech'];
+        $expectedThemes = ['crystal-3d', 'minimal-professional', 'creative-studio', 'futuristic-tech', 'split-engineer', 'editorial-brutalist'];
 
         foreach ($expectedThemes as $slug) {
             $manifestPath = resource_path("views/themes/{$slug}/theme.json");
@@ -76,11 +76,15 @@ class ThemeEngineTest extends TestCase
         $response->assertSee('Minimal Professional');
         $response->assertSee('Creative Studio');
         $response->assertSee('Futuristic Tech');
+        $response->assertSee('Split Engineer');
+        $response->assertSee('Editorial Brutalist');
 
         $this->assertDatabaseHas('themes', ['slug' => 'crystal-3d']);
         $this->assertDatabaseHas('themes', ['slug' => 'minimal-professional']);
         $this->assertDatabaseHas('themes', ['slug' => 'creative-studio']);
         $this->assertDatabaseHas('themes', ['slug' => 'futuristic-tech']);
+        $this->assertDatabaseHas('themes', ['slug' => 'split-engineer']);
+        $this->assertDatabaseHas('themes', ['slug' => 'editorial-brutalist']);
     }
 
     public function test_theme_preview_does_not_mutate_live_active_theme(): void

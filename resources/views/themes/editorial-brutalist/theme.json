@@ -1,0 +1,18 @@
+{
+  "slug": "editorial-brutalist",
+  "name": "Editorial Brutalist",
+  "version": "1.0.0",
+  "description": "Inspired by Anton & Irene and Tobias van Schneider. Bold, architectural, typography-first editorial layout with oversized case numbers, high-contrast grids, and quiet confidence.",
+  "mode": "dark-first",
+  "tokens": {
+    "accent_color": "#e11d48",
+    "bg_color": "#09090b",
+    "surface_color": "#121214",
+    "border_color": "rgba(255, 255, 255, 0.15)",
+    "font_heading": "Syne",
+    "font_body": "Space Grotesk"
+  },
+  "supported_blocks": [
+    "hero", "highlights", "about", "expertise", "projects", "services", "experience", "education", "process", "blog", "contact"
+  ]
+}

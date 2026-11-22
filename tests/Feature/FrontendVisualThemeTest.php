@@ -239,4 +239,45 @@ class FrontendVisualThemeTest extends TestCase
         $response->assertDontSee('Meta CAPI: 99.8% Server Verified');
         $response->assertDontSee('API Dispatch: Pathao/RedX');
     }
+
+    public function test_split_engineer_theme_renders_properly(): void
+    {
+        Theme::create([
+            'name' => 'Split Engineer',
+            'slug' => 'split-engineer',
+            'version' => '1.0.0',
+            'manifest_json' => ['slug' => 'split-engineer', 'name' => 'Split Engineer'],
+            'status' => 'active',
+        ]);
+
+        \App\Services\ThemeResolver::setPreviewSlug('split-engineer');
+        $response = $this->get('/');
+        $response->assertOk();
+        $response->assertSee('Md. Alif Ahmed');
+        $response->assertSee('Web Developer | Technical Project Lead | E-commerce Solutions Specialist');
+        $response->assertDontSee('Sr. Web Developer');
+        $response->assertSee('Available for Select Projects & Leadership Roles');
+        $response->assertSee('Courier Logistics API Integration');
+        \App\Services\ThemeResolver::setPreviewSlug(null);
+    }
+
+    public function test_editorial_brutalist_theme_renders_properly(): void
+    {
+        Theme::create([
+            'name' => 'Editorial Brutalist',
+            'slug' => 'editorial-brutalist',
+            'version' => '1.0.0',
+            'manifest_json' => ['slug' => 'editorial-brutalist', 'name' => 'Editorial Brutalist'],
+            'status' => 'active',
+        ]);
+
+        \App\Services\ThemeResolver::setPreviewSlug('editorial-brutalist');
+        $response = $this->get('/');
+        $response->assertOk();
+        $response->assertSee('Md. Alif Ahmed');
+        $response->assertSee('Web Developer | Technical Project Lead | E-commerce Solutions Specialist');
+        $response->assertDontSee('Sr. Web Developer');
+        $response->assertSee('Courier Logistics API Integration');
+        \App\Services\ThemeResolver::setPreviewSlug(null);
+    }
 }

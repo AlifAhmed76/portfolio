@@ -1,0 +1,18 @@
+{
+  "slug": "split-engineer",
+  "name": "Split Engineer",
+  "version": "1.0.0",
+  "description": "Inspired by Brittany Chiang. High-density split screen layout with sticky left biography/navigation dock, subtle ambient spotlight glow, and right-hand narrative stream.",
+  "mode": "dark-first",
+  "tokens": {
+    "accent_color": "#14b8a6",
+    "bg_color": "#0f172a",
+    "surface_color": "#1e293b",
+    "border_color": "rgba(148, 163, 184, 0.12)",
+    "font_heading": "Inter",
+    "font_body": "Inter"
+  },
+  "supported_blocks": [
+    "hero", "highlights", "about", "expertise", "projects", "services", "experience", "education", "process", "blog", "contact"
+  ]
+}
