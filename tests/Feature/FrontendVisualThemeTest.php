@@ -288,6 +288,11 @@ class FrontendVisualThemeTest extends TestCase
             'craft-playful' => 'Craft & Playful',
             'nordic-minimal' => 'Nordic Minimal',
             'executive-lead' => 'Executive Lead',
+            'developer-garden' => 'Developer Garden',
+            'boutique-studio' => 'Boutique Studio',
+            'fintech-saas' => 'Fintech SaaS',
+            'industrial-engineering' => 'Industrial Engineering',
+            'interactive-spotlight' => 'Interactive Spotlight',
         ];
 
         foreach ($newThemes as $slug => $name) {

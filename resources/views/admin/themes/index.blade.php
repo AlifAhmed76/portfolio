@@ -105,6 +105,46 @@
                     'accent' => '#0f766e',
                     'icon' => 'file-text',
                 ],
+                'developer-garden' => [
+                    'layout' => 'Personal Digital Garden · Dense Log',
+                    'ref' => 'taniarascia.com',
+                    'bg' => '#181a1b',
+                    'border' => '#10b981',
+                    'accent' => '#10b981',
+                    'icon' => 'code-2',
+                ],
+                'boutique-studio' => [
+                    'layout' => 'Boutique E-Commerce Studio · Dark Luxury',
+                    'ref' => 'devonstank.com',
+                    'bg' => '#09090b',
+                    'border' => '#a3e635',
+                    'accent' => '#a3e635',
+                    'icon' => 'shopping-bag',
+                ],
+                'fintech-saas' => [
+                    'layout' => 'Web3 & Fintech Launchpad · Glowing 3D Glass',
+                    'ref' => 'trendswap.app',
+                    'bg' => '#070913',
+                    'border' => '#6366f1',
+                    'accent' => '#818cf8',
+                    'icon' => 'trending-up',
+                ],
+                'industrial-engineering' => [
+                    'layout' => 'Architectural Blueprint · Technical Grid',
+                    'ref' => 'basestructures.com',
+                    'bg' => '#0f172a',
+                    'border' => '#f97316',
+                    'accent' => '#f97316',
+                    'icon' => 'compass',
+                ],
+                'interactive-spotlight' => [
+                    'layout' => 'Dynamic Cursor Spotlight · Micro-Animated 3D',
+                    'ref' => 'arsalankaleem.me',
+                    'bg' => '#030712',
+                    'border' => '#06b6d4',
+                    'accent' => '#22d3ee',
+                    'icon' => 'mouse-pointer',
+                ],
             ];
         @endphp
 

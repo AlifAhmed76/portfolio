@@ -1,0 +1,18 @@
+{
+  "slug": "developer-garden",
+  "name": "Developer Garden",
+  "version": "1.0.0",
+  "description": "Inspired by Tania Rascia. Dense digital garden and technical notebook with curated guides, architectural case logs, monospace directory breadcrumbs, and quiet developer utility.",
+  "mode": "dark-first",
+  "tokens": {
+    "accent_color": "#10b981",
+    "bg_color": "#181a1b",
+    "surface_color": "#212529",
+    "border_color": "rgba(255, 255, 255, 0.1)",
+    "font_heading": "Inter",
+    "font_body": "Inter"
+  },
+  "supported_blocks": [
+    "hero", "highlights", "about", "expertise", "projects", "services", "experience", "education", "process", "blog", "contact"
+  ]
+}

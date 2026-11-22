@@ -1,0 +1,18 @@
+{
+  "slug": "boutique-studio",
+  "name": "Boutique Studio",
+  "version": "1.0.0",
+  "description": "Inspired by Devon Stank. High-end e-commerce development studio with obsidian black backdrop, high-fashion neon lime accents, oversized typography, and conversion ROI badges.",
+  "mode": "dark-first",
+  "tokens": {
+    "accent_color": "#a3e635",
+    "bg_color": "#0a0a0c",
+    "surface_color": "#121316",
+    "border_color": "rgba(163, 230, 53, 0.2)",
+    "font_heading": "Syne",
+    "font_body": "Inter"
+  },
+  "supported_blocks": [
+    "hero", "highlights", "about", "expertise", "projects", "services", "experience", "education", "process", "blog", "contact"
+  ]
+}

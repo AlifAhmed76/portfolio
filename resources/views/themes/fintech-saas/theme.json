@@ -1,0 +1,18 @@
+{
+  "slug": "fintech-saas",
+  "name": "Fintech SaaS",
+  "version": "1.0.0",
+  "description": "Inspired by Trendswap. Modern Web3 & Fintech product launchpad with cosmic gradient mesh, floating 3D perspective cards, continuous telemetry ticker, and glowing pill badges.",
+  "mode": "dark-first",
+  "tokens": {
+    "accent_color": "#6366f1",
+    "bg_color": "#070913",
+    "surface_color": "#0f1325",
+    "border_color": "rgba(99, 102, 241, 0.25)",
+    "font_heading": "Plus Jakarta Sans",
+    "font_body": "Inter"
+  },
+  "supported_blocks": [
+    "hero", "highlights", "about", "expertise", "projects", "services", "experience", "education", "process", "blog", "contact"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "slug": "industrial-engineering",
+  "name": "Industrial Engineering",
+  "version": "1.0.0",
+  "description": "Inspired by Base Structures. Precision tensile engineering and architectural blueprint layout with coordinate labels, crosshair brackets, and technical spec tables.",
+  "mode": "dark-first",
+  "tokens": {
+    "accent_color": "#f97316",
+    "bg_color": "#0f172a",
+    "surface_color": "#1e293b",
+    "border_color": "rgba(249, 115, 22, 0.3)",
+    "font_heading": "Space Grotesk",
+    "font_body": "Inter"
+  },
+  "supported_blocks": [
+    "hero", "highlights", "about", "expertise", "projects", "services", "experience", "education", "process", "blog", "contact"
+  ]
+}

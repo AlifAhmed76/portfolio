@@ -57,6 +57,11 @@ class ThemeEngineTest extends TestCase
             'craft-playful',
             'nordic-minimal',
             'executive-lead',
+            'developer-garden',
+            'boutique-studio',
+            'fintech-saas',
+            'industrial-engineering',
+            'interactive-spotlight',
         ];
 
         foreach ($expectedThemes as $slug) {
@@ -93,6 +98,11 @@ class ThemeEngineTest extends TestCase
         $response->assertSee('Craft &amp; Playful', false);
         $response->assertSee('Nordic Minimal');
         $response->assertSee('Executive Lead');
+        $response->assertSee('Developer Garden');
+        $response->assertSee('Boutique Studio');
+        $response->assertSee('Fintech SaaS');
+        $response->assertSee('Industrial Engineering');
+        $response->assertSee('Interactive Spotlight');
 
         $this->assertDatabaseHas('themes', ['slug' => 'crystal-3d']);
         $this->assertDatabaseHas('themes', ['slug' => 'minimal-professional']);
@@ -104,6 +114,11 @@ class ThemeEngineTest extends TestCase
         $this->assertDatabaseHas('themes', ['slug' => 'craft-playful']);
         $this->assertDatabaseHas('themes', ['slug' => 'nordic-minimal']);
         $this->assertDatabaseHas('themes', ['slug' => 'executive-lead']);
+        $this->assertDatabaseHas('themes', ['slug' => 'developer-garden']);
+        $this->assertDatabaseHas('themes', ['slug' => 'boutique-studio']);
+        $this->assertDatabaseHas('themes', ['slug' => 'fintech-saas']);
+        $this->assertDatabaseHas('themes', ['slug' => 'industrial-engineering']);
+        $this->assertDatabaseHas('themes', ['slug' => 'interactive-spotlight']);
     }
 
     public function test_theme_preview_does_not_mutate_live_active_theme(): void

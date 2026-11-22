@@ -1,0 +1,18 @@
+{
+  "slug": "interactive-spotlight",
+  "name": "Interactive Spotlight",
+  "version": "1.0.0",
+  "description": "Inspired by Arsalan Kaleem. Lead UI/UX & Full-Stack Engineer showcase with dynamic cursor spotlight, floating 3D tech badge clouds, glowing gradient borders, and live skill telemetry.",
+  "mode": "dark-first",
+  "tokens": {
+    "accent_color": "#06b6d4",
+    "bg_color": "#030712",
+    "surface_color": "#0c1222",
+    "border_color": "rgba(6, 182, 212, 0.25)",
+    "font_heading": "Plus Jakarta Sans",
+    "font_body": "Inter"
+  },
+  "supported_blocks": [
+    "hero", "highlights", "about", "expertise", "projects", "services", "experience", "education", "process", "blog", "contact"
+  ]
+}
