@@ -280,4 +280,35 @@ class FrontendVisualThemeTest extends TestCase
         $response->assertSee('Courier Logistics API Integration');
         \App\Services\ThemeResolver::setPreviewSlug(null);
     }
+
+    public function test_all_six_new_themes_render_properly(): void
+    {
+        $newThemes = [
+            'animattor-dark' => 'Animattor 3D',
+            'craft-playful' => 'Craft & Playful',
+            'nordic-minimal' => 'Nordic Minimal',
+            'executive-lead' => 'Executive Lead',
+        ];
+
+        foreach ($newThemes as $slug => $name) {
+            Theme::updateOrCreate(
+                ['slug' => $slug],
+                [
+                    'name' => $name,
+                    'version' => '1.0.0',
+                    'manifest_json' => ['slug' => $slug, 'name' => $name],
+                    'status' => 'active',
+                ]
+            );
+
+            \App\Services\ThemeResolver::setPreviewSlug($slug);
+            $response = $this->get('/');
+            $response->assertOk();
+            $response->assertSee('Md. Alif Ahmed');
+            $response->assertSee('Web Developer | Technical Project Lead | E-commerce Solutions Specialist');
+            $response->assertDontSee('Sr. Web Developer');
+            $response->assertSee('Courier Logistics API Integration');
+            \App\Services\ThemeResolver::setPreviewSlug(null);
+        }
+    }
 }

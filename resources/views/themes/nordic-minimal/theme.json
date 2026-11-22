@@ -1,0 +1,18 @@
+{
+  "slug": "nordic-minimal",
+  "name": "Nordic Minimal",
+  "version": "1.0.0",
+  "description": "Inspired by Tobias van Schneider. Scandinavian quiet luxury with warm ivory palette, elegant editorial serif headings, generous whitespace, and expansive case imagery.",
+  "mode": "light-first",
+  "tokens": {
+    "accent_color": "#1c1917",
+    "bg_color": "#f7f5f0",
+    "surface_color": "#ffffff",
+    "border_color": "#e7e5e4",
+    "font_heading": "Fraunces",
+    "font_body": "Inter"
+  },
+  "supported_blocks": [
+    "hero", "highlights", "about", "expertise", "projects", "services", "experience", "education", "process", "blog", "contact"
+  ]
+}

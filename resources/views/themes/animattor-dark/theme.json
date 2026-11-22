@@ -1,0 +1,18 @@
+{
+  "slug": "animattor-dark",
+  "name": "Animattor 3D",
+  "version": "1.0.0",
+  "description": "Inspired by Animattor.co & Sitewise Agency. Electric violet 3D studio with dark mesh gradient, floating frosted pill dock, perspective depth, and neon glow accents.",
+  "mode": "dark-first",
+  "tokens": {
+    "accent_color": "#8b5cf6",
+    "bg_color": "#0d0c1d",
+    "surface_color": "#171530",
+    "border_color": "rgba(139, 92, 246, 0.25)",
+    "font_heading": "Plus Jakarta Sans",
+    "font_body": "Inter"
+  },
+  "supported_blocks": [
+    "hero", "highlights", "about", "expertise", "projects", "services", "experience", "education", "process", "blog", "contact"
+  ]
+}

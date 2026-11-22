@@ -1,0 +1,18 @@
+{
+  "slug": "craft-playful",
+  "name": "Craft & Playful",
+  "version": "1.0.0",
+  "description": "Inspired by Josh W. Comeau & Lynn Fisher. Vibrant gradient card borders, playful interactive chips, warm developer personality, and crafted typography.",
+  "mode": "dark-first",
+  "tokens": {
+    "accent_color": "#ec4899",
+    "bg_color": "#0f111a",
+    "surface_color": "#1a1d2e",
+    "border_color": "rgba(236, 72, 153, 0.25)",
+    "font_heading": "Plus Jakarta Sans",
+    "font_body": "Inter"
+  },
+  "supported_blocks": [
+    "hero", "highlights", "about", "expertise", "projects", "services", "experience", "education", "process", "blog", "contact"
+  ]
+}

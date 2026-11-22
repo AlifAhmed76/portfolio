@@ -1,0 +1,18 @@
+{
+  "slug": "executive-lead",
+  "name": "Executive Lead",
+  "version": "1.0.0",
+  "description": "Enterprise Technical Project Lead suite. Deep executive navy and imperial gold accents, high-stakes commercial ROI metrics, and architectural governance breakdowns.",
+  "mode": "dark-first",
+  "tokens": {
+    "accent_color": "#d97706",
+    "bg_color": "#0a192f",
+    "surface_color": "#112240",
+    "border_color": "rgba(217, 119, 6, 0.25)",
+    "font_heading": "Plus Jakarta Sans",
+    "font_body": "Inter"
+  },
+  "supported_blocks": [
+    "hero", "highlights", "about", "expertise", "projects", "services", "experience", "education", "process", "blog", "contact"
+  ]
+}

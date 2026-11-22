@@ -46,7 +46,18 @@ class ThemeEngineTest extends TestCase
 
     public function test_all_four_themes_have_valid_manifests_and_templates(): void
     {
-        $expectedThemes = ['crystal-3d', 'minimal-professional', 'creative-studio', 'futuristic-tech', 'split-engineer', 'editorial-brutalist'];
+        $expectedThemes = [
+            'crystal-3d',
+            'minimal-professional',
+            'creative-studio',
+            'futuristic-tech',
+            'split-engineer',
+            'editorial-brutalist',
+            'animattor-dark',
+            'craft-playful',
+            'nordic-minimal',
+            'executive-lead',
+        ];
 
         foreach ($expectedThemes as $slug) {
             $manifestPath = resource_path("views/themes/{$slug}/theme.json");
@@ -78,6 +89,10 @@ class ThemeEngineTest extends TestCase
         $response->assertSee('Futuristic Tech');
         $response->assertSee('Split Engineer');
         $response->assertSee('Editorial Brutalist');
+        $response->assertSee('Animattor 3D');
+        $response->assertSee('Craft &amp; Playful', false);
+        $response->assertSee('Nordic Minimal');
+        $response->assertSee('Executive Lead');
 
         $this->assertDatabaseHas('themes', ['slug' => 'crystal-3d']);
         $this->assertDatabaseHas('themes', ['slug' => 'minimal-professional']);
@@ -85,6 +100,10 @@ class ThemeEngineTest extends TestCase
         $this->assertDatabaseHas('themes', ['slug' => 'futuristic-tech']);
         $this->assertDatabaseHas('themes', ['slug' => 'split-engineer']);
         $this->assertDatabaseHas('themes', ['slug' => 'editorial-brutalist']);
+        $this->assertDatabaseHas('themes', ['slug' => 'animattor-dark']);
+        $this->assertDatabaseHas('themes', ['slug' => 'craft-playful']);
+        $this->assertDatabaseHas('themes', ['slug' => 'nordic-minimal']);
+        $this->assertDatabaseHas('themes', ['slug' => 'executive-lead']);
     }
 
     public function test_theme_preview_does_not_mutate_live_active_theme(): void
