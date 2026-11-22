@@ -3,200 +3,203 @@
 @section('title', ($profile->name ?? 'Md. Alif Ahmed') . ' — Web Developer & Technical Project Lead')
 @section('meta_description', $profile->bio ?? 'Dedicated Web Developer & Technical Project Lead specializing in custom Laravel engineering, enterprise e-commerce solutions, RESTful API architecture, and Meta Conversion API.')
 
+@push('styles')
+<style>
+    /* Tobias van Schneider Scandinavian Monograph */
+    .essay-container {
+        max-width: 760px;
+        margin: 0 auto;
+    }
+    .essay-project-card {
+        padding: 56px 0;
+        border-bottom: 1px solid var(--nordic-border);
+    }
+    .serif-display {
+        font-family: var(--font-serif);
+        font-style: italic;
+        font-weight: 400;
+    }
+</style>
+@endpush
+
 @section('content')
-<div class="container py-5" style="max-width: 1040px;">
+<div class="container py-5">
+    <div class="essay-container">
 
-    <!-- Hero Section -->
-    <section id="hero" class="py-5 mb-5 border-bottom" style="border-color: var(--nordic-border) !important;">
-        <span class="badge-nordic mb-3 d-inline-block">
-            {{ $contact->availability_status ?? 'Available for Select Projects & Leadership Roles' }}
-        </span>
-
-        <div class="row align-items-center g-5 mb-4">
-            <div class="{{ ($profile?->avatar || $profile?->profileImage) ? 'col-lg-8' : 'col-12' }}">
-                <h1 class="display-3 font-serif fw-bold mb-3" style="line-height: 1.15;">
-                    {{ $profile->name ?? 'Md. Alif Ahmed' }}
-                </h1>
-
-                <h2 class="h4 text-muted font-serif mb-4">
-                    {{ $profile->designation ?? 'Web Developer | Technical Project Lead | E-commerce Solutions Specialist' }}
-                </h2>
-
-                <p class="lead mb-4" style="max-width: 680px; font-size: 1.2rem; color: var(--nordic-muted);">
-                    {{ $profile->headline ?? 'Building Digital Experiences. Engineering Business Solutions.' }}
-                    Specialized in custom Laravel backends, multi-carrier courier API integrations, and resilient Meta Conversion API server-side tracking pipelines.
-                </p>
-
-                <div class="d-flex flex-wrap gap-3">
-                    <a href="#projects" class="btn btn-nordic">Selected Works ↓</a>
-                    <a href="#contact" class="btn btn-nordic-outline">Initiate Collaboration</a>
-                </div>
+        <!-- Hero Monograph -->
+        <section id="hero" class="py-5 mb-5 border-bottom" style="border-color: var(--nordic-border) !important;">
+            <div class="small font-mono text-muted mb-3 text-uppercase" style="letter-spacing: 0.12em; font-size: 0.72rem;">
+                {{ $contact->availability_status ?? 'Available for Select Projects & Leadership Roles' }}
             </div>
+
+            <h1 class="display-3 font-serif fw-normal mb-3" style="line-height: 1.1;">
+                {{ $profile->name ?? 'Md. Alif Ahmed' }}
+            </h1>
+
+            <p class="h4 text-muted serif-display mb-4">
+                {{ $profile->designation ?? 'Web Developer | Technical Project Lead | E-commerce Solutions Specialist' }}
+            </p>
+
+            <p class="lead mb-5" style="font-size: 1.25rem; line-height: 1.8; color: var(--nordic-muted);">
+                {{ $profile->headline ?? 'Building Digital Experiences. Engineering Business Solutions.' }}
+                Specialized in custom Laravel backends, multi-carrier courier API automations, and resilient Meta Conversion API server-side tracking pipelines.
+            </p>
 
             @if ($profile?->avatar || $profile?->profileImage)
-                <div class="col-lg-4 text-center">
-                    <img src="{{ $profile->avatar?->url ?? $profile->profileImage?->url }}" alt="{{ $profile->name }}" class="rounded-circle shadow-sm border p-2" style="width: 200px; height: 200px; object-fit: cover;">
+                <div class="mb-5">
+                    <img src="{{ $profile->avatar?->url ?? $profile->profileImage?->url }}" alt="{{ $profile->name }}" class="rounded-circle shadow-sm border p-2" style="width: 140px; height: 140px; object-fit: cover;">
                 </div>
             @endif
-        </div>
-    </section>
 
-    <!-- Metrics -->
-    <section id="highlights" class="py-4 mb-5 border-bottom" style="border-color: var(--nordic-border) !important;">
-        <div class="row g-4">
-            @foreach ($stats as $stat)
-                <div class="col-6 col-md-3">
-                    <div class="display-6 font-serif fw-bold mb-1">{{ $stat['value'] }}</div>
-                    <p class="small text-muted mb-0">{{ $stat['label'] }}</p>
-                </div>
-            @endforeach
-        </div>
-    </section>
-
-    <!-- Projects -->
-    <section id="projects" class="py-4 mb-5 border-bottom" style="border-color: var(--nordic-border) !important;">
-        <div class="d-flex justify-content-between align-items-end mb-5">
-            <div>
-                <span class="badge-nordic mb-2 d-inline-block">Curated Cases</span>
-                <h2 class="display-5 font-serif fw-bold mb-0">Featured Projects &amp; Case Studies</h2>
+            <div class="d-flex gap-3">
+                <a href="#projects" class="btn btn-nordic">Selected Works ↓</a>
+                <a href="#contact" class="btn btn-nordic-outline">Initiate Collaboration</a>
             </div>
-            <a href="{{ url('/projects') }}" class="small text-decoration-underline text-reset">All Works →</a>
-        </div>
+        </section>
 
-        <div class="row g-5">
-            @forelse ($featuredProjects as $project)
-                <div class="col-md-6">
-                    <article class="h-100 d-flex flex-column">
-                        <div class="mb-3 overflow-hidden rounded-3 border" style="height: 260px; background: #e7e5e4;">
-                            @if ($project->coverImage)
-                                <img src="{{ $project->coverImage->url }}" alt="{{ $project->title }}" class="w-100 h-100 object-fit-cover">
-                            @else
-                                <div class="w-100 h-100 d-flex flex-column justify-content-between p-4" style="background: #e7e5e4;">
-                                    <span class="badge-nordic align-self-start">{{ $project->category?->name ?? 'Production' }}</span>
-                                    <div class="font-serif h4 mb-0 text-dark">{{ $project->title }}</div>
-                                </div>
-                            @endif
-                        </div>
+        <!-- Stats Metric Note -->
+        <section id="highlights" class="py-4 mb-5 border-bottom" style="border-color: var(--nordic-border) !important;">
+            <div class="row g-4">
+                @foreach ($stats as $stat)
+                    <div class="col-6 col-md-3">
+                        <div class="font-serif display-6 fw-normal mb-0">{{ $stat['value'] }}</div>
+                        <div class="small text-muted" style="font-size: 0.78rem;">{{ $stat['label'] }}</div>
+                    </div>
+                @endforeach
+            </div>
+        </section>
 
-                        <span class="small text-muted text-uppercase font-mono mb-1">{{ $project->category?->name ?? 'Production' }}</span>
-                        <h3 class="h4 font-serif fw-bold mb-2">
+        <!-- Projects Essay List (Van Schneider Single-Column Essay format) -->
+        <section id="projects" class="mb-5 pb-4">
+            <div class="d-flex justify-content-between align-items-baseline mb-4">
+                <h2 class="h3 font-serif mb-0">Featured Projects &amp; Case Studies</h2>
+                <a href="{{ url('/projects') }}" class="small text-muted text-decoration-underline">All Projects →</a>
+            </div>
+
+            <div>
+                @forelse ($featuredProjects as $project)
+                    <article class="essay-project-card">
+                        <span class="small font-mono text-muted text-uppercase mb-2 d-inline-block">{{ $project->category?->name ?? 'Production' }}</span>
+                        
+                        <h3 class="display-6 font-serif fw-normal mb-3">
                             <a href="{{ url('/projects/' . $project->slug) }}" class="text-decoration-none text-reset">
                                 {{ $project->title }}
                             </a>
                         </h3>
-                        <p class="small text-muted mb-3 flex-grow-1 leading-relaxed">{{ $project->summary }}</p>
 
-                        <div class="d-flex flex-wrap gap-1 mb-3">
-                            @foreach ($project->skills->take(3) as $s)
-                                <span class="badge-nordic">{{ $s->name }}</span>
+                        <div class="mb-4 overflow-hidden rounded-2 border" style="height: 320px; background: #e7e5e4;">
+                            @if ($project->coverImage)
+                                <img src="{{ $project->coverImage->url }}" alt="{{ $project->title }}" class="w-100 h-100 object-fit-cover">
+                            @else
+                                <div class="w-100 h-100 d-flex flex-column justify-content-between p-4" style="background: #e7e5e4;">
+                                    <span class="small font-mono text-muted">{{ $project->category?->name ?? 'Engineering' }}</span>
+                                    <div class="font-serif h3 text-dark">{{ $project->title }}</div>
+                                </div>
+                            @endif
+                        </div>
+
+                        <p class="lead mb-4" style="font-size: 1.15rem; line-height: 1.8; color: var(--nordic-muted);">
+                            {{ $project->summary }}
+                        </p>
+
+                        <div class="d-flex flex-wrap gap-2 mb-4">
+                            @foreach ($project->skills as $skill)
+                                <span class="badge-nordic">{{ $skill->name }}</span>
                             @endforeach
                         </div>
 
-                        <a href="{{ url('/projects/' . $project->slug) }}" class="small fw-semibold text-decoration-underline text-reset mt-auto">
+                        <a href="{{ url('/projects/' . $project->slug) }}" class="small fw-semibold text-decoration-underline text-reset">
                             Read Architecture Case Study →
                         </a>
                     </article>
-                </div>
-            @empty
-                <p class="text-muted text-center py-5">No projects available.</p>
-            @endforelse
-        </div>
-    </section>
+                @empty
+                    <p class="text-muted py-4">Projects loading...</p>
+                @endforelse
+            </div>
+        </section>
 
-    <!-- Services -->
-    <section id="services" class="py-4 mb-5 border-bottom" style="border-color: var(--nordic-border) !important;">
-        <span class="badge-nordic mb-2 d-inline-block">Specializations</span>
-        <h2 class="display-5 font-serif fw-bold mb-4">Services &amp; Architecture</h2>
-
-        <div class="row g-4">
-            @foreach ($services as $srv)
-                <div class="col-md-6 col-lg-4">
-                    <div class="nordic-card p-4 h-100">
-                        <h3 class="h5 font-serif fw-bold mb-2">{{ $srv->title }}</h3>
+        <!-- Services Section -->
+        <section id="services" class="py-5 border-bottom" style="border-color: var(--nordic-border) !important;">
+            <h2 class="h3 font-serif mb-4">Services &amp; Architecture</h2>
+            <div class="d-flex flex-column gap-4">
+                @foreach ($services as $srv)
+                    <div class="pb-3 border-bottom" style="border-color: var(--nordic-border) !important;">
+                        <h3 class="h5 font-serif fw-normal mb-1">{{ $srv->title }}</h3>
                         <p class="small text-muted mb-0 leading-relaxed">{{ $srv->description }}</p>
                     </div>
-                </div>
-            @endforeach
-        </div>
-    </section>
-
-    <!-- Experience -->
-    <section id="experience" class="py-4 mb-5 border-bottom" style="border-color: var(--nordic-border) !important;">
-        <span class="badge-nordic mb-2 d-inline-block">Career Journey</span>
-        <h2 class="display-5 font-serif fw-bold mb-4">Professional Experience</h2>
-
-        <div class="d-flex flex-column gap-4">
-            @foreach ($experiences as $exp)
-                <div class="d-flex flex-column flex-md-row justify-content-between align-items-start pb-4 border-bottom" style="border-color: var(--nordic-border) !important;">
-                    <div>
-                        <h3 class="h5 font-serif fw-bold mb-1">{{ $exp->designation }}</h3>
-                        <div class="small font-mono text-muted mb-2">{{ $exp->company }}</div>
-                        <p class="small text-muted mb-0" style="max-width: 650px;">{{ $exp->description }}</p>
-                    </div>
-                    <span class="small font-mono text-muted mt-2 mt-md-0">
-                        {{ \Carbon\Carbon::parse($exp->start_date)->format('Y') }} — {{ $exp->is_current ? 'Present' : ($exp->end_date ? \Carbon\Carbon::parse($exp->end_date)->format('Y') : '') }}
-                    </span>
-                </div>
-            @endforeach
-        </div>
-    </section>
-
-    <!-- Expertise -->
-    <section id="expertise" class="py-4 mb-5 border-bottom" style="border-color: var(--nordic-border) !important;">
-        <span class="badge-nordic mb-2 d-inline-block">Stack</span>
-        <h2 class="display-5 font-serif fw-bold mb-4">Technical Expertise &amp; Core Stack</h2>
-
-        <div class="row g-4">
-            @foreach ($skillCategories as $cat)
-                <div class="col-md-6 col-lg-3">
-                    <div class="nordic-card p-4 h-100">
-                        <h3 class="h6 font-serif fw-bold mb-3">{{ $cat->name }}</h3>
-                        <ul class="list-unstyled mb-0 d-flex flex-column gap-2">
-                            @foreach ($cat->skills as $sk)
-                                <li class="small text-muted">{{ $sk->name }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    </section>
-
-    <!-- About -->
-    <section id="about" class="py-4 mb-5 border-bottom" style="border-color: var(--nordic-border) !important;">
-        <span class="badge-nordic mb-2 d-inline-block">Monograph</span>
-        <h2 class="display-5 font-serif fw-bold mb-3">About Alif Ahmed</h2>
-        <p class="lead text-muted mb-4" style="max-width: 720px;">
-            {{ $profile->bio ?? 'Dedicated Web Developer and Technical Project Lead specializing in custom Laravel engineering, enterprise e-commerce solutions, RESTful API architecture, Meta Conversion API server-side tracking, courier API integrations, and website performance and security optimization.' }}
-        </p>
-        <p class="small text-muted mb-0">
-            Structured Execution Process · High Concurrency Database Profiling
-        </p>
-    </section>
-
-    <!-- Education -->
-    <section id="education" class="py-4 mb-5 border-bottom" style="border-color: var(--nordic-border) !important;">
-        <span class="badge-nordic mb-2 d-inline-block">Academia</span>
-        <h2 class="display-5 font-serif fw-bold mb-4">Education &amp; Credentials</h2>
-
-        @foreach ($educations as $edu)
-            <div class="mb-3">
-                <h3 class="h5 font-serif fw-bold mb-1">{{ $edu->degree }}</h3>
-                <div class="small text-muted">{{ $edu->institution }} · {{ $edu->subject }}</div>
+                @endforeach
             </div>
-        @endforeach
-    </section>
+        </section>
 
-    <!-- Contact -->
-    <section id="contact" class="py-5 text-center">
-        <h2 class="display-4 font-serif fw-bold mb-3">Initiate Collaboration</h2>
-        <p class="text-muted lead mb-4 mx-auto" style="max-width: 580px;">
-            Inquiries for technical project leadership, high-throughput Laravel systems, and e-commerce tracking architecture.
-        </p>
-        <a href="mailto:{{ $contact->email ?? 'admin@alifahmed.com' }}" class="btn btn-nordic px-5 py-3">
-            Write to {{ $contact->email ?? 'admin@alifahmed.com' }}
-        </a>
-    </section>
+        <!-- Experience Section -->
+        <section id="experience" class="py-5 border-bottom" style="border-color: var(--nordic-border) !important;">
+            <h2 class="h3 font-serif mb-4">Professional Experience</h2>
+            <div class="d-flex flex-column gap-4">
+                @foreach ($experiences as $exp)
+                    <div>
+                        <div class="d-flex justify-content-between align-items-baseline mb-1">
+                            <h3 class="h5 font-serif fw-normal mb-0">{{ $exp->designation }}</h3>
+                            <span class="small font-mono text-muted">
+                                {{ \Carbon\Carbon::parse($exp->start_date)->format('Y') }} — {{ $exp->is_current ? 'Present' : ($exp->end_date ? \Carbon\Carbon::parse($exp->end_date)->format('Y') : '') }}
+                            </span>
+                        </div>
+                        <div class="small text-muted mb-2 font-mono">{{ $exp->company }}</div>
+                        <p class="small text-muted mb-0 leading-relaxed">{{ $exp->description }}</p>
+                    </div>
+                @endforeach
+            </div>
+        </section>
 
+        <!-- Expertise Section -->
+        <section id="expertise" class="py-5 border-bottom" style="border-color: var(--nordic-border) !important;">
+            <h2 class="h3 font-serif mb-4">Technical Expertise &amp; Core Stack</h2>
+            <div class="row g-4">
+                @foreach ($skillCategories as $cat)
+                    <div class="col-sm-6">
+                        <h3 class="h6 font-serif mb-2">{{ $cat->name }}</h3>
+                        <div class="d-flex flex-wrap gap-1">
+                            @foreach ($cat->skills as $sk)
+                                <span class="badge-nordic">{{ $sk->name }}</span>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-5 border-bottom" style="border-color: var(--nordic-border) !important;">
+            <h2 class="h3 font-serif mb-3">About Alif Ahmed</h2>
+            <p class="lead mb-4" style="line-height: 1.8; color: var(--nordic-muted);">
+                {{ $profile->bio ?? 'Dedicated Web Developer and Technical Project Lead specializing in custom Laravel engineering, enterprise e-commerce solutions, RESTful API architecture, Meta Conversion API server-side tracking, courier API integrations, and website performance and security optimization.' }}
+            </p>
+            <p class="small text-muted mb-0">
+                Structured Execution Process · High Concurrency Database Profiling
+            </p>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-5 border-bottom" style="border-color: var(--nordic-border) !important;">
+            <h2 class="h3 font-serif mb-3">Education &amp; Credentials</h2>
+            @foreach ($educations as $edu)
+                <div class="mb-3">
+                    <h3 class="h6 font-serif fw-bold mb-1">{{ $edu->degree }}</h3>
+                    <div class="small text-muted">{{ $edu->institution }} · {{ $edu->subject }}</div>
+                </div>
+            @endforeach
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-5 text-center">
+            <h2 class="display-5 font-serif fw-normal mb-3">Initiate Collaboration</h2>
+            <p class="lead text-muted mb-4 mx-auto" style="max-width: 500px; font-size: 1.15rem;">
+                Direct inquiries for technical project leadership, high-concurrency systems, and attribution architecture.
+            </p>
+            <a href="mailto:{{ $contact->email ?? 'admin@alifahmed.com' }}" class="btn btn-nordic px-4 py-2">
+                Write to {{ $contact->email ?? 'admin@alifahmed.com' }}
+            </a>
+        </section>
+
+    </div>
 </div>
 @endsection
