@@ -3,7 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\ContactDetail;
+use App\Models\Education;
+use App\Models\Experience;
 use App\Models\HomepageSection;
+use App\Models\Post;
+use App\Models\PostCategory;
+use App\Models\PostTag;
 use App\Models\Profile;
 use App\Models\Project;
 use App\Models\ProjectCategory;
@@ -259,5 +264,155 @@ class DatabaseSeeder extends Seeder
                 ['title' => $sec['title'], 'sort_order' => $sec['order'], 'is_enabled' => true]
             );
         }
+
+        // 11. Initial Experiences
+        $experiences = [
+            [
+                'company' => 'Independent Technical Consultancy & Digital Solutions',
+                'designation' => 'Lead Web Engineer & Technical Solutions Architect',
+                'description' => 'Architecting and delivering enterprise Laravel web systems, custom e-commerce checkout platforms, Meta Conversion API server-side tracking pipelines, and courier logistics integrations. Leading sprint architecture, reviewing code, and ensuring sub-second response times.',
+                'start_date' => '2022-01-01',
+                'end_date' => null,
+                'is_current' => true,
+                'sort_order' => 1,
+            ],
+            [
+                'company' => 'E-Commerce Solutions Group',
+                'designation' => 'Full-Stack Web Developer & Integration Specialist',
+                'description' => 'Engineered scalable RESTful API backends, multi-channel payment gateway integrations, database schema optimizations, and reactive client-side interfaces. Reduced checkout abandonment and eliminated conversion tracking discrepancy.',
+                'start_date' => '2020-03-01',
+                'end_date' => '2021-12-31',
+                'is_current' => false,
+                'sort_order' => 2,
+            ],
+        ];
+
+        foreach ($experiences as $exp) {
+            Experience::updateOrCreate(
+                ['workspace_id' => $workspace->id, 'company' => $exp['company'], 'designation' => $exp['designation']],
+                $exp
+            );
+        }
+
+        // 12. Initial Education
+        Education::updateOrCreate(
+            ['workspace_id' => $workspace->id, 'degree' => 'B.Sc. in Computer Science & Engineering (CSE)'],
+            [
+                'institution' => 'University of Technology',
+                'subject' => 'Computer Science & Software Engineering',
+                'result' => 'First Class Honours',
+                'start_date' => '2017-01-01',
+                'end_date' => '2021-01-01',
+                'sort_order' => 1,
+            ]
+        );
+
+        // 13. Additional Featured Projects
+        $project2 = Project::updateOrCreate(
+            ['workspace_id' => $workspace->id, 'slug' => 'courier-logistics-automation-hub'],
+            [
+                'category_id' => $catEcommerce->id,
+                'title' => 'Courier & Logistics Automation Middleware Hub',
+                'summary' => 'Automated logistics middleware routing multi-carrier consignments, instant airway bill generation, and real-time delivery status webhooks.',
+                'description' => 'Engineered a centralized logistics gateway integrating Pathao, Steadfast, and RedX courier APIs. Dispatches thousands of parcels daily with automatic failover, webhook listeners, and zero manual entry.',
+                'status' => 'published',
+                'is_featured' => true,
+                'sort_order' => 2,
+                'published_at' => now(),
+            ]
+        );
+
+        ProjectDetail::updateOrCreate(
+            ['project_id' => $project2->id],
+            [
+                'challenge' => 'Manual dispatch booking created delivery bottlenecks of 4+ hours daily and tracking numbers often failed to reach customers in time.',
+                'solution' => 'Built an asynchronous queue-driven courier hub that auto-creates consignments upon order approval, downloads shipping labels, and broadcasts tracking SMS.',
+                'implementation' => 'Designed resilient Laravel job workers with exponential backoff retry algorithms, unified carrier payload transformers, and secure webhook signature verification.',
+                'outcome' => 'Eliminated 100% of manual entry errors, reduced parcel booking time from 4 hours to instantaneous background dispatch.',
+            ]
+        );
+
+        ProjectLink::firstOrCreate(
+            ['project_id' => $project2->id, 'link_type' => 'live'],
+            ['label' => 'Live Logistics Demo', 'url' => 'https://example.com/demo-logistics', 'sort_order' => 1]
+        );
+
+        $project3 = Project::updateOrCreate(
+            ['workspace_id' => $workspace->id, 'slug' => 'server-side-meta-capi-middleware'],
+            [
+                'category_id' => $catWebApps->id,
+                'title' => 'Server-Side Meta CAPI & Conversion Attribution Engine',
+                'summary' => 'Dual-stream tracking pipeline reconciling client-side Pixel events with server-side Meta Conversion API for 99.8% accurate attribution.',
+                'description' => 'A robust privacy-compliant conversion tracking architecture built to conquer iOS 14.5+ restrictions and ad-blockers. Includes SHA-256 user data hashing, event deduplication, and Google Tag Manager DataLayer synchronization.',
+                'status' => 'published',
+                'is_featured' => true,
+                'sort_order' => 3,
+                'published_at' => now(),
+            ]
+        );
+
+        ProjectDetail::updateOrCreate(
+            ['project_id' => $project3->id],
+            [
+                'challenge' => 'Browser ad-blockers and Safari ITP caused 30-40% of conversion data to go unrecorded, degrading Meta ad performance and ROAS measurement.',
+                'solution' => 'Engineered a dual-stream pipeline sending events simultaneously via browser and server-side Graph API, matching deduplication keys (`event_id`).',
+                'implementation' => 'Utilized Laravel middleware and queued HTTP clients to dispatch hashed user parameters (`em`, `ph`, `fbc`, `fbp`) without impacting page load latency.',
+                'outcome' => 'Restored 99.8% event match quality and improved Meta campaign ROAS through accurate attribution modeling.',
+            ]
+        );
+
+        ProjectLink::firstOrCreate(
+            ['project_id' => $project3->id, 'link_type' => 'live'],
+            ['label' => 'Attribution Architecture Docs', 'url' => 'https://example.com/demo-attribution', 'sort_order' => 1]
+        );
+
+        // 14. Initial Blog Posts
+        $catBlogAnalytics = PostCategory::firstOrCreate(
+            ['workspace_id' => $workspace->id, 'slug' => 'analytics-tracking'],
+            ['name' => 'Analytics & Tracking', 'description' => 'Server-side attribution, Meta CAPI, and Google Tag Manager insights.']
+        );
+
+        $catBlogBackend = PostCategory::firstOrCreate(
+            ['workspace_id' => $workspace->id, 'slug' => 'backend-architecture'],
+            ['name' => 'Backend & Architecture', 'description' => 'High-performance Laravel design patterns, database tuning, and API engineering.']
+        );
+
+        $tagLaravel = PostTag::firstOrCreate(['workspace_id' => $workspace->id, 'slug' => 'laravel'], ['name' => 'Laravel 11']);
+        $tagCapi = PostTag::firstOrCreate(['workspace_id' => $workspace->id, 'slug' => 'meta-capi'], ['name' => 'Meta CAPI']);
+        $tagPerformance = PostTag::firstOrCreate(['workspace_id' => $workspace->id, 'slug' => 'performance'], ['name' => 'Performance']);
+
+        $post1 = Post::updateOrCreate(
+            ['workspace_id' => $workspace->id, 'slug' => 'mastering-meta-conversion-api-in-laravel'],
+            [
+                'category_id' => $catBlogAnalytics->id,
+                'author_id' => $owner->id,
+                'title' => 'Mastering Meta Conversion API (CAPI) in Laravel 11',
+                'summary' => 'A comprehensive guide to defeating iOS privacy barriers and client-side ad-blockers with asynchronous server-side event tracking.',
+                'content' => "## Why Client-Side Tracking Fails in Modern E-Commerce\n\nBrowser-based tracking via standard JavaScript pixels suffers from ad-blockers, Safari Intelligent Tracking Prevention (ITP), and network drops. Over 35% of purchase events can be missed.\n\n### The Dual-Stream Solution\n\nBy dispatching events from both the client browser and your Laravel backend with an identical `event_id`, Meta automatically deduplicates them. If the browser event is blocked, the server event ensures the purchase is recorded.\n\n```php\nHttp::asJson()->post('https://graph.facebook.com/v19.0/' . \$pixelId . '/events', [\n    'data' => [[\n        'event_name' => 'Purchase',\n        'event_time' => time(),\n        'event_id' => \$eventId,\n        'user_data' => [\n            'em' => [hash('sha256', strtolower(trim(\$email)))],\n        ],\n    ]],\n    'access_token' => \$accessToken,\n]);\n```\n\n### Key Takeaways\n1. Always hash customer PII using SHA-256 before transmission.\n2. Leverage Laravel's asynchronous database queues so checkout latency is unaffected.",
+                'reading_time' => 5,
+                'status' => 'published',
+                'published_at' => now()->subDays(2),
+                'meta_title' => 'Mastering Meta Conversion API in Laravel 11 | Md. Alif Ahmed',
+                'meta_description' => 'Step-by-step technical guide to implementing server-side Meta Conversion API in Laravel for 100% conversion attribution.',
+            ]
+        );
+        $post1->tags()->sync([$tagLaravel->id, $tagCapi->id]);
+
+        $post2 = Post::updateOrCreate(
+            ['workspace_id' => $workspace->id, 'slug' => 'high-throughput-ecommerce-architecture-laravel'],
+            [
+                'category_id' => $catBlogBackend->id,
+                'author_id' => $owner->id,
+                'title' => 'Architecting High-Throughput E-Commerce Systems with Laravel',
+                'summary' => 'Practical patterns for handling heavy traffic surges, preventing database race conditions, and executing sub-100ms checkout operations.',
+                'content' => "## Engineering for Scale During Flash Sales\n\nE-commerce platforms often encounter massive concurrency spikes during promotional launches. Standard Eloquent patterns can easily exhaust database connection pools or result in race conditions.\n\n### Pessimistic vs. Optimistic Locking\n\nWhen deducting inventory for limited-stock products, avoid naive updates. Use pessimistic locking within database transactions:\n\n```php\nDB::transaction(function () use (\$productId, \$qty) {\n    \$product = Product::where('id', \$productId)->lockForUpdate()->first();\n    if (\$product->stock < \$qty) {\n        throw new InsufficientStockException();\n    }\n    \$product->decrement('stock', \$qty);\n});\n```\n\n### Queue Everything Non-Critical\n\nEmail receipts, invoice PDF generation, SMS notifications, and courier dispatch APIs must never block the HTTP response cycle. Offload them to Redis or MariaDB queues.",
+                'reading_time' => 6,
+                'status' => 'published',
+                'published_at' => now()->subDays(5),
+                'meta_title' => 'High-Throughput E-Commerce Architecture in Laravel | Md. Alif Ahmed',
+                'meta_description' => 'Learn architectural patterns for handling heavy traffic surges, avoiding database locks, and accelerating checkout speed in Laravel.',
+            ]
+        );
+        $post2->tags()->sync([$tagLaravel->id, $tagPerformance->id]);
     }
 }

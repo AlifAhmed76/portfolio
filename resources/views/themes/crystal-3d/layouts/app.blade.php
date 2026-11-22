@@ -3,48 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Alif Ahmed — Portfolio')</title>
-    <meta name="description" content="@yield('meta_description', 'Web Developer, Technical Project Lead & E-commerce Solutions Specialist.')">
+    <title>@yield('title', 'Md. Alif Ahmed — Web Developer | Technical Project Lead')</title>
+    <meta name="description" content="@yield('meta_description', 'Dedicated Web Developer & Technical Project Lead specializing in custom Laravel engineering, enterprise e-commerce solutions, RESTful API architecture, and Meta Conversion API.')">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
+            --font-heading: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+
             --theme-accent: #10b981;
+            --theme-accent-hover: #059669;
             --theme-accent-rgb: 16, 185, 129;
-            --theme-bg: #070a12;
-            --theme-surface: rgba(15, 23, 42, 0.75);
-            --theme-border: rgba(255, 255, 255, 0.08);
-            --glass-blur: 16px;
+            --theme-accent-glow: rgba(16, 185, 129, 0.25);
+            
+            --theme-bg: #070a13;
+            --theme-bg-gradient: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.08) 0%, rgba(7, 10, 19, 1) 70%);
+            --theme-surface: rgba(15, 23, 42, 0.72);
+            --theme-surface-solid: #0f172a;
+            --theme-border: rgba(255, 255, 255, 0.09);
+            --theme-border-highlight: rgba(255, 255, 255, 0.16);
+            --glass-blur: 20px;
+            --card-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.55), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
         }
+
         [data-bs-theme="light"] {
+            --theme-accent: #059669;
+            --theme-accent-hover: #047857;
+            --theme-accent-rgb: 5, 150, 105;
+            --theme-accent-glow: rgba(5, 150, 105, 0.18);
+            
             --theme-bg: #f8fafc;
-            --theme-surface: rgba(255, 255, 255, 0.85);
+            --theme-bg-gradient: radial-gradient(circle at 50% 0%, rgba(5, 150, 105, 0.06) 0%, rgba(248, 250, 252, 1) 70%);
+            --theme-surface: rgba(255, 255, 255, 0.88);
+            --theme-surface-solid: #ffffff;
             --theme-border: rgba(0, 0, 0, 0.08);
+            --theme-border-highlight: rgba(0, 0, 0, 0.12);
+            --glass-blur: 20px;
+            --card-shadow: 0 10px 30px -6px rgba(0, 0, 0, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
         }
+
         body {
             background-color: var(--theme-bg);
+            background-image: var(--theme-bg-gradient);
+            background-attachment: fixed;
             color: var(--bs-body-color);
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: var(--font-body);
             min-height: 100vh;
+            line-height: 1.65;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
+
+        h1, h2, h3, h4, h5, h6, .navbar-brand {
+            font-family: var(--font-heading);
+            letter-spacing: -0.02em;
+        }
+
         .crystal-surface {
             background: var(--theme-surface);
             backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
             border: 1px solid var(--theme-border);
-            border-radius: 1rem;
+            border-radius: 1.25rem;
+            box-shadow: var(--card-shadow);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
+        .crystal-card-3d {
+            background: var(--theme-surface);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--theme-border);
+            border-radius: 1.25rem;
+            box-shadow: var(--card-shadow);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, border-color 0.25s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .crystal-card-3d:hover {
+            border-color: var(--theme-border-highlight);
+            box-shadow: 0 18px 45px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.25), 0 0 24px var(--theme-accent-glow);
+        }
+
         .text-emerald { color: var(--theme-accent) !important; }
         .bg-emerald { background-color: var(--theme-accent) !important; }
+        
+        .badge-crystal {
+            background: rgba(var(--theme-accent-rgb), 0.12);
+            color: var(--theme-accent);
+            border: 1px solid rgba(var(--theme-accent-rgb), 0.28);
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            letter-spacing: 0.02em;
+            padding: 0.4rem 0.9rem;
+        }
+
         .btn-emerald {
             background: var(--theme-accent);
             border-color: var(--theme-accent);
-            color: #fff;
+            color: #ffffff;
             font-weight: 600;
+            padding: 0.65rem 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 14px 0 rgba(var(--theme-accent-rgb), 0.35);
+            transition: all 0.2s ease;
         }
         .btn-emerald:hover {
-            background: #059669;
-            border-color: #059669;
-            color: #fff;
+            background: var(--theme-accent-hover);
+            border-color: var(--theme-accent-hover);
+            color: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px 0 rgba(var(--theme-accent-rgb), 0.5);
+        }
+
+        .btn-crystal-outline {
+            background: transparent;
+            border: 1px solid var(--theme-border-highlight);
+            color: var(--bs-body-color);
+            font-weight: 600;
+            padding: 0.65rem 1.5rem;
+            border-radius: 0.75rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.2s ease;
+        }
+        .btn-crystal-outline:hover {
+            background: rgba(var(--theme-accent-rgb), 0.1);
+            border-color: var(--theme-accent);
+            color: var(--theme-accent);
+            transform: translateY(-2px);
+        }
+
+        .beacon-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--theme-accent);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 0 0 rgba(var(--theme-accent-rgb), 0.7);
+            animation: beacon 2s infinite cubic-bezier(0.66, 0, 0, 1);
+        }
+        @keyframes beacon {
+            to {
+                box-shadow: 0 0 0 8px rgba(var(--theme-accent-rgb), 0);
+            }
+        }
+
+        .timeline-node {
+            position: relative;
+            padding-left: 2rem;
+            border-left: 2px solid rgba(var(--theme-accent-rgb), 0.25);
+        }
+        .timeline-node::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--theme-accent);
+            box-shadow: 0 0 10px var(--theme-accent);
+        }
+
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(var(--theme-accent-rgb), 0.12);
+            color: var(--theme-accent);
+            border: 1px solid rgba(var(--theme-accent-rgb), 0.22);
         }
     </style>
     @stack('styles')
@@ -58,57 +197,111 @@
         </div>
     @endif
 
+    <!-- Navigation -->
     <nav class="navbar navbar-expand-lg sticky-top crystal-surface mx-3 mt-3 px-3">
         <div class="container-fluid">
-            <a class="navbar-brand fw-bold text-emerald" href="{{ url('/') }}">
-                ALIF AHMED
+            <a class="navbar-brand fw-bold text-emerald d-flex align-items-center gap-2" href="{{ url('/') }}">
+                <div class="icon-box" style="width: 34px; height: 34px; border-radius: 8px;">
+                    <i data-lucide="terminal" style="width: 18px; height: 18px;"></i>
+                </div>
+                <span>ALIF AHMED</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navMenu">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-3 align-items-center">
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/#about') }}">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/#expertise') }}">Expertise</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/projects') }}">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/#services') }}">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/#contact') }}">Contact</a></li>
-                    <li class="nav-item">
-                        <button class="btn btn-sm btn-outline-secondary p-1 px-2" id="themeToggleBtn" type="button" title="Toggle Dark/Light">
-                            <i data-lucide="moon" id="publicThemeIcon"></i>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2 align-items-center">
+                    <li class="nav-item"><a class="nav-link px-2" href="#hero">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link px-2" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link px-2" href="#expertise">Skills</a></li>
+                    <li class="nav-item"><a class="nav-link px-2" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link px-2" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link px-2" href="#experience">Timeline</a></li>
+                    <li class="nav-item"><a class="nav-link px-2" href="#process">Process</a></li>
+                    <li class="nav-item"><a class="nav-link px-2" href="#blog">Insights</a></li>
+                    <li class="nav-item"><a class="nav-link px-2" href="#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <button class="btn btn-sm btn-crystal-outline p-1 px-2" id="themeToggleBtn" type="button" title="Toggle Dark/Light">
+                            <i data-lucide="moon" id="publicThemeIcon" style="width: 18px; height: 18px;"></i>
                         </button>
+                    </li>
+                    <li class="nav-item ms-lg-1">
+                        <a href="{{ url('/admin/login') }}" class="btn btn-sm btn-emerald py-1 px-3" style="font-size: 0.85rem;">
+                            Admin
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <main class="py-4">
+    <!-- Main Content -->
+    <main>
         @yield('content')
     </main>
 
-    <footer class="container py-4 text-center text-secondary small border-top border-secondary-subtle mt-5">
+    <!-- Footer -->
+    <footer class="container py-5 text-center text-secondary small border-top border-secondary-subtle mt-5">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 mb-3">
+            <div class="text-start">
+                <p class="fw-bold mb-0 text-body">Md. Alif Ahmed</p>
+                <p class="text-muted small mb-0">Web Developer | Technical Project Lead | E-commerce Solutions Specialist</p>
+            </div>
+            <div class="d-flex gap-3">
+                <a href="#hero" class="text-secondary text-decoration-none">Back to Top ↑</a>
+                <a href="{{ url('/projects') }}" class="text-secondary text-decoration-none">Projects</a>
+                <a href="{{ url('/blog') }}" class="text-secondary text-decoration-none">Blog</a>
+                <a href="{{ url('/sitemap.xml') }}" class="text-secondary text-decoration-none">Sitemap</a>
+            </div>
+        </div>
+        <hr class="opacity-10 my-3">
         <p class="mb-1">© {{ date('Y') }} Md. Alif Ahmed. All rights reserved.</p>
-        <p class="mb-0 text-muted">Theme: Crystal 3D • Powered by Alif Ahmed Portfolio CMS</p>
+        <p class="mb-0 text-muted">Theme: <strong>Crystal 3D</strong> • High-Performance Laravel 11 CMS</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Initialize Icons
         lucide.createIcons();
+
+        // Zero-Flash Theme Switcher
         const toggleBtn = document.getElementById('themeToggleBtn');
         const icon = document.getElementById('publicThemeIcon');
-        const saved = localStorage.getItem('site_theme') || 'dark';
-        document.documentElement.setAttribute('data-bs-theme', saved);
+        const savedTheme = localStorage.getItem('site_theme') || 'dark';
+        
+        function applyTheme(theme) {
+            document.documentElement.setAttribute('data-bs-theme', theme);
+            if (icon) {
+                icon.setAttribute('data-lucide', theme === 'dark' ? 'sun' : 'moon');
+                lucide.createIcons();
+            }
+        }
+        applyTheme(savedTheme);
+
         if (toggleBtn) {
             toggleBtn.addEventListener('click', () => {
                 const current = document.documentElement.getAttribute('data-bs-theme');
                 const next = current === 'dark' ? 'light' : 'dark';
-                document.documentElement.setAttribute('data-bs-theme', next);
                 localStorage.setItem('site_theme', next);
+                applyTheme(next);
             });
         }
+
+        // 3D Card Depth Tilt Effect
+        document.querySelectorAll('.crystal-card-3d').forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                const rotateX = (-y / rect.height) * 8;
+                const rotateY = (x / rect.width) * 8;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+            });
+        });
     </script>
-    @stack('scripts')
 </body>
 </html>
-

@@ -1,11 +1,16 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\CodeEditorController;
+use App\Http\Controllers\Admin\ContactMessageController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EducationController;
 use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\IdentityController;
 use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\Admin\PageBuilderController;
+use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\SectionController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -99,5 +104,48 @@ Route::middleware('admin')->group(function () {
         Route::get('{theme}/preview', [ThemeController::class, 'preview'])->name('preview');
         Route::post('{theme}/publish', [ThemeController::class, 'publish'])->name('publish');
         Route::post('rollback/{revision}', [ThemeController::class, 'rollback'])->name('rollback');
+    });
+
+    // Trusted Code Editor
+    Route::prefix('code-editor')->name('code-editor.')->group(function () {
+        Route::get('/', [CodeEditorController::class, 'index'])->name('index');
+        Route::get('open', [CodeEditorController::class, 'open'])->name('open');
+        Route::post('save', [CodeEditorController::class, 'save'])->name('save');
+        Route::post('restore', [CodeEditorController::class, 'restore'])->name('restore');
+    });
+
+    // Pages & Visual Page Builder
+    Route::prefix('pages')->name('pages.')->group(function () {
+        Route::get('/', [PageController::class, 'index'])->name('index');
+        Route::get('create', [PageController::class, 'create'])->name('create');
+        Route::post('/', [PageController::class, 'store'])->name('store');
+        Route::get('{page}/edit', [PageController::class, 'edit'])->name('edit');
+        Route::put('{page}', [PageController::class, 'update'])->name('update');
+        Route::delete('{page}', [PageController::class, 'destroy'])->name('destroy');
+
+        Route::get('{page}/builder', [PageBuilderController::class, 'builder'])->name('builder');
+        Route::get('{page}/builder/preview', [PageBuilderController::class, 'preview'])->name('builder.preview');
+        Route::post('{page}/builder/draft', [PageBuilderController::class, 'saveDraft'])->name('builder.save-draft');
+        Route::post('{page}/builder/publish', [PageBuilderController::class, 'publish'])->name('builder.publish');
+        Route::get('{page}/builder/revisions', [PageBuilderController::class, 'revisions'])->name('builder.revisions');
+        Route::post('{page}/builder/restore/{revision}', [PageBuilderController::class, 'restoreRevision'])->name('builder.restore');
+    });
+
+    // Blog Articles
+    Route::prefix('posts')->name('posts.')->group(function () {
+        Route::get('/', [PostController::class, 'index'])->name('index');
+        Route::get('create', [PostController::class, 'create'])->name('create');
+        Route::post('/', [PostController::class, 'store'])->name('store');
+        Route::get('{post}/edit', [PostController::class, 'edit'])->name('edit');
+        Route::put('{post}', [PostController::class, 'update'])->name('update');
+        Route::delete('{post}', [PostController::class, 'destroy'])->name('destroy');
+    });
+
+    // Contact Inbox
+    Route::prefix('contacts')->name('contacts.')->group(function () {
+        Route::get('/', [ContactMessageController::class, 'index'])->name('index');
+        Route::get('{contact}', [ContactMessageController::class, 'show'])->name('show');
+        Route::patch('{contact}/archive', [ContactMessageController::class, 'archive'])->name('archive');
+        Route::delete('{contact}', [ContactMessageController::class, 'destroy'])->name('destroy');
     });
 });

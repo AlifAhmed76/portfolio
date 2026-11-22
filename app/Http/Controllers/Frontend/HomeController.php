@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\ContactDetail;
+use App\Models\Education;
+use App\Models\Experience;
 use App\Models\HomepageSection;
+use App\Models\Post;
 use App\Models\Profile;
 use App\Models\Project;
 use App\Models\Service;
@@ -33,6 +36,16 @@ class HomeController extends Controller
 
         $skillCategories = SkillCategory::with('skills')->orderBy('sort_order')->get();
         $services = Service::where('is_enabled', true)->orderBy('sort_order')->get();
+        $experiences = Experience::orderBy('sort_order')->orderByDesc('start_date')->get();
+        $educations = Education::orderBy('sort_order')->get();
+        $recentPosts = Post::published()->with(['category', 'tags'])->latest('published_at')->take(3)->get();
+
+        $stats = [
+            ['value' => '5+', 'label' => 'Years Engineering Experience', 'icon' => 'calendar'],
+            ['value' => '30+', 'label' => 'Enterprise Solutions Delivered', 'icon' => 'check-circle'],
+            ['value' => '99.8%', 'label' => 'Tracking Attribution Accuracy', 'icon' => 'activity'],
+            ['value' => '$2M+', 'label' => 'E-Commerce GMV Orchestrated', 'icon' => 'trending-up'],
+        ];
 
         return view(ThemeResolver::getView('pages.home'), compact(
             'theme',
@@ -43,8 +56,11 @@ class HomeController extends Controller
             'sections',
             'featuredProjects',
             'skillCategories',
-            'services'
+            'services',
+            'experiences',
+            'educations',
+            'recentPosts',
+            'stats'
         ));
     }
 }
-

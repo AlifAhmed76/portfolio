@@ -52,5 +52,20 @@ class CacheInvalidationService
         $id = WorkspaceResolver::currentId() ?? 1;
         Cache::flush();
     }
+
+    public function flushFrontend(): void
+    {
+        self::invalidateAll();
+    }
+
+    public function invalidatePages(?int $pageId = null): void
+    {
+        $id = WorkspaceResolver::currentId() ?? 1;
+        Cache::forget("workspace_{$id}_pages");
+        Cache::forget("workspace_{$id}_homepage");
+        if ($pageId) {
+            Cache::forget("workspace_{$id}_page_{$pageId}");
+        }
+    }
 }
 
