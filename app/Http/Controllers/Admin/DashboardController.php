@@ -36,7 +36,7 @@ class DashboardController extends Controller
             : 0;
 
         $unreadMessages = Schema::hasTable('contact_messages')
-            ? DB::table('contact_messages')->whereNull('read_at')->count()
+            ? DB::table('contact_messages')->where('status', 'unread')->count()
             : 0;
 
         $stats = [
