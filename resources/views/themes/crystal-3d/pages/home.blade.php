@@ -6,49 +6,82 @@
 @section('content')
 <div class="container py-4">
 
-    <!-- Section 1: Hero Banner -->
+    <!-- Section 1: Hero Banner (Rich 3D Visual Showcase) -->
     <section id="hero" class="py-5 mb-4">
-        <div class="crystal-card-3d p-5 text-center position-relative overflow-hidden">
-            <div class="d-inline-flex align-items-center gap-2 badge-crystal mb-4">
-                <span class="beacon-dot"></span>
-                <span>{{ $contact->availability_status ?? 'Available for Select Projects & Leadership Roles' }}</span>
-            </div>
+        <div class="crystal-card-3d p-4 p-lg-5 position-relative overflow-hidden">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-7 text-center text-lg-start">
+                    <div class="d-inline-flex align-items-center gap-2 badge-crystal mb-3">
+                        <span class="beacon-dot"></span>
+                        <span>{{ $contact->availability_status ?? 'Available for Select Projects & Leadership Roles' }}</span>
+                    </div>
 
-            <h1 class="display-3 fw-bold mb-3">
-                {{ $profile->name ?? 'Md. Alif Ahmed' }}
-            </h1>
+                    <h1 class="display-3 fw-bold mb-2">
+                        {{ $profile->name ?? 'Md. Alif Ahmed' }}
+                    </h1>
 
-            <h2 class="h3 text-emerald fw-semibold mb-4" style="letter-spacing: -0.01em;">
-                {{ $profile->designation ?? 'Web Developer | Technical Project Lead | E-commerce Solutions Specialist' }}
-            </h2>
+                    <h2 class="h4 text-emerald fw-semibold mb-3">
+                        {{ $profile->designation ?? 'Web Developer | Technical Project Lead | E-commerce Solutions Specialist' }}
+                    </h2>
 
-            <p class="lead text-secondary mx-auto mb-4" style="max-width: 760px; font-size: 1.15rem;">
-                {{ $profile->headline ?? 'Building Digital Experiences. Engineering Business Solutions.' }}
-                Specialized in custom Laravel backends, high-conversion e-commerce storefronts, multi-carrier courier API integrations, and resilient Meta Conversion API server-side tracking pipelines.
-            </p>
+                    <p class="lead text-secondary mb-4" style="font-size: 1.15rem; max-width: 680px;">
+                        {{ $profile->headline ?? 'Building Digital Experiences. Engineering Business Solutions.' }}
+                        Specialized in custom Laravel backends, high-conversion e-commerce storefronts, multi-carrier courier API integrations, and resilient Meta Conversion API server-side tracking pipelines.
+                    </p>
 
-            <div class="d-flex flex-wrap justify-content-center gap-3 mb-5">
-                <a href="#projects" class="btn btn-emerald px-4 py-3 d-inline-flex align-items-center gap-2">
-                    <i data-lucide="folder-git-2" style="width: 18px; height: 18px;"></i>
-                    <span>Explore Featured Projects</span>
-                </a>
-                <a href="#contact" class="btn btn-crystal-outline px-4 py-3 d-inline-flex align-items-center gap-2">
-                    <i data-lucide="mail" style="width: 18px; height: 18px;"></i>
-                    <span>Discuss an Opportunity</span>
-                </a>
-            </div>
+                    <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3 mb-4">
+                        <a href="#projects" class="btn btn-emerald px-4 py-3 d-inline-flex align-items-center gap-2">
+                            <i data-lucide="folder-git-2" style="width: 18px; height: 18px;"></i>
+                            <span>Explore Case Studies</span>
+                        </a>
+                        <a href="#contact" class="btn btn-crystal-outline px-4 py-3 d-inline-flex align-items-center gap-2">
+                            <i data-lucide="mail" style="width: 18px; height: 18px;"></i>
+                            <span>Discuss Sprints</span>
+                        </a>
+                    </div>
 
-            <!-- Core Technologies Quick Pills -->
-            <div class="d-flex flex-wrap justify-content-center align-items-center gap-2 pt-3 border-top border-secondary-subtle opacity-75">
-                <span class="small text-secondary me-2">Core Tech:</span>
-                <span class="badge bg-body-secondary text-body px-3 py-2">PHP 8.2+</span>
-                <span class="badge bg-body-secondary text-body px-3 py-2">Laravel 11</span>
-                <span class="badge bg-body-secondary text-body px-3 py-2">MySQL / MariaDB</span>
-                <span class="badge bg-body-secondary text-body px-3 py-2">RESTful APIs</span>
-                <span class="badge bg-body-secondary text-body px-3 py-2">Meta CAPI &amp; GTM</span>
-                <span class="badge bg-body-secondary text-body px-3 py-2">Courier APIs</span>
-                <span class="badge bg-body-secondary text-body px-3 py-2">Alpine.js / Vue</span>
-                <span class="badge bg-body-secondary text-body px-3 py-2">Docker CI/CD</span>
+                    <!-- Core Technologies Quick Pills -->
+                    <div class="d-flex flex-wrap justify-content-center justify-content-lg-start align-items-center gap-2 pt-3 border-top border-secondary-subtle opacity-75">
+                        <span class="small text-secondary me-2">Core Stack:</span>
+                        <span class="badge bg-body-secondary text-body px-3 py-2">PHP 8.2+</span>
+                        <span class="badge bg-body-secondary text-body px-3 py-2">Laravel 11</span>
+                        <span class="badge bg-body-secondary text-body px-3 py-2">MySQL / MariaDB</span>
+                        <span class="badge bg-body-secondary text-body px-3 py-2">Meta CAPI &amp; GTM</span>
+                        <span class="badge bg-body-secondary text-body px-3 py-2">Courier APIs</span>
+                        <span class="badge bg-body-secondary text-body px-3 py-2">Alpine.js / Vue</span>
+                        <span class="badge bg-body-secondary text-body px-3 py-2">Docker</span>
+                    </div>
+                </div>
+
+                <!-- Right Column: 3D Holographic Crystal Card -->
+                <div class="col-lg-5 text-center">
+                    <div class="p-4 rounded-4 crystal-surface position-relative shadow-lg border border-emerald-subtle" style="background: radial-gradient(circle at 50% 30%, rgba(16, 185, 129, 0.15), rgba(15, 23, 42, 0.85));">
+                        
+                        <!-- 3D Orb Avatar -->
+                        <div class="prism-orb mb-4 position-relative">
+                            <div class="avatar-glow-ring"></div>
+                            <div class="icon-box" style="width: 80px; height: 80px; border-radius: 20px; font-size: 2rem;">
+                                <i data-lucide="code-2" style="width: 44px; height: 44px;"></i>
+                            </div>
+                        </div>
+
+                        <!-- Floating Tech Hologram Tags -->
+                        <div class="d-flex flex-column gap-2 text-start">
+                            <div class="d-flex justify-content-between align-items-center p-2 px-3 rounded-3 crystal-surface border border-secondary-subtle">
+                                <span class="small fw-semibold"><i data-lucide="shield-check" class="text-emerald me-1" style="width: 15px; height: 15px;"></i> Enterprise Architecture</span>
+                                <span class="badge bg-emerald-subtle text-emerald small">Verified</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center p-2 px-3 rounded-3 crystal-surface border border-secondary-subtle">
+                                <span class="small fw-semibold"><i data-lucide="activity" class="text-emerald me-1" style="width: 15px; height: 15px;"></i> Server-Side CAPI Tracking</span>
+                                <span class="badge bg-emerald-subtle text-emerald small">99.8% Match</span>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center p-2 px-3 rounded-3 crystal-surface border border-secondary-subtle">
+                                <span class="small fw-semibold"><i data-lucide="truck" class="text-emerald me-1" style="width: 15px; height: 15px;"></i> Multi-Courier Logistics Hub</span>
+                                <span class="badge bg-emerald-subtle text-emerald small">Automated</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -60,7 +93,7 @@
                 <div class="col-6 col-lg-3">
                     <div class="crystal-card-3d p-4 h-100 text-center d-flex flex-column justify-content-center align-items-center">
                         <div class="icon-box mb-3">
-                            <i data-lucide="{{ $stat['icon'] }}" style="width: 22px; height: 22px;"></i>
+                            <i data-lucide="{{ $stat['icon'] }}" style="width: 24px; height: 24px;"></i>
                         </div>
                         <h3 class="display-6 fw-bold text-emerald mb-1">{{ $stat['value'] }}</h3>
                         <p class="small text-secondary mb-0 fw-medium">{{ $stat['label'] }}</p>
@@ -87,7 +120,7 @@
                         <div class="col-sm-6">
                             <div class="d-flex align-items-center gap-2">
                                 <i data-lucide="check" class="text-emerald" style="width: 18px; height: 18px;"></i>
-                                <span class="small fw-semibold">Clean Service-Layer Architecture</span>
+                                <span class="small fw-semibold">Custom Laravel Engineering</span>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -114,32 +147,32 @@
             <div class="col-lg-5">
                 <div class="crystal-card-3d p-4 p-md-5 h-100 d-flex flex-column justify-content-between">
                     <div>
-                        <span class="badge-crystal mb-3 d-inline-block">Snapshot &amp; Location</span>
-                        <h3 class="h4 fw-bold mb-4">Engagement &amp; Logistics</h3>
+                        <span class="badge-crystal mb-3 d-inline-block">Snapshot &amp; Logistics</span>
+                        <h3 class="h4 fw-bold mb-4">Availability &amp; Location</h3>
                         
                         <div class="d-flex flex-column gap-3 mb-4">
                             <div class="d-flex align-items-start gap-3">
-                                <div class="icon-box flex-shrink-0" style="width: 40px; height: 40px;">
+                                <div class="icon-box flex-shrink-0" style="width: 42px; height: 42px;">
                                     <i data-lucide="map-pin" style="width: 18px; height: 18px;"></i>
                                 </div>
                                 <div>
-                                    <span class="d-block small text-secondary">Based in</span>
+                                    <span class="d-block small text-secondary">Location</span>
                                     <span class="fw-semibold">{{ $contact->location ?? 'Dhaka, Bangladesh (Available Worldwide)' }}</span>
                                 </div>
                             </div>
 
                             <div class="d-flex align-items-start gap-3">
-                                <div class="icon-box flex-shrink-0" style="width: 40px; height: 40px;">
+                                <div class="icon-box flex-shrink-0" style="width: 42px; height: 42px;">
                                     <i data-lucide="briefcase" style="width: 18px; height: 18px;"></i>
                                 </div>
                                 <div>
-                                    <span class="d-block small text-secondary">Current Status</span>
-                                    <span class="fw-semibold text-emerald">{{ $contact->availability_status ?? 'Open to Projects & Leadership' }}</span>
+                                    <span class="d-block small text-secondary">Role Focus</span>
+                                    <span class="fw-semibold text-emerald">Technical Project Lead &amp; Web Architect</span>
                                 </div>
                             </div>
 
                             <div class="d-flex align-items-start gap-3">
-                                <div class="icon-box flex-shrink-0" style="width: 40px; height: 40px;">
+                                <div class="icon-box flex-shrink-0" style="width: 42px; height: 42px;">
                                     <i data-lucide="languages" style="width: 18px; height: 18px;"></i>
                                 </div>
                                 <div>
@@ -152,7 +185,7 @@
 
                     <div class="p-3 crystal-surface border border-emerald-subtle rounded-3 text-center">
                         <p class="small text-secondary mb-2">Need direct technical advice or project planning?</p>
-                        <a href="#contact" class="btn btn-sm btn-emerald w-100">Send an Inquiry</a>
+                        <a href="#contact" class="btn btn-sm btn-emerald w-100">Initiate Collaboration</a>
                     </div>
                 </div>
             </div>
@@ -200,13 +233,13 @@
         </div>
     </section>
 
-    <!-- Section 5: Featured Projects & Case Studies -->
+    <!-- Section 5: Featured Projects & Case Studies (With Rich Visual Preview Mockups) -->
     <section id="projects" class="mb-5 py-4">
         <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
             <div>
-                <span class="badge-crystal mb-2 d-inline-block">Proven Engineering Work</span>
+                <span class="badge-crystal mb-2 d-inline-block">Production Engineering</span>
                 <h2 class="h2 fw-bold mb-1">Featured Projects &amp; Case Studies</h2>
-                <p class="text-secondary mb-0">Production applications solving real commercial, logistics, and attribution problems.</p>
+                <p class="text-secondary mb-0">Production systems solving real commercial, logistics, and attribution problems.</p>
             </div>
             <a href="{{ url('/projects') }}" class="btn btn-crystal-outline btn-sm d-inline-flex align-items-center gap-1">
                 <span>View All Projects</span>
@@ -215,10 +248,52 @@
         </div>
 
         <div class="row g-4">
-            @forelse ($featuredProjects as $project)
+            @forelse ($featuredProjects as $index => $project)
                 <div class="col-md-6 col-lg-4">
                     <div class="crystal-card-3d p-4 h-100 d-flex flex-column">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
+                        
+                        <!-- Visual Preview Mockup Banner -->
+                        <div class="project-preview-mockup mb-3" style="background: linear-gradient(135deg, {{ $index === 0 ? '#064e3b, #0f172a' : ($index === 1 ? '#1e1b4b, #0f172a' : '#1e293b, #070a14') }});">
+                            @if ($index === 0)
+                                <!-- E-Commerce & CAPI Mockup SVG -->
+                                <svg width="100%" height="100%" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="padding: 15px;">
+                                    <rect x="20" y="25" width="280" height="110" rx="8" fill="rgba(15, 23, 42, 0.85)" stroke="rgba(16, 185, 129, 0.4)"/>
+                                    <rect x="35" y="40" width="80" height="12" rx="4" fill="#10b981"/>
+                                    <rect x="35" y="60" width="120" height="8" rx="3" fill="#64748b"/>
+                                    <rect x="35" y="75" width="90" height="8" rx="3" fill="#475569"/>
+                                    <circle cx="250" cy="55" r="22" fill="rgba(16, 185, 129, 0.2)" stroke="#10b981" stroke-width="2"/>
+                                    <path d="M242 55L248 61L260 48" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
+                                    <rect x="35" y="100" width="250" height="20" rx="4" fill="rgba(16, 185, 129, 0.2)"/>
+                                    <text x="45" y="114" fill="#10b981" font-size="10" font-family="monospace">Meta CAPI: 99.8% Server Verified</text>
+                                </svg>
+                            @elseif ($index === 1)
+                                <!-- Logistics & Courier Mockup SVG -->
+                                <svg width="100%" height="100%" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="padding: 15px;">
+                                    <rect x="20" y="25" width="280" height="110" rx="8" fill="rgba(15, 23, 42, 0.85)" stroke="rgba(99, 102, 241, 0.4)"/>
+                                    <rect x="35" y="40" width="90" height="12" rx="4" fill="#6366f1"/>
+                                    <rect x="35" y="60" width="250" height="6" rx="3" fill="#334155"/>
+                                    <circle cx="50" cy="63" r="6" fill="#10b981"/>
+                                    <circle cx="160" cy="63" r="6" fill="#6366f1"/>
+                                    <circle cx="270" cy="63" r="6" fill="#94a3b8"/>
+                                    <rect x="35" y="85" width="130" height="14" rx="3" fill="rgba(99, 102, 241, 0.2)"/>
+                                    <text x="42" y="96" fill="#a5b4fc" font-size="10" font-family="monospace">API Dispatch: Pathao/RedX</text>
+                                    <rect x="180" y="85" width="105" height="14" rx="3" fill="rgba(16, 185, 129, 0.2)"/>
+                                    <text x="188" y="96" fill="#6ee7b7" font-size="10" font-family="monospace">Status: Synced</text>
+                                </svg>
+                            @else
+                                <!-- Server-Side Conversion Engine Mockup SVG -->
+                                <svg width="100%" height="100%" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="padding: 15px;">
+                                    <rect x="20" y="25" width="280" height="110" rx="8" fill="rgba(15, 23, 42, 0.85)" stroke="rgba(14, 165, 233, 0.4)"/>
+                                    <rect x="35" y="40" width="110" height="12" rx="4" fill="#0ea5e9"/>
+                                    <path d="M40 85C80 60 120 110 160 70C200 40 240 90 280 65" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round"/>
+                                    <circle cx="160" cy="70" r="4" fill="#10b981"/>
+                                    <rect x="35" y="105" width="250" height="16" rx="3" fill="rgba(14, 165, 233, 0.15)"/>
+                                    <text x="45" y="117" fill="#38bdf8" font-size="10" font-family="monospace">Dual-Stream Deduplication Engine</text>
+                                </svg>
+                            @endif
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
                             <span class="badge bg-secondary-subtle text-secondary small px-2 py-1">
                                 {{ $project->category?->name ?? 'Enterprise Solution' }}
                             </span>
@@ -228,12 +303,12 @@
                         </div>
 
                         <h3 class="h5 fw-bold mb-2">{{ $project->title }}</h3>
-                        <p class="small text-secondary mb-4 flex-grow-1 leading-relaxed">
+                        <p class="small text-secondary mb-3 flex-grow-1 leading-relaxed">
                             {{ $project->summary }}
                         </p>
 
                         <!-- Tech tags -->
-                        <div class="d-flex flex-wrap gap-1 mb-4">
+                        <div class="d-flex flex-wrap gap-1 mb-3">
                             @foreach ($project->skills->take(4) as $s)
                                 <span class="badge bg-body-secondary text-body" style="font-size: 0.72rem;">{{ $s->name }}</span>
                             @endforeach
@@ -282,7 +357,7 @@
                         </p>
                         <div class="mt-auto pt-3 border-top border-secondary-subtle">
                             <a href="#contact" class="btn btn-sm btn-crystal-outline w-100 d-inline-flex justify-content-center align-items-center gap-1">
-                                <span>Inquire About This</span>
+                                <span>Inquire About This Service</span>
                                 <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
                             </a>
                         </div>

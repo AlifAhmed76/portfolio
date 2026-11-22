@@ -108,7 +108,7 @@
 
             <div class="mb-4 d-flex justify-content-between align-items-center">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" name="remember" id="remember">
+                    <input class="form-check-input" type="checkbox" name="remember" id="remember" value="1">
                     <label class="form-check-label small text-secondary" for="remember">
                         Remember session
                     </label>

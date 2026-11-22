@@ -19,32 +19,32 @@
             --theme-accent: #10b981;
             --theme-accent-hover: #059669;
             --theme-accent-rgb: 16, 185, 129;
-            --theme-accent-glow: rgba(16, 185, 129, 0.25);
+            --theme-accent-glow: rgba(16, 185, 129, 0.35);
             
-            --theme-bg: #070a13;
-            --theme-bg-gradient: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.08) 0%, rgba(7, 10, 19, 1) 70%);
-            --theme-surface: rgba(15, 23, 42, 0.72);
+            --theme-bg: #070a14;
+            --theme-bg-gradient: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.12) 0%, rgba(7, 10, 20, 1) 75%);
+            --theme-surface: rgba(15, 23, 42, 0.75);
             --theme-surface-solid: #0f172a;
-            --theme-border: rgba(255, 255, 255, 0.09);
-            --theme-border-highlight: rgba(255, 255, 255, 0.16);
-            --glass-blur: 20px;
-            --card-shadow: 0 12px 36px -8px rgba(0, 0, 0, 0.55), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+            --theme-border: rgba(255, 255, 255, 0.10);
+            --theme-border-highlight: rgba(16, 185, 129, 0.4);
+            --glass-blur: 24px;
+            --card-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
         }
 
         [data-bs-theme="light"] {
             --theme-accent: #059669;
             --theme-accent-hover: #047857;
             --theme-accent-rgb: 5, 150, 105;
-            --theme-accent-glow: rgba(5, 150, 105, 0.18);
+            --theme-accent-glow: rgba(5, 150, 105, 0.2);
             
             --theme-bg: #f8fafc;
-            --theme-bg-gradient: radial-gradient(circle at 50% 0%, rgba(5, 150, 105, 0.06) 0%, rgba(248, 250, 252, 1) 70%);
-            --theme-surface: rgba(255, 255, 255, 0.88);
+            --theme-bg-gradient: radial-gradient(circle at 50% 0%, rgba(5, 150, 105, 0.08) 0%, rgba(248, 250, 252, 1) 75%);
+            --theme-surface: rgba(255, 255, 255, 0.90);
             --theme-surface-solid: #ffffff;
             --theme-border: rgba(0, 0, 0, 0.08);
-            --theme-border-highlight: rgba(0, 0, 0, 0.12);
-            --glass-blur: 20px;
-            --card-shadow: 0 10px 30px -6px rgba(0, 0, 0, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.8);
+            --theme-border-highlight: rgba(5, 150, 105, 0.4);
+            --glass-blur: 24px;
+            --card-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.08), inset 0 1px 0 0 rgba(255, 255, 255, 0.9);
         }
 
         body {
@@ -82,7 +82,7 @@
             border-radius: 1.25rem;
             box-shadow: var(--card-shadow);
             transform-style: preserve-3d;
-            perspective: 1000px;
+            perspective: 1200px;
             transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, border-color 0.25s ease-out;
             position: relative;
             overflow: hidden;
@@ -90,21 +90,27 @@
 
         .crystal-card-3d:hover {
             border-color: var(--theme-border-highlight);
-            box-shadow: 0 18px 45px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 0 rgba(255, 255, 255, 0.25), 0 0 24px var(--theme-accent-glow);
+            box-shadow: 0 24px 50px -12px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.3), 0 0 28px var(--theme-accent-glow);
         }
+
+        /* 3D Floating elements */
+        .layer-depth-1 { transform: translateZ(20px); }
+        .layer-depth-2 { transform: translateZ(40px); }
+        .layer-depth-3 { transform: translateZ(60px); }
 
         .text-emerald { color: var(--theme-accent) !important; }
         .bg-emerald { background-color: var(--theme-accent) !important; }
         
         .badge-crystal {
-            background: rgba(var(--theme-accent-rgb), 0.12);
+            background: rgba(var(--theme-accent-rgb), 0.15);
             color: var(--theme-accent);
-            border: 1px solid rgba(var(--theme-accent-rgb), 0.28);
+            border: 1px solid rgba(var(--theme-accent-rgb), 0.35);
             border-radius: 9999px;
             font-weight: 600;
             font-size: 0.8rem;
             letter-spacing: 0.02em;
-            padding: 0.4rem 0.9rem;
+            padding: 0.45rem 1rem;
+            box-shadow: 0 0 15px rgba(var(--theme-accent-rgb), 0.2);
         }
 
         .btn-emerald {
@@ -112,9 +118,9 @@
             border-color: var(--theme-accent);
             color: #ffffff;
             font-weight: 600;
-            padding: 0.65rem 1.5rem;
+            padding: 0.75rem 1.75rem;
             border-radius: 0.75rem;
-            box-shadow: 0 4px 14px 0 rgba(var(--theme-accent-rgb), 0.35);
+            box-shadow: 0 6px 18px 0 rgba(var(--theme-accent-rgb), 0.4);
             transition: all 0.2s ease;
         }
         .btn-emerald:hover {
@@ -122,29 +128,29 @@
             border-color: var(--theme-accent-hover);
             color: #ffffff;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px 0 rgba(var(--theme-accent-rgb), 0.5);
+            box-shadow: 0 8px 24px 0 rgba(var(--theme-accent-rgb), 0.55);
         }
 
         .btn-crystal-outline {
-            background: transparent;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--theme-border-highlight);
             color: var(--bs-body-color);
             font-weight: 600;
-            padding: 0.65rem 1.5rem;
+            padding: 0.75rem 1.75rem;
             border-radius: 0.75rem;
             backdrop-filter: blur(10px);
             transition: all 0.2s ease;
         }
         .btn-crystal-outline:hover {
-            background: rgba(var(--theme-accent-rgb), 0.1);
+            background: rgba(var(--theme-accent-rgb), 0.12);
             border-color: var(--theme-accent);
             color: var(--theme-accent);
             transform: translateY(-2px);
         }
 
         .beacon-dot {
-            width: 8px;
-            height: 8px;
+            width: 9px;
+            height: 9px;
             background-color: var(--theme-accent);
             border-radius: 50%;
             display: inline-block;
@@ -153,37 +159,83 @@
         }
         @keyframes beacon {
             to {
-                box-shadow: 0 0 0 8px rgba(var(--theme-accent-rgb), 0);
+                box-shadow: 0 0 0 10px rgba(var(--theme-accent-rgb), 0);
             }
         }
 
         .timeline-node {
             position: relative;
             padding-left: 2rem;
-            border-left: 2px solid rgba(var(--theme-accent-rgb), 0.25);
+            border-left: 2px solid rgba(var(--theme-accent-rgb), 0.35);
         }
         .timeline-node::before {
             content: '';
             position: absolute;
-            left: -7px;
+            left: -8px;
             top: 4px;
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             border-radius: 50%;
             background: var(--theme-accent);
-            box-shadow: 0 0 10px var(--theme-accent);
+            box-shadow: 0 0 12px var(--theme-accent);
         }
 
         .icon-box {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(var(--theme-accent-rgb), 0.12);
+            background: rgba(var(--theme-accent-rgb), 0.14);
             color: var(--theme-accent);
-            border: 1px solid rgba(var(--theme-accent-rgb), 0.22);
+            border: 1px solid rgba(var(--theme-accent-rgb), 0.28);
+            box-shadow: 0 4px 15px rgba(var(--theme-accent-rgb), 0.15);
+        }
+
+        /* 3D Orb / Prism Animation */
+        .prism-orb {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(16, 185, 129, 0.4), rgba(15, 23, 42, 0.9));
+            box-shadow: 0 0 40px rgba(16, 185, 129, 0.3), inset 0 0 20px rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(16, 185, 129, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: floatOrb 6s ease-in-out infinite;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        .avatar-glow-ring {
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 2px dashed rgba(16, 185, 129, 0.4);
+            animation: spinRing 20s linear infinite;
+        }
+
+        @keyframes spinRing {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .project-preview-mockup {
+            height: 190px;
+            border-radius: 0.85rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
     </style>
     @stack('styles')
@@ -201,7 +253,7 @@
     <nav class="navbar navbar-expand-lg sticky-top crystal-surface mx-3 mt-3 px-3">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold text-emerald d-flex align-items-center gap-2" href="{{ url('/') }}">
-                <div class="icon-box" style="width: 34px; height: 34px; border-radius: 8px;">
+                <div class="icon-box" style="width: 36px; height: 36px; border-radius: 10px;">
                     <i data-lucide="terminal" style="width: 18px; height: 18px;"></i>
                 </div>
                 <span>ALIF AHMED</span>
@@ -293,13 +345,13 @@
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left - rect.width / 2;
                 const y = e.clientY - rect.top - rect.height / 2;
-                const rotateX = (-y / rect.height) * 8;
-                const rotateY = (x / rect.width) * 8;
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+                const rotateX = (-y / rect.height) * 10;
+                const rotateY = (x / rect.width) * 10;
+                card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
             });
 
             card.addEventListener('mouseleave', () => {
-                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)';
+                card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) translateY(0)';
             });
         });
     </script>
