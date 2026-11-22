@@ -618,7 +618,7 @@
                         </div>
                     @endif
 
-                    <form action="{{ route('contact.submit') }}" method="POST">
+                    <form action="/contact" method="POST">
                         @csrf
                         <!-- Honeypot anti-spam trap (invisible to human users) -->
                         <div style="display:none !important;" aria-hidden="true">

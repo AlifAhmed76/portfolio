@@ -362,7 +362,7 @@
                             </li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
-                                <form action="{{ route('admin.logout') }}" method="POST">
+                                <form action="/admin/logout" method="POST">
                                     @csrf
                                     <button type="submit" class="dropdown-item text-danger d-flex align-items-center gap-2">
                                         <i data-lucide="log-out" style="width: 16px; height: 16px;"></i>
