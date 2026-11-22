@@ -23,6 +23,7 @@
             --admin-sidebar-bg: #0f172a;
             --admin-card-bg: #131d33;
             --admin-border: #1e293b;
+            --admin-text: #f1f5f9;
             --admin-text-muted: #94a3b8;
         }
 
@@ -31,15 +32,35 @@
             --admin-sidebar-bg: #ffffff;
             --admin-card-bg: #ffffff;
             --admin-border: #e2e8f0;
+            --admin-text: #0f172a;
             --admin-text-muted: #64748b;
         }
 
         body {
             background-color: var(--admin-bg);
+            color: var(--admin-text);
             font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+        }
+
+        /* High-Contrast Light Mode Safety Rules */
+        [data-bs-theme="light"] .text-light {
+            color: #0f172a !important;
+        }
+        [data-bs-theme="light"] .table-dark {
+            --bs-table-bg: #f1f5f9;
+            --bs-table-color: #0f172a;
+            border-color: #e2e8f0;
+        }
+        [data-bs-theme="light"] .btn-outline-light {
+            color: #475569 !important;
+            border-color: #cbd5e1 !important;
+        }
+        [data-bs-theme="light"] .bg-dark {
+            background-color: #f1f5f9 !important;
+            color: #0f172a !important;
         }
 
         .admin-wrapper {

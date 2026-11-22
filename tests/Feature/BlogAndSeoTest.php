@@ -80,7 +80,7 @@ class BlogAndSeoTest extends TestCase
             'category_id' => $this->category->id,
             'title' => 'Published Technical Article',
             'slug' => 'published-technical-article',
-            'content' => 'Public article content describing high performance architectures.',
+            'content' => "## Architecture Overview\n\nPublic article content describing high performance architectures.\n\n```php\necho 'API Running';\n```",
             'reading_time' => 2,
             'status' => 'published',
             'published_at' => now(),
@@ -104,10 +104,13 @@ class BlogAndSeoTest extends TestCase
         $indexResponse->assertSee('Published Technical Article');
         $indexResponse->assertDontSee('Secret Draft Article');
 
-        // Single published post accessible
+        // Single published post accessible and parses Markdown
         $singleResponse = $this->get('/blog/published-technical-article');
         $singleResponse->assertOk();
         $singleResponse->assertSee('Published Technical Article');
+        $singleResponse->assertSee('Architecture Overview');
+        $singleResponse->assertSee('API Running');
+        $singleResponse->assertSee('readingProgress');
         $singleResponse->assertSee('BlogPosting'); // JSON-LD check
 
         // Single draft post returns 404 for guests

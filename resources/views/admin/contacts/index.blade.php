@@ -15,10 +15,10 @@
     @endif
 </div>
 
-<div class="card border-0 shadow-sm" style="background: var(--admin-card-bg); border: 1px solid var(--admin-border) !important;">
+<div class="card border-0 shadow-sm" style="background: var(--admin-card-bg); border: 1px solid var(--admin-border) !important; color: var(--admin-text);">
     <div class="table-responsive">
-        <table class="table table-hover align-middle mb-0" style="color: var(--admin-text);">
-            <thead class="table-dark">
+        <table class="table table-hover align-middle mb-0" style="color: inherit;">
+            <thead class="table-light border-bottom">
                 <tr>
                     <th scope="col" class="ps-4">Sender</th>
                     <th scope="col">Subject / Preview</th>

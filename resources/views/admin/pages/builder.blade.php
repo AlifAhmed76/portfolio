@@ -52,7 +52,7 @@
                 </button>
 
                 @if ($page->isPublished())
-                    <a href="{{ url('/' . $page->slug) }}" target="_blank" class="btn btn-sm btn-outline-light" title="View Live Page">
+                    <a href="{{ url('/' . $page->slug) }}" target="_blank" class="btn btn-sm btn-outline-secondary" title="View Live Page">
                         <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
                     </a>
                 @endif

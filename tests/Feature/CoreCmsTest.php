@@ -288,4 +288,22 @@ class CoreCmsTest extends TestCase
             'is_enabled' => true,
         ]);
     }
+
+    public function test_admin_can_view_contact_inquiry_with_high_contrast(): void
+    {
+        $message = \App\Models\ContactMessage::create([
+            'workspace_id' => $this->workspace->id,
+            'name' => 'John Enterprise',
+            'email' => 'john@enterprise.com',
+            'subject' => 'Enterprise Architecture Consultation',
+            'message' => 'We need an in-depth review of our Laravel APIs.',
+            'status' => 'unread',
+        ]);
+
+        $response = $this->actingAs($this->admin)->get(route('admin.contacts.show', $message));
+        $response->assertOk();
+        $response->assertSee('John Enterprise');
+        $response->assertSee('We need an in-depth review of our Laravel APIs.');
+        $response->assertDontSee('class="text-light"', false);
+    }
 }
