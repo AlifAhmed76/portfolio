@@ -29,6 +29,7 @@ class IdentityController extends Controller
                 'headline' => 'Building Digital Experiences. Engineering Business Solutions.',
             ]
         );
+        $profile->load(['avatar', 'profileImage', 'resume']);
 
         $contact = ContactDetail::firstOrCreate(
             ['workspace_id' => $workspace?->id],

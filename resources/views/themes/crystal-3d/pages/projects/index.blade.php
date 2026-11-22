@@ -12,7 +12,17 @@
     <div class="row g-4">
         @forelse ($projects ?? [] as $project)
             <div class="col-md-6 col-lg-4">
-                <div class="crystal-surface p-4 h-100 d-flex flex-column">
+                <div class="crystal-card-3d p-4 h-100 d-flex flex-column">
+                    <div class="project-card-visual mb-3 position-relative overflow-hidden" style="height: 180px; background: #0f172a; border-radius: 12px;">
+                        @if ($project->coverImage)
+                            <img src="{{ $project->coverImage->url }}" alt="{{ $project->title }}" class="w-100 h-100 object-fit-cover project-img-zoom">
+                        @else
+                            <div class="editorial-project-cover w-100 h-100 d-flex flex-column justify-content-between p-3" style="background: radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.2), transparent 60%), linear-gradient(135deg, #0b1120 0%, #020617 100%);">
+                                <span class="badge bg-emerald-subtle text-emerald small font-monospace align-self-start">{{ $project->category?->name ?? 'Production' }}</span>
+                                <div class="text-white fw-bold">{{ $project->title }}</div>
+                            </div>
+                        @endif
+                    </div>
                     <span class="badge bg-secondary-subtle text-secondary small align-self-start mb-2">
                         {{ $project->category?->name ?? 'Project' }}
                     </span>

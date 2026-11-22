@@ -23,7 +23,7 @@ class HomeController extends Controller
         $theme = ThemeResolver::resolve();
         $tokens = ThemeResolver::getTokens();
 
-        $profile = Profile::first();
+        $profile = Profile::with(['avatar', 'profileImage', 'resume'])->first();
         $contact = ContactDetail::first();
         $socialLinks = SocialLink::where('is_enabled', true)->orderBy('sort_order')->get();
         $sections = HomepageSection::where('is_enabled', true)->orderBy('sort_order')->get();

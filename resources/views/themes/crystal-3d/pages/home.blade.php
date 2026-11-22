@@ -57,12 +57,20 @@
                 <div class="col-lg-5 text-center">
                     <div class="p-4 rounded-4 crystal-surface position-relative shadow-lg border border-emerald-subtle" style="background: radial-gradient(circle at 50% 30%, rgba(16, 185, 129, 0.15), rgba(15, 23, 42, 0.85));">
                         
-                        <!-- 3D Orb Avatar -->
-                        <div class="prism-orb mb-4 position-relative">
+                        <!-- 3D Holographic Prism Frame -->
+                        <div class="prism-orb mb-4 position-relative overflow-hidden">
                             <div class="avatar-glow-ring"></div>
-                            <div class="icon-box" style="width: 80px; height: 80px; border-radius: 20px; font-size: 2rem;">
-                                <i data-lucide="code-2" style="width: 44px; height: 44px;"></i>
-                            </div>
+                            @if ($profile?->avatar || $profile?->profileImage)
+                                <img src="{{ $profile->avatar?->url ?? $profile->profileImage?->url }}" 
+                                     alt="{{ $profile->name ?? 'Md. Alif Ahmed' }}" 
+                                     class="rounded-circle w-100 h-100 object-fit-cover position-relative p-1" 
+                                     style="z-index: 2;">
+                            @else
+                                <div class="hologram-monogram position-relative d-flex flex-column align-items-center justify-content-center" style="z-index: 2;">
+                                    <span class="display-6 fw-bold text-emerald mb-0" style="letter-spacing: 2px;">AA</span>
+                                    <span class="badge bg-emerald-subtle text-emerald" style="font-size: 0.65rem; letter-spacing: 1.5px;">SYSTEM LEAD</span>
+                                </div>
+                            @endif
                         </div>
 
                         <!-- Floating Tech Hologram Tags -->
@@ -252,44 +260,33 @@
                 <div class="col-md-6 col-lg-4">
                     <div class="crystal-card-3d p-4 h-100 d-flex flex-column">
                         
-                        <!-- Visual Preview Mockup Banner -->
-                        <div class="project-preview-mockup mb-3" style="background: linear-gradient(135deg, {{ $index === 0 ? '#064e3b, #0f172a' : ($index === 1 ? '#1e1b4b, #0f172a' : '#1e293b, #070a14') }});">
-                            @if ($index === 0)
-                                <!-- E-Commerce & CAPI Mockup SVG -->
-                                <svg width="100%" height="100%" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="padding: 15px;">
-                                    <rect x="20" y="25" width="280" height="110" rx="8" fill="rgba(15, 23, 42, 0.85)" stroke="rgba(16, 185, 129, 0.4)"/>
-                                    <rect x="35" y="40" width="80" height="12" rx="4" fill="#10b981"/>
-                                    <rect x="35" y="60" width="120" height="8" rx="3" fill="#64748b"/>
-                                    <rect x="35" y="75" width="90" height="8" rx="3" fill="#475569"/>
-                                    <circle cx="250" cy="55" r="22" fill="rgba(16, 185, 129, 0.2)" stroke="#10b981" stroke-width="2"/>
-                                    <path d="M242 55L248 61L260 48" stroke="#10b981" stroke-width="3" stroke-linecap="round"/>
-                                    <rect x="35" y="100" width="250" height="20" rx="4" fill="rgba(16, 185, 129, 0.2)"/>
-                                    <text x="45" y="114" fill="#10b981" font-size="10" font-family="monospace">Meta CAPI: 99.8% Server Verified</text>
-                                </svg>
-                            @elseif ($index === 1)
-                                <!-- Logistics & Courier Mockup SVG -->
-                                <svg width="100%" height="100%" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="padding: 15px;">
-                                    <rect x="20" y="25" width="280" height="110" rx="8" fill="rgba(15, 23, 42, 0.85)" stroke="rgba(99, 102, 241, 0.4)"/>
-                                    <rect x="35" y="40" width="90" height="12" rx="4" fill="#6366f1"/>
-                                    <rect x="35" y="60" width="250" height="6" rx="3" fill="#334155"/>
-                                    <circle cx="50" cy="63" r="6" fill="#10b981"/>
-                                    <circle cx="160" cy="63" r="6" fill="#6366f1"/>
-                                    <circle cx="270" cy="63" r="6" fill="#94a3b8"/>
-                                    <rect x="35" y="85" width="130" height="14" rx="3" fill="rgba(99, 102, 241, 0.2)"/>
-                                    <text x="42" y="96" fill="#a5b4fc" font-size="10" font-family="monospace">API Dispatch: Pathao/RedX</text>
-                                    <rect x="180" y="85" width="105" height="14" rx="3" fill="rgba(16, 185, 129, 0.2)"/>
-                                    <text x="188" y="96" fill="#6ee7b7" font-size="10" font-family="monospace">Status: Synced</text>
-                                </svg>
+                        <!-- Visual Project Cover (Dynamic Uploaded Media or Editorial Case Cover) -->
+                        <div class="project-card-visual mb-3 position-relative overflow-hidden" style="height: 195px; background: #0f172a;">
+                            @if ($project->coverImage)
+                                <img src="{{ $project->coverImage->url }}" 
+                                     alt="{{ $project->title }}" 
+                                     class="w-100 h-100 object-fit-cover project-img-zoom">
                             @else
-                                <!-- Server-Side Conversion Engine Mockup SVG -->
-                                <svg width="100%" height="100%" viewBox="0 0 320 160" fill="none" xmlns="http://www.w3.org/2000/svg" style="padding: 15px;">
-                                    <rect x="20" y="25" width="280" height="110" rx="8" fill="rgba(15, 23, 42, 0.85)" stroke="rgba(14, 165, 233, 0.4)"/>
-                                    <rect x="35" y="40" width="110" height="12" rx="4" fill="#0ea5e9"/>
-                                    <path d="M40 85C80 60 120 110 160 70C200 40 240 90 280 65" stroke="#0ea5e9" stroke-width="2" stroke-linecap="round"/>
-                                    <circle cx="160" cy="70" r="4" fill="#10b981"/>
-                                    <rect x="35" y="105" width="250" height="16" rx="3" fill="rgba(14, 165, 233, 0.15)"/>
-                                    <text x="45" y="117" fill="#38bdf8" font-size="10" font-family="monospace">Dual-Stream Deduplication Engine</text>
-                                </svg>
+                                <div class="editorial-project-cover w-100 h-100 d-flex flex-column justify-content-between p-3" 
+                                     style="background: radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.22), transparent 60%), linear-gradient(135deg, #0b1120 0%, #020617 100%); border: 1px solid rgba(255, 255, 255, 0.08);">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="badge bg-emerald-subtle text-emerald font-monospace px-2 py-1" style="font-size: 0.72rem;">
+                                            {{ $project->category?->name ?? 'Enterprise Solution' }}
+                                        </span>
+                                        <div class="icon-circle" style="width: 28px; height: 28px; border-radius: 50%; background: rgba(255, 255, 255, 0.08); display: flex; align-items: center; justify-content: center;">
+                                            <i data-lucide="arrow-up-right" class="text-emerald" style="width: 15px; height: 15px;"></i>
+                                        </div>
+                                    </div>
+                                    <div class="my-auto">
+                                        <div class="text-white fw-bold mb-1" style="font-size: 1.05rem;">{{ $project->title }}</div>
+                                        <div class="text-secondary small line-clamp-2" style="font-size: 0.78rem;">{{ Str::limit($project->summary ?? $project->description, 80) }}</div>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-1">
+                                        @foreach ($project->skills->take(3) as $ps)
+                                            <span class="badge bg-secondary-subtle text-secondary" style="font-size: 0.65rem;">{{ $ps->name }}</span>
+                                        @endforeach
+                                    </div>
+                                </div>
                             @endif
                         </div>
 

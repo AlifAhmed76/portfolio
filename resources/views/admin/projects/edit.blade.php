@@ -149,15 +149,13 @@
                     </div>
 
                     <div class="mb-0">
-                        <label for="cover_image_id" class="form-label small text-secondary">Cover Image (Media)</label>
-                        <select name="cover_image_id" id="cover_image_id" class="form-select">
-                            <option value="">-- No Cover Image Selected --</option>
-                            @foreach ($mediaImages as $img)
-                                <option value="{{ $img->id }}" {{ old('cover_image_id', $project->cover_image_id) == $img->id ? 'selected' : '' }}>
-                                    {{ $img->original_name }}
-                                </option>
-                            @endforeach
-                        </select>
+                        <x-admin.image-picker 
+                            name="cover_image_id" 
+                            label="Project Cover Image" 
+                            :value="$project->cover_image_id" 
+                            :selectedImage="$project->coverImage" 
+                            :images="$mediaImages" 
+                            helpText="Displayed in portfolio grid & case study hero" />
                     </div>
                 </div>
 

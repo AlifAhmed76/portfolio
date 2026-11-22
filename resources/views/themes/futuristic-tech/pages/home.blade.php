@@ -8,19 +8,28 @@
 
     <!-- Section 1: Hero -->
     <section id="hero" class="tech-panel p-5 mb-5 font-mono">
-        <div class="d-flex justify-content-between align-items-center text-cyan small mb-3">
-            <span>[SYS_STATUS: {{ strtoupper($contact->availability_status ?? 'AVAILABLE') }}]</span>
-            <span>NODE::ALIF-PORTFOLIO-V1</span>
-        </div>
-        <h1 class="display-4 fw-bold mb-3">{{ $profile->name ?? 'Md. Alif Ahmed' }}</h1>
-        <h2 class="h4 text-cyan mb-3">{{ $profile->designation ?? 'Web Developer | Technical Project Lead | E-commerce Solutions Specialist' }}</h2>
-        <p class="lead text-secondary mb-4" style="max-width: 760px;">
-            {{ $profile->headline ?? 'Building Digital Experiences. Engineering Business Solutions.' }}
-            High-throughput Laravel backends, multi-carrier courier API integrations, and resilient Meta Conversion API server-side telemetry.
-        </p>
-        <div class="d-flex flex-wrap gap-3">
-            <a href="#projects" class="btn btn-cyan font-mono px-4 py-2">&gt; INSPECT_PROJECTS()</a>
-            <a href="#contact" class="btn btn-outline-secondary font-mono px-4 py-2">&gt; TRANSMIT_MESSAGE()</a>
+        <div class="row align-items-center g-4">
+            <div class="{{ ($profile?->avatar || $profile?->profileImage) ? 'col-lg-8' : 'col-12' }}">
+                <div class="d-flex justify-content-between align-items-center text-cyan small mb-3">
+                    <span>[SYS_STATUS: {{ strtoupper($contact->availability_status ?? 'AVAILABLE') }}]</span>
+                    <span>NODE::ALIF-PORTFOLIO-V1</span>
+                </div>
+                <h1 class="display-4 fw-bold mb-3">{{ $profile->name ?? 'Md. Alif Ahmed' }}</h1>
+                <h2 class="h4 text-cyan mb-3">{{ $profile->designation ?? 'Web Developer | Technical Project Lead | E-commerce Solutions Specialist' }}</h2>
+                <p class="lead text-secondary mb-4" style="max-width: 760px;">
+                    {{ $profile->headline ?? 'Building Digital Experiences. Engineering Business Solutions.' }}
+                    High-throughput Laravel backends, multi-carrier courier API integrations, and resilient Meta Conversion API server-side telemetry.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="#projects" class="btn btn-cyan font-mono px-4 py-2">&gt; INSPECT_PROJECTS()</a>
+                    <a href="#contact" class="btn btn-outline-secondary font-mono px-4 py-2">&gt; TRANSMIT_MESSAGE()</a>
+                </div>
+            </div>
+            @if ($profile?->avatar || $profile?->profileImage)
+                <div class="col-lg-4 text-center">
+                    <img src="{{ $profile->avatar?->url ?? $profile->profileImage?->url }}" alt="{{ $profile->name }}" class="rounded border border-info p-1 shadow-lg" style="width: 170px; height: 170px; object-fit: cover;">
+                </div>
+            @endif
         </div>
     </section>
 
@@ -75,6 +84,11 @@
             @foreach ($featuredProjects as $project)
                 <div class="col-md-6 col-lg-4">
                     <div class="tech-panel p-4 h-100 d-flex flex-column">
+                        @if ($project->coverImage)
+                            <div class="mb-3 overflow-hidden rounded border border-secondary" style="height: 160px;">
+                                <img src="{{ $project->coverImage->url }}" alt="{{ $project->title }}" class="w-100 h-100 object-fit-cover">
+                            </div>
+                        @endif
                         <span class="badge bg-secondary-subtle text-secondary small align-self-start mb-2">{{ $project->category?->name ?? 'SYSTEM' }}</span>
                         <h3 class="h5 fw-bold mb-2">{{ $project->title }}</h3>
                         <p class="small text-secondary mb-4 flex-grow-1">{{ $project->summary }}</p>

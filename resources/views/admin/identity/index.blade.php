@@ -61,39 +61,38 @@
                         <textarea name="bio" id="bio" rows="5" class="form-control">{{ old('bio', $profile->bio) }}</textarea>
                     </div>
 
-                    <div class="row g-3 mb-4">
-                        <div class="col-md-4">
-                            <label for="profile_image_id" class="form-label small text-secondary">Profile Portrait (Media)</label>
-                            <select name="profile_image_id" id="profile_image_id" class="form-select">
-                                <option value="">-- No Portrait Selected --</option>
-                                @foreach ($images as $img)
-                                    <option value="{{ $img->id }}" {{ $profile->profile_image_id == $img->id ? 'selected' : '' }}>
-                                        {{ $img->original_name }} ({{ $img->width }}x{{ $img->height }})
-                                    </option>
-                                @endforeach
-                            </select>
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-6 col-lg-4">
+                            <x-admin.image-picker 
+                                name="profile_image_id" 
+                                label="Profile Portrait Photo" 
+                                :value="$profile->profile_image_id" 
+                                :selectedImage="$profile->profileImage"
+                                :images="$images" 
+                                helpText="Shown in hero & about" />
                         </div>
-                        <div class="col-md-4">
-                            <label for="avatar_image_id" class="form-label small text-secondary">Technical Avatar / Illustration</label>
-                            <select name="avatar_image_id" id="avatar_image_id" class="form-select">
-                                <option value="">-- No Avatar Selected --</option>
-                                @foreach ($images as $img)
-                                    <option value="{{ $img->id }}" {{ $profile->avatar_image_id == $img->id ? 'selected' : '' }}>
-                                        {{ $img->original_name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                        <div class="col-md-6 col-lg-4">
+                            <x-admin.image-picker 
+                                name="avatar_image_id" 
+                                label="Technical Avatar / 3D Hologram" 
+                                :value="$profile->avatar_image_id" 
+                                :selectedImage="$profile->avatar"
+                                :images="$images" 
+                                helpText="Shown in 3D prism orb" />
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12 col-lg-4">
                             <label for="resume_media_id" class="form-label small text-secondary">Downloadable CV / Resume Document</label>
-                            <select name="resume_media_id" id="resume_media_id" class="form-select">
-                                <option value="">-- No CV Document Selected --</option>
-                                @foreach ($documents as $doc)
-                                    <option value="{{ $doc->id }}" {{ $profile->resume_media_id == $doc->id ? 'selected' : '' }}>
-                                        {{ $doc->original_name }} ({{ round($doc->size / 1024) }} KB)
-                                    </option>
-                                @endforeach
-                            </select>
+                            <div class="p-3 border rounded-3 bg-dark-subtle border-secondary-subtle">
+                                <select name="resume_media_id" id="resume_media_id" class="form-select bg-dark border-secondary-subtle">
+                                    <option value="">-- No CV Document Selected --</option>
+                                    @foreach ($documents as $doc)
+                                        <option value="{{ $doc->id }}" {{ $profile->resume_media_id == $doc->id ? 'selected' : '' }}>
+                                            📄 {{ $doc->original_name }} ({{ round($doc->size / 1024) }} KB)
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <small class="text-secondary d-block mt-2">Manage PDFs and DOCX in Media Manager.</small>
+                            </div>
                         </div>
                     </div>
 

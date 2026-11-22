@@ -237,10 +237,89 @@
             justify-content: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
+
+        /* Floating Frosted Pill Navbar (Animattor / Brittany Chiang inspired) */
+        .floating-pill-nav {
+            max-width: 960px;
+            margin: 16px auto 0;
+            background: var(--theme-surface);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid var(--theme-border);
+            border-radius: 9999px;
+            padding: 8px 24px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.45), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+            transition: all 0.3s ease;
+        }
+
+        .floating-pill-nav .nav-link {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.75);
+            padding: 6px 14px !important;
+            border-radius: 9999px;
+            transition: all 0.2s ease;
+        }
+
+        [data-bs-theme="light"] .floating-pill-nav .nav-link {
+            color: #334155;
+        }
+
+        .floating-pill-nav .nav-link:hover,
+        .floating-pill-nav .nav-link.active {
+            color: #ffffff;
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        [data-bs-theme="light"] .floating-pill-nav .nav-link:hover,
+        [data-bs-theme="light"] .floating-pill-nav .nav-link.active {
+            color: #059669;
+            background: rgba(5, 150, 105, 0.1);
+        }
+
+        /* Cursor Spotlight Overlay (Brittany Chiang style) */
+        .spotlight-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            background: radial-gradient(700px circle at var(--mouse-x, -500px) var(--mouse-y, -500px), rgba(16, 185, 129, 0.08), transparent 70%);
+            transition: opacity 0.3s ease;
+        }
+
+        /* Project Image Zoom & Card Depth */
+        .project-card-visual {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .project-img-zoom {
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .crystal-card-3d:hover .project-img-zoom {
+            transform: scale(1.06);
+        }
+
+        .editorial-project-cover {
+            transition: all 0.3s ease;
+        }
+
+        .crystal-card-3d:hover .editorial-project-cover {
+            background: radial-gradient(circle at 75% 25%, rgba(16, 185, 129, 0.28), rgba(15, 23, 42, 0.98)) !important;
+        }
     </style>
     @stack('styles')
 </head>
 <body>
+    <!-- Ambient Cursor Spotlight Glow -->
+    <div class="spotlight-glow" id="cursorSpotlight"></div>
+
     @if (request()->has('theme_preview'))
         <div class="alert alert-warning py-2 px-3 small text-center mb-0 border-0 rounded-0 d-flex align-items-center justify-content-center gap-2">
             <i data-lucide="eye" style="width: 16px; height: 16px;"></i>
@@ -249,43 +328,43 @@
         </div>
     @endif
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg sticky-top crystal-surface mx-3 mt-3 px-3">
-        <div class="container-fluid">
-            <a class="navbar-brand fw-bold text-emerald d-flex align-items-center gap-2" href="{{ url('/') }}">
-                <div class="icon-box" style="width: 36px; height: 36px; border-radius: 10px;">
-                    <i data-lucide="terminal" style="width: 18px; height: 18px;"></i>
-                </div>
-                <span>ALIF AHMED</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navMenu">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-2 align-items-center">
-                    <li class="nav-item"><a class="nav-link px-2" href="#hero">Overview</a></li>
-                    <li class="nav-item"><a class="nav-link px-2" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link px-2" href="#expertise">Skills</a></li>
-                    <li class="nav-item"><a class="nav-link px-2" href="#projects">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link px-2" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link px-2" href="#experience">Timeline</a></li>
-                    <li class="nav-item"><a class="nav-link px-2" href="#process">Process</a></li>
-                    <li class="nav-item"><a class="nav-link px-2" href="#blog">Insights</a></li>
-                    <li class="nav-item"><a class="nav-link px-2" href="#contact">Contact</a></li>
-                    <li class="nav-item ms-lg-2">
-                        <button class="btn btn-sm btn-crystal-outline p-1 px-2" id="themeToggleBtn" type="button" title="Toggle Dark/Light">
-                            <i data-lucide="moon" id="publicThemeIcon" style="width: 18px; height: 18px;"></i>
+    <!-- Navigation: Floating Frosted Pill Nav (Clean & Organised) -->
+    <header class="sticky-top px-3 z-3">
+        <nav class="navbar navbar-expand-lg floating-pill-nav">
+            <div class="container-fluid px-0">
+                <a class="navbar-brand fw-bold text-emerald d-flex align-items-center gap-2" href="{{ url('/') }}">
+                    <span class="beacon-dot"></span>
+                    <span style="font-size: 1.05rem; letter-spacing: 0.5px;">ALIF AHMED</span>
+                </a>
+
+                <button class="navbar-toggler border-0 shadow-none p-1 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                    <i data-lucide="menu" style="width: 22px; height: 22px;"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navMenu">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-1 align-items-center">
+                        <li class="nav-item"><a class="nav-link" href="#projects">Work</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#expertise">Stack</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    </ul>
+
+                    <div class="d-flex align-items-center gap-2 ms-lg-2">
+                        <button class="btn btn-sm btn-crystal-outline rounded-circle p-2 d-flex align-items-center justify-content-center" id="themeToggleBtn" type="button" title="Toggle Theme" style="width: 36px; height: 36px;">
+                            <i data-lucide="moon" id="publicThemeIcon" style="width: 17px; height: 17px;"></i>
                         </button>
-                    </li>
-                    <li class="nav-item ms-lg-1">
-                        <a href="{{ url('/admin/login') }}" class="btn btn-sm btn-emerald py-1 px-3" style="font-size: 0.85rem;">
-                            Admin
+
+                        <a href="{{ url('/admin/login') }}" class="btn btn-sm btn-emerald rounded-pill px-3 py-1 d-inline-flex align-items-center gap-1" style="font-size: 0.85rem;">
+                            <i data-lucide="shield" style="width: 14px; height: 14px;"></i>
+                            <span>Admin</span>
                         </a>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
     <!-- Main Content -->
     <main>
@@ -338,6 +417,12 @@
                 applyTheme(next);
             });
         }
+
+        // Ambient Mouse Spotlight Glow Tracking (Animattor / Brittany Chiang style)
+        document.addEventListener('mousemove', e => {
+            document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+            document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+        });
 
         // 3D Card Depth Tilt Effect
         document.querySelectorAll('.crystal-card-3d').forEach(card => {

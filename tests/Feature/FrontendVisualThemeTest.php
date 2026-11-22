@@ -191,4 +191,52 @@ class FrontendVisualThemeTest extends TestCase
         $response->assertSee('SYS_STATUS');
         $response->assertSee('NODE::ALIF-PORTFOLIO-V1');
     }
+
+    public function test_homepage_renders_uploaded_profile_image_and_project_cover_image(): void
+    {
+        \App\Services\ThemeResolver::setPreviewSlug(null);
+
+        $avatar = \App\Models\Media::create([
+            'workspace_id' => $this->workspace->id,
+            'disk' => 'public',
+            'path' => 'media/2026/11/alif-avatar.png',
+            'original_name' => 'alif-avatar.png',
+            'mime_type' => 'image/png',
+            'size' => 10240,
+            'width' => 400,
+            'height' => 400,
+            'alt_text' => 'Md. Alif Ahmed Avatar',
+            'processing_status' => 'ready',
+        ]);
+
+        $cover = \App\Models\Media::create([
+            'workspace_id' => $this->workspace->id,
+            'disk' => 'public',
+            'path' => 'media/2026/11/courier-project-cover.jpg',
+            'original_name' => 'courier-project-cover.jpg',
+            'mime_type' => 'image/jpeg',
+            'size' => 40960,
+            'width' => 1200,
+            'height' => 800,
+            'alt_text' => 'Courier Logistics API Cover',
+            'processing_status' => 'ready',
+        ]);
+
+        $profile = Profile::where('workspace_id', $this->workspace->id)->first();
+        $profile->update(['avatar_image_id' => $avatar->id]);
+
+        $project = Project::where('workspace_id', $this->workspace->id)->first();
+        $project->update(['cover_image_id' => $cover->id]);
+
+        $response = $this->get('/');
+        $response->assertOk();
+
+        // Verify real image URLs rendered
+        $response->assertSee('media/2026/11/alif-avatar.png');
+        $response->assertSee('media/2026/11/courier-project-cover.jpg');
+
+        // Verify synthetic SVGs are removed from frontend
+        $response->assertDontSee('Meta CAPI: 99.8% Server Verified');
+        $response->assertDontSee('API Dispatch: Pathao/RedX');
+    }
 }

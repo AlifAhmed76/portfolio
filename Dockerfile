@@ -10,7 +10,8 @@ COPY . /var/www/html
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
 # Install composer production dependencies during build
-RUN composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction
+RUN composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction && \
+    php artisan storage:link || true
 
 # Image and PHP-FPM Configuration
 ENV WEBROOT=/var/www/html/public

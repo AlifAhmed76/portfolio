@@ -34,7 +34,16 @@ class Media extends Model
 
     public function getUrlAttribute(): string
     {
-        return Storage::disk($this->disk)->url($this->path);
+        if ($this->disk === 's3') {
+            return Storage::disk('s3')->url($this->path);
+        }
+
+        $cleanPath = ltrim($this->path, '/');
+        if (str_starts_with($cleanPath, 'storage/')) {
+            return asset($cleanPath);
+        }
+
+        return asset('storage/' . $cleanPath);
     }
 
     public function isImage(): bool

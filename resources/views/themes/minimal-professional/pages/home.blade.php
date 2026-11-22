@@ -8,18 +8,27 @@
 
     <!-- Section 1: Hero -->
     <section id="hero" class="py-5 border-bottom mb-5">
-        <span class="badge bg-light text-dark border mb-3 px-3 py-2 text-uppercase fw-normal" style="letter-spacing: 0.05em; font-size: 0.75rem;">
-            {{ $contact->availability_status ?? 'Available for Select Projects' }}
-        </span>
-        <h1 class="display-3 fw-normal mb-2" style="letter-spacing: -0.03em;">{{ $profile->name ?? 'Md. Alif Ahmed' }}</h1>
-        <p class="h4 text-muted fw-normal mb-4">{{ $profile->designation ?? 'Web Developer | Technical Project Lead | E-commerce Solutions Specialist' }}</p>
-        <p class="lead mb-4 text-secondary" style="max-width: 720px; line-height: 1.7;">
-            {{ $profile->headline ?? 'Building Digital Experiences. Engineering Business Solutions.' }}
-            Specializing in high-throughput Laravel architectures, automated courier logistics pipelines, and resilient Meta Conversion API server-side tracking.
-        </p>
-        <div class="d-flex gap-3">
-            <a href="#projects" class="btn btn-dark px-4 py-2">Selected Work</a>
-            <a href="#contact" class="btn btn-outline-dark px-4 py-2">Contact</a>
+        <div class="row align-items-center g-4">
+            <div class="{{ ($profile?->avatar || $profile?->profileImage) ? 'col-lg-8' : 'col-12' }}">
+                <span class="badge bg-light text-dark border mb-3 px-3 py-2 text-uppercase fw-normal" style="letter-spacing: 0.05em; font-size: 0.75rem;">
+                    {{ $contact->availability_status ?? 'Available for Select Projects' }}
+                </span>
+                <h1 class="display-3 fw-normal mb-2" style="letter-spacing: -0.03em;">{{ $profile->name ?? 'Md. Alif Ahmed' }}</h1>
+                <p class="h4 text-muted fw-normal mb-4">{{ $profile->designation ?? 'Web Developer | Technical Project Lead | E-commerce Solutions Specialist' }}</p>
+                <p class="lead mb-4 text-secondary" style="max-width: 720px; line-height: 1.7;">
+                    {{ $profile->headline ?? 'Building Digital Experiences. Engineering Business Solutions.' }}
+                    Specializing in high-throughput Laravel architectures, automated courier logistics pipelines, and resilient Meta Conversion API server-side tracking.
+                </p>
+                <div class="d-flex gap-3">
+                    <a href="#projects" class="btn btn-dark px-4 py-2">Selected Work</a>
+                    <a href="#contact" class="btn btn-outline-dark px-4 py-2">Contact</a>
+                </div>
+            </div>
+            @if ($profile?->avatar || $profile?->profileImage)
+                <div class="col-lg-4 text-center">
+                    <img src="{{ $profile->avatar?->url ?? $profile->profileImage?->url }}" alt="{{ $profile->name }}" class="rounded-circle shadow-sm border p-1" style="width: 170px; height: 170px; object-fit: cover;">
+                </div>
+            @endif
         </div>
     </section>
 
@@ -84,6 +93,11 @@
             @foreach ($featuredProjects as $project)
                 <div class="col-md-6">
                     <div class="p-4 border rounded-1 h-100 d-flex flex-column">
+                        @if ($project->coverImage)
+                            <div class="mb-3 overflow-hidden rounded-1 border" style="height: 180px;">
+                                <img src="{{ $project->coverImage->url }}" alt="{{ $project->title }}" class="w-100 h-100 object-fit-cover">
+                            </div>
+                        @endif
                         <span class="small text-muted text-uppercase">{{ $project->category?->name ?? 'System' }}</span>
                         <h3 class="h5 fw-bold mt-1 mb-2">{{ $project->title }}</h3>
                         <p class="small text-secondary mb-4 flex-grow-1">{{ $project->summary }}</p>

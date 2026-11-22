@@ -8,18 +8,27 @@
 
     <!-- Section 1: Hero -->
     <section id="hero" class="studio-card p-5 mb-5 position-relative overflow-hidden">
-        <span class="badge bg-warning-subtle text-warning border border-warning-subtle mb-3 px-3 py-2">
-            {{ $contact->availability_status ?? 'Available for Select Projects' }}
-        </span>
-        <h1 class="display-3 fw-bolder mb-3">{{ $profile->name ?? 'Md. Alif Ahmed' }}</h1>
-        <h2 class="h3 text-warning mb-4">{{ $profile->designation ?? 'Web Developer | Technical Project Lead | E-commerce Solutions Specialist' }}</h2>
-        <p class="lead text-secondary mb-4" style="max-width: 760px;">
-            {{ $profile->headline ?? 'Building Digital Experiences. Engineering Business Solutions.' }}
-            Bespoke Laravel architectures, automated courier logistics pipelines, and resilient Meta Conversion API server-side tracking.
-        </p>
-        <div class="d-flex flex-wrap gap-3">
-            <a href="#projects" class="btn btn-warning fw-bold px-4 py-2">Explore Projects</a>
-            <a href="#contact" class="btn btn-outline-warning fw-bold px-4 py-2">Get in Touch</a>
+        <div class="row align-items-center g-4">
+            <div class="{{ ($profile?->avatar || $profile?->profileImage) ? 'col-lg-8' : 'col-12' }}">
+                <span class="badge bg-warning-subtle text-warning border border-warning-subtle mb-3 px-3 py-2">
+                    {{ $contact->availability_status ?? 'Available for Select Projects' }}
+                </span>
+                <h1 class="display-3 fw-bolder mb-3">{{ $profile->name ?? 'Md. Alif Ahmed' }}</h1>
+                <h2 class="h3 text-warning mb-4">{{ $profile->designation ?? 'Web Developer | Technical Project Lead | E-commerce Solutions Specialist' }}</h2>
+                <p class="lead text-secondary mb-4" style="max-width: 760px;">
+                    {{ $profile->headline ?? 'Building Digital Experiences. Engineering Business Solutions.' }}
+                    Bespoke Laravel architectures, automated courier logistics pipelines, and resilient Meta Conversion API server-side tracking.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="#projects" class="btn btn-warning fw-bold px-4 py-2">Explore Projects</a>
+                    <a href="#contact" class="btn btn-outline-warning fw-bold px-4 py-2">Get in Touch</a>
+                </div>
+            </div>
+            @if ($profile?->avatar || $profile?->profileImage)
+                <div class="col-lg-4 text-center">
+                    <img src="{{ $profile->avatar?->url ?? $profile->profileImage?->url }}" alt="{{ $profile->name }}" class="rounded-circle shadow-lg border border-warning p-1" style="width: 170px; height: 170px; object-fit: cover;">
+                </div>
+            @endif
         </div>
     </section>
 
@@ -74,6 +83,11 @@
             @foreach ($featuredProjects as $project)
                 <div class="col-md-6 col-lg-4">
                     <div class="studio-card p-4 h-100 d-flex flex-column">
+                        @if ($project->coverImage)
+                            <div class="mb-3 overflow-hidden rounded" style="height: 160px;">
+                                <img src="{{ $project->coverImage->url }}" alt="{{ $project->title }}" class="w-100 h-100 object-fit-cover">
+                            </div>
+                        @endif
                         <span class="badge bg-warning-subtle text-warning small align-self-start mb-2">{{ $project->category?->name ?? 'Production' }}</span>
                         <h3 class="h5 fw-bold mb-2">{{ $project->title }}</h3>
                         <p class="small text-secondary mb-4 flex-grow-1">{{ $project->summary }}</p>
