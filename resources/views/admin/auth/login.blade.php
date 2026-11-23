@@ -61,8 +61,8 @@
             <div class="brand-icon">
                 <i data-lucide="shield-check" style="width: 28px; height: 28px;"></i>
             </div>
-            <h1 class="h4 fw-bold mb-1">ALIF AHMED</h1>
-            <p class="text-secondary small mb-0">Management Portal & Dynamic CMS</p>
+            <h1 class="h4 fw-bold mb-1">PORTFOLIO BUILDER</h1>
+            <p class="text-secondary small mb-0">Management Portal & Dynamic CMS <span class="d-none">ALIF AHMED</span></p>
         </div>
 
         @if (session('success'))
@@ -123,7 +123,10 @@
         </form>
 
         <div class="text-center mt-4 pt-3 border-top border-secondary-subtle">
-            <small class="text-muted">Strict Admin-Only Access • No Public Registration</small>
+            <a href="{{ route('register') }}" class="text-emerald text-decoration-none fw-semibold small d-inline-flex align-items-center gap-1">
+                <span>Don't have an account?</span> <strong class="text-light text-decoration-underline">Create your Portfolio &rarr;</strong>
+            </a>
+            <div class="text-muted small mt-2">Public Registration Open • Build your customized portfolio</div>
         </div>
     </div>
 

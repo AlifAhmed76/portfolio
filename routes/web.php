@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Frontend\BlogController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\HomeController;
@@ -8,8 +9,14 @@ use App\Http\Controllers\Frontend\ProjectController;
 use App\Http\Controllers\Frontend\SeoController;
 use Illuminate\Support\Facades\Route;
 
+// Public Registration
+Route::get('register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('register', [AuthController::class, 'register'])->name('register.submit');
+
 // Public Portfolio Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('u/{slug}', [HomeController::class, 'portfolio'])->name('portfolio.user');
+Route::get('@{slug}', [HomeController::class, 'portfolio'])->name('portfolio.user.alt');
 Route::get('projects', [ProjectController::class, 'index'])->name('projects.index');
 Route::get('projects/{slug}', [ProjectController::class, 'show'])->name('projects.show');
 

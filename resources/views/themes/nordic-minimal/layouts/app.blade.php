@@ -136,8 +136,8 @@
     <header class="sticky-top px-3 z-3">
         <nav class="navbar navbar-expand-lg nordic-nav">
             <div class="container-fluid px-0">
-                <a class="navbar-brand font-serif fw-bold text-dark d-flex align-items-center gap-2" href="{{ url('/') }}" style="color: var(--nordic-text) !important;">
-                    <span>Alif Ahmed</span>
+                <a class="navbar-brand font-serif fw-bold text-dark d-flex align-items-center gap-2" href="{{ isset($currentWorkspace) && $currentWorkspace->slug !== 'default' ? url('/u/' . $currentWorkspace->slug) : url('/') }}" style="color: var(--nordic-text) !important;">
+                    <span>{{ $profile->name ?? 'Portfolio Builder' }}</span>
                 </a>
 
                 <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
@@ -169,7 +169,7 @@
 
     <footer class="py-5 text-center small text-secondary border-top mt-5" style="border-color: var(--nordic-border) !important;">
         <div class="container">
-            <p class="font-serif fw-bold h6 mb-1" style="color: var(--nordic-text);">Md. Alif Ahmed</p>
+            <p class="font-serif fw-bold h6 mb-1" style="color: var(--nordic-text);">{{ $profile->name ?? 'Portfolio Builder' }}</p>
             <p class="mb-3 text-muted">Web Developer | Technical Project Lead | E-commerce Solutions Specialist</p>
             <p class="mb-0 text-muted">Theme: <strong>Nordic Minimal</strong> • Inspired by Tobias van Schneider</p>
         </div>

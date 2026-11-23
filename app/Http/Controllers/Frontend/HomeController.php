@@ -18,6 +18,17 @@ use Illuminate\View\View;
 
 class HomeController extends Controller
 {
+    public function portfolio(string $slug): View
+    {
+        $workspace = \App\Models\Workspace::where('slug', $slug)
+            ->where('status', 'active')
+            ->firstOrFail();
+
+        \App\Services\WorkspaceResolver::setCurrent($workspace);
+
+        return $this->index();
+    }
+
     public function index(): View
     {
         $theme = ThemeResolver::resolve();

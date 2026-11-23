@@ -83,9 +83,9 @@
 <body>
     <header class="studio-nav py-3">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="{{ url('/') }}" class="text-white text-decoration-none fw-bolder font-display fs-5 d-flex align-items-center gap-2">
+            <a href="{{ isset($currentWorkspace) && $currentWorkspace->slug !== 'default' ? url('/u/' . $currentWorkspace->slug) : url('/') }}" class="text-white text-decoration-none fw-bolder font-display fs-5 d-flex align-items-center gap-2">
                 <span class="p-1 rounded-circle" style="background: var(--studio-accent); width: 10px; height: 10px;"></span>
-                <span>ALIF AHMED <span style="color: var(--studio-accent);">STUDIO</span></span>
+                <span>{{ $profile->name ?? 'Portfolio Builder' }}</span>
             </a>
             <nav class="d-none d-md-flex align-items-center gap-4 small fw-medium">
                 <a href="{{ url('/#about') }}" class="text-secondary text-decoration-none hover-white">Agency</a>

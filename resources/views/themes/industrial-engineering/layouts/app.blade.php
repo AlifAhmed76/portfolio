@@ -108,9 +108,9 @@
 <body>
     <header class="eng-nav py-3">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="{{ url('/') }}" class="text-white text-decoration-none fw-bold font-mono d-flex align-items-center gap-2">
+            <a href="{{ isset($currentWorkspace) && $currentWorkspace->slug !== 'default' ? url('/u/' . $currentWorkspace->slug) : url('/') }}" class="text-white text-decoration-none fw-bold font-mono d-flex align-items-center gap-2">
                 <span class="text-warning">⬡</span>
-                <span>ALIF.ENGINEERING <span class="text-secondary small">[DWG: 2026]</span></span>
+                <span>{{ $profile->name ?? 'Portfolio Builder' }}</span>
             </a>
             <nav class="d-none d-md-flex align-items-center gap-4 font-mono small">
                 <a href="{{ url('/#about') }}" class="text-secondary text-decoration-none hover-white">01_SPEC</a>

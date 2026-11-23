@@ -93,11 +93,11 @@
 <body>
     <header class="saas-nav py-3">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="{{ url('/') }}" class="text-white text-decoration-none fw-bold fs-5 d-flex align-items-center gap-2">
+            <a href="{{ isset($currentWorkspace) && $currentWorkspace->slug !== 'default' ? url('/u/' . $currentWorkspace->slug) : url('/') }}" class="text-white text-decoration-none fw-bold fs-5 d-flex align-items-center gap-2">
                 <span class="p-2 rounded-3 text-white" style="background: linear-gradient(135deg, #6366f1, #10b981);">
                     <i data-lucide="layers" style="width: 18px; height: 18px;"></i>
                 </span>
-                <span>Alif<span style="color: var(--saas-accent-glow);">.Engine</span></span>
+                <span>{{ $profile->name ?? 'Portfolio Builder' }}</span>
             </a>
             <nav class="d-none d-md-flex align-items-center gap-4 small fw-medium">
                 <a href="{{ url('/#about') }}" class="text-secondary text-decoration-none hover-white">Platform</a>

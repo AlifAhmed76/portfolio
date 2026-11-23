@@ -44,8 +44,8 @@
 
     <nav class="navbar navbar-expand-lg border-bottom border-secondary-subtle py-3 font-mono">
         <div class="container">
-            <a class="navbar-brand fw-bold text-cyan" href="{{ url('/') }}">
-                &gt; ALIF_AHMED.dev
+            <a class="navbar-brand fw-bold text-cyan" href="{{ isset($currentWorkspace) && $currentWorkspace->slug !== 'default' ? url('/u/' . $currentWorkspace->slug) : url('/') }}">
+                &gt; {{ $profile->name ?? 'Portfolio Builder' }}
             </a>
             <div class="d-flex gap-3 small">
                 <a href="{{ url('/projects') }}" class="nav-link text-secondary">//PROJECTS</a>
@@ -59,7 +59,7 @@
     </main>
 
     <footer class="border-top border-secondary-subtle py-4 mt-5 text-center text-muted small font-mono">
-        <p class="mb-0">SYS_STATUS: OPTIMAL // © {{ date('Y') }} ALIF AHMED</p>
+        <p class="mb-0">SYS_STATUS: OPTIMAL // © {{ date('Y') }} {{ $profile->name ?? 'Portfolio Builder' }}</p>
     </footer>
     <script>lucide.createIcons();</script>
 </body>

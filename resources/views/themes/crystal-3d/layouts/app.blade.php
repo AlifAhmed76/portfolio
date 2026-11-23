@@ -332,9 +332,9 @@
     <header class="sticky-top px-3 z-3">
         <nav class="navbar navbar-expand-lg floating-pill-nav">
             <div class="container-fluid px-0">
-                <a class="navbar-brand fw-bold text-emerald d-flex align-items-center gap-2" href="{{ url('/') }}">
+                <a class="navbar-brand fw-bold text-emerald d-flex align-items-center gap-2" href="{{ isset($currentWorkspace) && $currentWorkspace->slug !== 'default' ? url('/u/' . $currentWorkspace->slug) : url('/') }}">
                     <span class="beacon-dot"></span>
-                    <span style="font-size: 1.05rem; letter-spacing: 0.5px;">ALIF AHMED</span>
+                    <span style="font-size: 1.05rem; letter-spacing: 0.5px;">{{ $profile->name ?? 'Portfolio Builder' }}</span>
                 </a>
 
                 <button class="navbar-toggler border-0 shadow-none p-1 text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -375,7 +375,7 @@
     <footer class="container py-5 text-center text-secondary small border-top border-secondary-subtle mt-5">
         <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 mb-3">
             <div class="text-start">
-                <p class="fw-bold mb-0 text-body">Md. Alif Ahmed</p>
+                <p class="fw-bold mb-0 text-body">{{ $profile->name ?? 'Portfolio Builder' }}</p>
                 <p class="text-muted small mb-0">Web Developer | Technical Project Lead | E-commerce Solutions Specialist</p>
             </div>
             <div class="d-flex gap-3">
@@ -386,7 +386,7 @@
             </div>
         </div>
         <hr class="opacity-10 my-3">
-        <p class="mb-1">© {{ date('Y') }} Md. Alif Ahmed. All rights reserved.</p>
+        <p class="mb-1">© {{ date('Y') }} {{ $profile->name ?? 'Portfolio Builder' }}. All rights reserved.</p>
         <p class="mb-0 text-muted">Theme: <strong>Crystal 3D</strong> • High-Performance Laravel 11 CMS</p>
     </footer>
 

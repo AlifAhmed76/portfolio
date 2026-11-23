@@ -34,7 +34,7 @@ class WorkspaceResolver
 
     public static function currentId(): ?int
     {
-        return static::resolve()?->id;
+        return static::current()?->id;
     }
 
     // Explicit override support for tests/multi-tenant context switches

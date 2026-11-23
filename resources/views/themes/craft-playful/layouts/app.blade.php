@@ -142,11 +142,11 @@
     <header class="sticky-top px-3 z-3">
         <nav class="navbar navbar-expand-lg craft-nav">
             <div class="container-fluid px-0">
-                <a class="navbar-brand fw-bold craft-gradient-text d-flex align-items-center gap-2" href="{{ url('/') }}">
+                <a class="navbar-brand fw-bold craft-gradient-text d-flex align-items-center gap-2" href="{{ isset($currentWorkspace) && $currentWorkspace->slug !== 'default' ? url('/u/' . $currentWorkspace->slug) : url('/') }}">
                     <div class="rounded-circle p-1" style="background: rgba(236, 72, 153, 0.2);">
                         <i data-lucide="code" style="width: 16px; height: 16px;" class="text-pink"></i>
                     </div>
-                    <span>ALIF AHMED</span>
+                    <span>{{ $profile->name ?? 'Portfolio Builder' }}</span>
                 </a>
 
                 <button class="navbar-toggler border-0 shadow-none text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
@@ -179,7 +179,7 @@
 
     <footer class="py-5 text-center text-secondary small border-top border-secondary-subtle mt-5">
         <div class="container">
-            <p class="mb-1 text-light fw-bold">Md. Alif Ahmed</p>
+            <p class="mb-1 text-light fw-bold">{{ $profile->name ?? 'Portfolio Builder' }}</p>
             <p class="mb-3 text-secondary">Web Developer | Technical Project Lead | E-commerce Solutions Specialist</p>
             <p class="mb-0 text-muted">Theme: <strong>Craft &amp; Playful</strong> • Inspired by Josh W. Comeau &amp; Lynn Fisher</p>
         </div>

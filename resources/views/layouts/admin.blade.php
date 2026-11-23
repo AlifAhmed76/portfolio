@@ -213,7 +213,7 @@
         <aside class="admin-sidebar" id="adminSidebar">
             <a href="{{ route('admin.dashboard') }}" class="brand-badge">
                 <i data-lucide="shield-check" class="text-success"></i>
-                <span>ALIF AHMED <small class="text-secondary fw-normal">CMS</small></span>
+                <span>PORTFOLIO <small class="text-secondary fw-normal">BUILDER</small></span>
             </a>
 
             <div class="py-2">
@@ -349,12 +349,12 @@
                     </button>
                     <span class="badge bg-success-subtle text-success border border-success-subtle">
                         <i data-lucide="database" class="me-1" style="width: 14px; height: 14px;"></i>
-                        {{ \App\Services\WorkspaceResolver::resolve()?->name ?? 'Single Workspace' }}
+                        {{ \App\Services\WorkspaceResolver::current()?->name ?? 'Single Workspace' }}
                     </span>
                 </div>
 
                 <div class="d-flex align-items-center gap-3">
-                    <a href="{{ url('/') }}" target="_blank" class="btn btn-sm btn-outline-secondary d-none d-sm-inline-flex align-items-center gap-1">
+                    <a href="{{ auth()->user()?->workspace?->slug && auth()->user()?->workspace?->slug !== 'default' ? url('/u/' . auth()->user()->workspace->slug) : url('/') }}" target="_blank" class="btn btn-sm btn-outline-secondary d-none d-sm-inline-flex align-items-center gap-1">
                         <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
                         <span>View Portfolio</span>
                     </a>

@@ -71,9 +71,9 @@
 <body>
     <header class="garden-nav py-3">
         <div class="container d-flex justify-content-between align-items-center" style="max-width: 980px;">
-            <a href="{{ url('/') }}" class="garden-link fw-bold font-mono d-flex align-items-center gap-2">
+            <a href="{{ isset($currentWorkspace) && $currentWorkspace->slug !== 'default' ? url('/u/' . $currentWorkspace->slug) : url('/') }}" class="garden-link fw-bold font-mono d-flex align-items-center gap-2">
                 <span class="text-success">●</span>
-                <span>alif.garden</span>
+                <span>{{ $profile->name ?? 'Portfolio Builder' }}</span>
             </a>
             <nav class="d-flex align-items-center gap-3 font-mono small">
                 <a href="{{ url('/#about') }}" class="garden-link">about</a>

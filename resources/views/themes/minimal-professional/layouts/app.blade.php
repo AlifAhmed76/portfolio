@@ -40,8 +40,8 @@
 
     <header class="border-bottom py-3 mb-4">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="{{ url('/') }}" class="h5 fw-bold text-dark text-decoration-none mb-0 tracking-wide">
-                ALIF AHMED
+            <a href="{{ isset($currentWorkspace) && $currentWorkspace->slug !== 'default' ? url('/u/' . $currentWorkspace->slug) : url('/') }}" class="h5 fw-bold text-dark text-decoration-none mb-0 tracking-wide">
+                {{ $profile->name ?? 'Portfolio Builder' }}
             </a>
             <nav class="d-flex gap-3 small">
                 <a href="{{ url('/#about') }}" class="text-secondary text-decoration-none">About</a>
@@ -56,7 +56,7 @@
     </main>
 
     <footer class="border-top py-4 mt-5 text-center text-muted small">
-        <p class="mb-0">© {{ date('Y') }} Md. Alif Ahmed • Minimal Professional Theme</p>
+        <p class="mb-0">© {{ date('Y') }} {{ $profile->name ?? 'Portfolio Builder' }} • Minimal Professional Theme</p>
     </footer>
     <script>lucide.createIcons();</script>
 </body>

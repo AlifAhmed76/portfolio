@@ -20,6 +20,37 @@
         </div>
     </div>
 
+    <!-- Live Public Portfolio URL Banner -->
+    @php
+        $userWorkspace = auth()->user()?->workspace;
+        $portfolioUrl = $userWorkspace && $userWorkspace->slug !== 'default' 
+            ? url('/u/' . $userWorkspace->slug) 
+            : url('/');
+    @endphp
+    <div class="admin-card p-3 mb-4 d-flex flex-wrap align-items-center justify-content-between gap-3" style="background: rgba(16, 185, 129, 0.06); border-color: rgba(16, 185, 129, 0.25);">
+        <div class="d-flex align-items-center gap-3">
+            <div class="p-2 rounded-circle bg-success-subtle text-success">
+                <i data-lucide="globe" style="width: 22px; height: 22px;"></i>
+            </div>
+            <div>
+                <div class="text-secondary small text-uppercase fw-bold" style="letter-spacing: 0.05em; font-size: 0.75rem;">Your Live Public Portfolio URL</div>
+                <div class="d-flex align-items-center gap-2 mt-1">
+                    <code class="fs-6 text-success fw-bold px-2 py-1 bg-dark rounded border border-success-subtle">{{ $portfolioUrl }}</code>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1" onclick="navigator.clipboard.writeText('{{ $portfolioUrl }}'); alert('Portfolio URL copied to clipboard: ' + '{{ $portfolioUrl }}');">
+                <i data-lucide="copy" style="width: 14px; height: 14px;"></i>
+                <span>Copy URL</span>
+            </button>
+            <a href="{{ $portfolioUrl }}" target="_blank" class="btn btn-sm btn-emerald d-flex align-items-center gap-1">
+                <i data-lucide="external-link" style="width: 14px; height: 14px;"></i>
+                <span>Open Portfolio</span>
+            </a>
+        </div>
+    </div>
+
     <!-- Quick Stats Grid -->
     <div class="row g-3 mb-4">
         <div class="col-sm-6 col-xl-3">

@@ -151,9 +151,9 @@
     <!-- Header Navigation Bar -->
     <header class="brutalist-border-bottom sticky-top" style="background: var(--bg-noir);">
         <div class="container-fluid px-4 py-3 d-flex justify-content-between align-items-center">
-            <a href="{{ url('/') }}" class="text-decoration-none text-reset d-flex align-items-center gap-2">
+            <a href="{{ isset($currentWorkspace) && $currentWorkspace->slug !== 'default' ? url('/u/' . $currentWorkspace->slug) : url('/') }}" class="text-decoration-none text-reset d-flex align-items-center gap-2">
                 <span class="fw-bold font-display text-uppercase" style="letter-spacing: 0.05em; font-size: 1.1rem;">
-                    ALIF AHMED
+                    {{ $profile->name ?? 'Portfolio Builder' }}
                 </span>
                 <span class="text-secondary small font-mono">/ LEAD ARCHITECT</span>
             </a>
@@ -184,7 +184,7 @@
         <div class="container px-4">
             <div class="row g-4 align-items-center justify-content-between">
                 <div class="col-md-6">
-                    <div class="font-display fw-bold text-uppercase h5 mb-1">Md. Alif Ahmed</div>
+                    <div class="font-display fw-bold text-uppercase h5 mb-1">{{ $profile->name ?? 'Portfolio Builder' }}</div>
                     <p class="small text-secondary mb-0">Web Developer | Technical Project Lead | E-commerce Solutions Specialist</p>
                 </div>
                 <div class="col-md-6 text-md-end">

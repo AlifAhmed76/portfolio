@@ -105,9 +105,9 @@
 
     <header class="spot-nav py-3">
         <div class="container d-flex justify-content-between align-items-center" style="position: relative; z-index: 10;">
-            <a href="{{ url('/') }}" class="text-white text-decoration-none fw-bold fs-5 d-flex align-items-center gap-2">
+            <a href="{{ isset($currentWorkspace) && $currentWorkspace->slug !== 'default' ? url('/u/' . $currentWorkspace->slug) : url('/') }}" class="text-white text-decoration-none fw-bold fs-5 d-flex align-items-center gap-2">
                 <span class="p-1 rounded-circle bg-cyan" style="background: var(--spot-cyan); width: 10px; height: 10px; box-shadow: 0 0 10px var(--spot-cyan);"></span>
-                <span>Alif<span style="color: var(--spot-cyan-glow);">.Spotlight</span></span>
+                <span>{{ $profile->name ?? 'Portfolio Builder' }}</span>
             </a>
             <nav class="d-none d-md-flex align-items-center gap-4 small fw-medium">
                 <a href="{{ url('/#about') }}" class="text-secondary text-decoration-none hover-white">About</a>

@@ -43,8 +43,8 @@
 
     <nav class="navbar navbar-expand-lg border-bottom border-secondary-subtle py-3">
         <div class="container">
-            <a class="navbar-brand fw-bolder text-warning" href="{{ url('/') }}">
-                ALIF AHMED <span class="badge bg-warning text-dark small">STUDIO</span>
+            <a class="navbar-brand fw-bolder text-warning" href="{{ isset($currentWorkspace) && $currentWorkspace->slug !== 'default' ? url('/u/' . $currentWorkspace->slug) : url('/') }}">
+                {{ $profile->name ?? 'Portfolio Builder' }}
             </a>
             <div class="d-flex gap-3">
                 <a href="{{ url('/projects') }}" class="nav-link text-secondary">Work</a>
@@ -58,7 +58,7 @@
     </main>
 
     <footer class="border-top border-secondary-subtle py-4 mt-5 text-center text-muted small">
-        <p class="mb-0">© {{ date('Y') }} Md. Alif Ahmed • Creative Studio Theme</p>
+        <p class="mb-0">© {{ date('Y') }} {{ $profile->name ?? 'Portfolio Builder' }} • Creative Studio Theme</p>
     </footer>
     <script>lucide.createIcons();</script>
 </body>
