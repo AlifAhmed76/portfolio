@@ -264,4 +264,50 @@ class PageBuilderTest extends TestCase
         $adminDraftResponse->assertOk();
         $adminDraftResponse->assertSee('Secret Content');
     }
+
+    public function test_grapesjs_visual_builder_payload_is_validated_and_persisted(): void
+    {
+        $page = Page::create([
+            'workspace_id' => $this->workspace->id,
+            'title' => 'Visual Landing',
+            'slug' => 'visual-landing',
+            'status' => 'draft',
+            'created_by' => $this->admin->id,
+        ]);
+
+        $grapesPayload = [
+            'mode' => 'grapesjs',
+            'html' => '<div class="hero-custom"><h1>Visual Drag Drop Heading</h1><p>Designed with Elementor style builder</p></div>',
+            'css' => '.hero-custom { background: #070a14; color: #ffffff; }',
+            'components' => ['type' => 'wrapper'],
+        ];
+
+        // 1. Save Draft
+        $draftRes = $this->actingAs($this->admin)->postJson(
+            route('admin.pages.builder.save-draft', $page),
+            ['blocks' => $grapesPayload]
+        );
+        $draftRes->assertOk();
+        $draftRes->assertJson(['success' => true]);
+
+        $page->refresh();
+        $this->assertEquals('grapesjs', $page->getBlocks()['mode']);
+        $this->assertStringContainsString('Visual Drag Drop Heading', $page->getBlocks()['html']);
+
+        // 2. Publish
+        $pubRes = $this->actingAs($this->admin)->postJson(
+            route('admin.pages.builder.publish', $page),
+            ['blocks' => $grapesPayload]
+        );
+        $pubRes->assertOk();
+        $this->assertDatabaseHas('page_revisions', [
+            'page_id' => $page->id,
+            'revision_number' => 1,
+        ]);
+
+        // 3. Public access
+        $publicRes = $this->get('/visual-landing');
+        $publicRes->assertOk();
+        $publicRes->assertSee('Visual Drag Drop Heading');
+    }
 }

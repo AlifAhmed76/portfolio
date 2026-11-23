@@ -1,6 +1,15 @@
 @props(['blocks' => []])
 
-@if (!empty($blocks) && is_array($blocks))
+@if (is_array($blocks) && (isset($blocks['html']) || (isset($blocks['mode']) && $blocks['mode'] === 'grapesjs')))
+    @if (!empty($blocks['css']))
+        <style>
+            {!! $blocks['css'] !!}
+        </style>
+    @endif
+    <div class="grapesjs-page-content">
+        {!! $blocks['html'] ?? '' !!}
+    </div>
+@elseif (!empty($blocks) && is_array($blocks))
     <div class="page-builder-content">
         @foreach ($blocks as $block)
             @if (!empty($block['enabled']))

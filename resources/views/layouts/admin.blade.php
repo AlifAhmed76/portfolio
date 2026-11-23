@@ -6,6 +6,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Admin Dashboard') | {{ config('app.name') }}</title>
     
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="//unpkg.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preconnect" href="https://unpkg.com" crossorigin>
+    
     <!-- Bootstrap 5.3 & Lucide Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -268,39 +273,26 @@
                         <span class="badge bg-secondary-subtle text-secondary badge-phase">Phase 2</span>
                     @endif
                 </a>
-                <a href="{{ Route::has('admin.sections.index') ? route('admin.sections.index') : '#' }}" class="nav-link-item {{ request()->routeIs('admin.sections*') ? 'active' : '' }}">
-                    <i data-lucide="layers"></i>
-                    <span>Homepage Sections</span>
-                    @if (! Route::has('admin.sections.index'))
-                        <span class="badge bg-secondary-subtle text-secondary badge-phase">Phase 2</span>
-                    @endif
-                </a>
-
                 <!-- Appearance -->
                 <div class="nav-section-header">Appearance</div>
-                <a href="{{ Route::has('admin.themes.index') ? route('admin.themes.index') : '#' }}" class="nav-link-item {{ request()->routeIs('admin.themes*') ? 'active' : '' }}">
+                <a href="{{ route('admin.themes.index') }}" class="nav-link-item {{ request()->routeIs('admin.themes*') ? 'active' : '' }}">
                     <i data-lucide="palette"></i>
                     <span>Theme Studio</span>
-                    @if (! Route::has('admin.themes.index'))
-                        <span class="badge bg-secondary-subtle text-secondary badge-phase">Phase 3</span>
-                    @endif
                 </a>
-                <a href="{{ Route::has('admin.code-editor.index') ? route('admin.code-editor.index') : '#' }}" class="nav-link-item {{ request()->routeIs('admin.code-editor*') ? 'active' : '' }}">
+                <a href="{{ route('admin.code-editor.index') }}" class="nav-link-item {{ request()->routeIs('admin.code-editor*') ? 'active' : '' }}">
                     <i data-lucide="code-2"></i>
                     <span>Trusted Code Editor</span>
-                    @if (! Route::has('admin.code-editor.index'))
-                        <span class="badge bg-secondary-subtle text-secondary badge-phase">Phase 5</span>
-                    @endif
                 </a>
 
-                <!-- Pages & Builder -->
-                <div class="nav-section-header">Pages & Builder</div>
-                <a href="{{ Route::has('admin.pages.index') ? route('admin.pages.index') : '#' }}" class="nav-link-item {{ request()->routeIs('admin.pages*') ? 'active' : '' }}">
-                    <i data-lucide="file-text"></i>
-                    <span>Page Manager</span>
-                    @if (! Route::has('admin.pages.index'))
-                        <span class="badge bg-secondary-subtle text-secondary badge-phase">Phase 4</span>
-                    @endif
+                <!-- Pages & Visual Builder -->
+                <div class="nav-section-header">Pages &amp; Builder</div>
+                <a href="{{ route('admin.sections.index') }}" class="nav-link-item {{ request()->routeIs('admin.sections*') ? 'active' : '' }}">
+                    <i data-lucide="layers"></i>
+                    <span>Homepage Sections</span>
+                </a>
+                <a href="{{ route('admin.pages.index') }}" class="nav-link-item {{ request()->routeIs('admin.pages*') ? 'active' : '' }}">
+                    <i data-lucide="layout-template"></i>
+                    <span>Page Manager &amp; Visual Builder</span>
                 </a>
 
                 <!-- Inbox & Blog -->

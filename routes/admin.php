@@ -96,6 +96,7 @@ Route::middleware('admin')->group(function () {
     // Homepage Sections
     Route::prefix('sections')->name('sections.')->group(function () {
         Route::get('/', [SectionController::class, 'index'])->name('index');
+        Route::post('reorder', [SectionController::class, 'reorder'])->name('reorder');
         Route::put('{section}', [SectionController::class, 'update'])->name('update');
         Route::post('{section}/toggle', [SectionController::class, 'toggle'])->name('toggle');
     });

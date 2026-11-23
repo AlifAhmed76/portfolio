@@ -27,15 +27,28 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        // Globally share active profile and current workspace with all views
-        View::composer('*', function ($view) {
+        // Globally share active profile and current workspace with all views (memoized per-request)
+        static $cachedProfile = null;
+        static $cachedWorkspace = null;
+        static $hasProfilesTable = null;
+
+        View::composer('*', function ($view) use (&$cachedProfile, &$cachedWorkspace, &$hasProfilesTable) {
             if (! $view->offsetExists('profile')) {
-                if (Schema::hasTable('profiles')) {
-                    $view->with('profile', Profile::first());
+                if ($hasProfilesTable === null) {
+                    $hasProfilesTable = Schema::hasTable('profiles');
+                }
+                if ($hasProfilesTable) {
+                    if ($cachedProfile === null) {
+                        $cachedProfile = Profile::first();
+                    }
+                    $view->with('profile', $cachedProfile);
                 }
             }
             if (! $view->offsetExists('currentWorkspace')) {
-                $view->with('currentWorkspace', \App\Services\WorkspaceResolver::current());
+                if ($cachedWorkspace === null) {
+                    $cachedWorkspace = \App\Services\WorkspaceResolver::current();
+                }
+                $view->with('currentWorkspace', $cachedWorkspace);
             }
         });
     }

@@ -3,15 +3,21 @@
 @section('title', 'Page Manager')
 
 @section('content')
-<div class="d-flex justify-content-between align-items-center mb-4">
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
     <div>
-        <h1 class="h3 fw-bold mb-1">Page Manager</h1>
-        <p class="text-secondary mb-0">Create, compose, and publish dynamic landing pages and custom layouts.</p>
+        <h1 class="h3 fw-bold mb-1">Page Manager &amp; Visual Builder</h1>
+        <p class="text-secondary mb-0">Create, compose, and visually design custom landing pages with drag-and-drop Elementor-style builder.</p>
     </div>
-    <a href="{{ route('admin.pages.create') }}" class="btn btn-primary d-flex align-items-center gap-2">
-        <i data-lucide="plus"></i>
-        <span>Create New Page</span>
-    </a>
+    <div class="d-flex align-items-center gap-2">
+        <a href="{{ route('admin.sections.index') }}" class="btn btn-outline-secondary d-flex align-items-center gap-2">
+            <i data-lucide="layers"></i>
+            <span>Homepage Sections</span>
+        </a>
+        <a href="{{ route('admin.pages.create') }}" class="btn btn-emerald d-flex align-items-center gap-2">
+            <i data-lucide="plus"></i>
+            <span>Create New Page</span>
+        </a>
+    </div>
 </div>
 
 <div class="card border-0 shadow-sm" style="background: var(--admin-card-bg); border: 1px solid var(--admin-border) !important;">

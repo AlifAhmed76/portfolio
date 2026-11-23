@@ -7,6 +7,7 @@ use App\Models\ActivityLog;
 use App\Models\HomepageSection;
 use App\Services\CacheInvalidationService;
 use App\Services\WorkspaceResolver;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -16,7 +17,7 @@ class SectionController extends Controller
     protected array $defaultSections = [
         ['section_key' => 'hero', 'title' => 'Hero Banner', 'sort_order' => 1],
         ['section_key' => 'highlights', 'title' => 'Professional Highlights', 'sort_order' => 2],
-        ['section_key' => 'about', 'title' => 'About Alif Ahmed', 'sort_order' => 3],
+        ['section_key' => 'about', 'title' => 'About Me', 'sort_order' => 3],
         ['section_key' => 'expertise', 'title' => 'Technical Expertise & Skills', 'sort_order' => 4],
         ['section_key' => 'projects', 'title' => 'Featured Projects & Case Studies', 'sort_order' => 5],
         ['section_key' => 'services', 'title' => 'Services & Solutions', 'sort_order' => 6],
@@ -29,7 +30,7 @@ class SectionController extends Controller
 
     public function index(): View
     {
-        $workspace = WorkspaceResolver::resolve();
+        $workspace = WorkspaceResolver::current();
 
         // Ensure default sections exist
         foreach ($this->defaultSections as $sec) {
@@ -44,7 +45,40 @@ class SectionController extends Controller
         return view('admin.sections.index', compact('sections'));
     }
 
-    public function update(Request $request, HomepageSection $section): RedirectResponse
+    public function reorder(Request $request): JsonResponse|RedirectResponse
+    {
+        $request->validate([
+            'order' => ['nullable', 'array'],
+            'order.*.id' => ['required_with:order', 'integer'],
+            'order.*.sort_order' => ['required_with:order', 'integer'],
+            'ids' => ['nullable', 'array'],
+            'ids.*' => ['integer'],
+        ]);
+
+        if ($request->has('order')) {
+            foreach ($request->input('order') as $item) {
+                HomepageSection::where('id', $item['id'])->update(['sort_order' => (int) $item['sort_order']]);
+            }
+        } elseif ($request->has('ids')) {
+            foreach ($request->input('ids') as $index => $id) {
+                HomepageSection::where('id', $id)->update(['sort_order' => $index + 1]);
+            }
+        }
+
+        ActivityLog::log('section.reorder', ['count' => count($request->input('order', $request->input('ids', [])))]);
+        CacheInvalidationService::invalidateSections();
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Homepage sections reordered successfully.',
+            ]);
+        }
+
+        return back()->with('success', 'Homepage sections reordered successfully.');
+    }
+
+    public function update(Request $request, HomepageSection $section): JsonResponse|RedirectResponse
     {
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
@@ -61,13 +95,29 @@ class SectionController extends Controller
         ActivityLog::log('section.update', ['section_key' => $section->section_key], $section);
         CacheInvalidationService::invalidateSections();
 
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => "Section '{$section->title}' updated successfully.",
+                'section' => $section,
+            ]);
+        }
+
         return back()->with('success', "Section '{$section->title}' updated successfully.");
     }
 
-    public function toggle(HomepageSection $section): RedirectResponse
+    public function toggle(HomepageSection $section): JsonResponse|RedirectResponse
     {
         $section->update(['is_enabled' => ! $section->is_enabled]);
         CacheInvalidationService::invalidateSections();
+
+        if (request()->wantsJson() || request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'is_enabled' => (bool) $section->is_enabled,
+                'message' => "Section '{$section->title}' visibility set to " . ($section->is_enabled ? 'Active' : 'Inactive') . '.',
+            ]);
+        }
 
         return back()->with('success', "Section '{$section->title}' visibility toggled.");
     }

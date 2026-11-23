@@ -33,6 +33,27 @@ class PageBuilderService
      */
     public function validateBlocks(array $blocks): array
     {
+        // 1. Support GrapesJS Drag & Drop visual builder payload
+        if (isset($blocks['mode']) && $blocks['mode'] === 'grapesjs') {
+            return [
+                'mode' => 'grapesjs',
+                'html' => $this->sanitizeHtml((string) ($blocks['html'] ?? '')),
+                'css' => (string) ($blocks['css'] ?? ''),
+                'components' => $blocks['components'] ?? [],
+                'style' => $blocks['style'] ?? [],
+            ];
+        }
+
+        if (isset($blocks['html']) && is_string($blocks['html'])) {
+            return [
+                'mode' => 'grapesjs',
+                'html' => $this->sanitizeHtml($blocks['html']),
+                'css' => (string) ($blocks['css'] ?? ''),
+                'components' => $blocks['components'] ?? [],
+                'style' => $blocks['style'] ?? [],
+            ];
+        }
+
         $validated = [];
 
         foreach ($blocks as $index => $block) {

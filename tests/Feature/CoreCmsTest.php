@@ -289,6 +289,37 @@ class CoreCmsTest extends TestCase
         ]);
     }
 
+    public function test_homepage_sections_can_be_reordered_via_ajax(): void
+    {
+        $sec1 = HomepageSection::create([
+            'workspace_id' => $this->workspace->id,
+            'section_key' => 'hero',
+            'title' => 'Hero',
+            'sort_order' => 1,
+            'is_enabled' => true,
+        ]);
+        $sec2 = HomepageSection::create([
+            'workspace_id' => $this->workspace->id,
+            'section_key' => 'about',
+            'title' => 'About',
+            'sort_order' => 2,
+            'is_enabled' => true,
+        ]);
+
+        $response = $this->actingAs($this->admin)->postJson(route('admin.sections.reorder'), [
+            'ids' => [$sec2->id, $sec1->id],
+        ]);
+
+        $response->assertOk();
+        $response->assertJson(['success' => true]);
+
+        $sec1->refresh();
+        $sec2->refresh();
+
+        $this->assertEquals(2, $sec1->sort_order);
+        $this->assertEquals(1, $sec2->sort_order);
+    }
+
     public function test_admin_can_view_contact_inquiry_with_high_contrast(): void
     {
         $message = \App\Models\ContactMessage::create([
